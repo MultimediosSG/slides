@@ -164,7 +164,9 @@ pnpm remove servor
 
 - Las dependencias se instalan en node_modules/
 - Versionado: ``4.0.2`` → SemVer → Major, minor, patch
-- Actualizaciones con ``pnpx npm-check -u npm-check``
+- Actualizaciones con ``pnpx npm-check -u``
+- ``npm install -g npm-check``
+- ``npm-check -u``
 
 <div class="grid">
 
