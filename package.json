@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "marp -I ./src -o ./dist --bespoke.progress=true --bespoke.osc=false && cp -r ./src/assets ./dist/assets",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",

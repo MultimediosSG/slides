@@ -7,7 +7,7 @@ paginate: true
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(img_00027_.png);
+  --cover: url(../assets/img_00027_.png);
 }
 </style>
 # Lenguaje HTML
@@ -109,7 +109,7 @@ Todos los documentos HTML tienen una estructura con los siguientes elementos
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(img_00033_.png);
+  --cover: url(../assets/img_00033_.png);
 }
 </style>
 # Multimedia
@@ -225,7 +225,7 @@ eager, lazy
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(img_00048_.png);
+  --cover: url(../assets/img_00048_.png);
 }
 </style>
 # Formularios
@@ -335,7 +335,7 @@ section {
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(img_00044_.png);
+  --cover: url(../assets/img_00044_.png);
 }
 </style>
 # Semántica
