@@ -1,0 +1,91 @@
+/* @theme alo */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/monokai.css');
+
+:root {
+    font-family: "Outfit", sans-serif;
+    font-weight: 200;
+    font-size: 20px;
+    padding: 2.5rem;
+    background: #181818;
+    color: white;
+    
+
+}
+.bespoke-marp-parent {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  aspect-ratio: 16/9 !important;
+  align-self: center;
+  
+}
+section {
+    &.cover {
+        background: 
+        linear-gradient(to bottom, black, transparent 40% 96%, black 100%), 
+        linear-gradient(to right, #000 3%, #000e 15%, #000c 20%, transparent 28%), 
+        var(--cover, url(cover.jpg));
+        background-color: black;
+        background-size: auto 765px;
+        background-position: top right;
+        background-repeat: no-repeat;
+
+        ul {
+            padding-left: 5px;
+            list-style: none;
+        }
+
+        li {
+            background: #000c;
+            margin: 1rem 0;
+            padding: 1rem;
+            box-shadow: 3px 3px 0 #fe704d;
+            max-width: max-content;
+
+            &:hover {
+                background: #fe704d;
+                cursor: pointer;
+            }
+        }
+
+        blockquote {
+            position: absolute;
+            bottom: 5rem;
+            right: 5rem;
+            padding: 1rem;
+            background: #000c;
+        }
+    }
+
+    h2 {
+        color: #fe704d;
+    }
+
+    li {
+        margin: .5rem 0;
+    }
+    
+}
+
+pre {
+    background: #000;
+    color: white;
+    padding: 1rem;
+}
+code {
+    color: gold;
+    pre & {
+        color: white;
+    }
+}
+
+a {
+    color: #3179ed;
+    text-decoration: none;
+}
+svg[data-marpit-svg] {
+    background: linear-gradient(126deg, indigo, deeppink);
+    /* padding: calc(var(--marpit-root-font-size, 1rem) * 2);
+    padding-bottom: calc(var(--marpit-root-font-size, 1rem) * 0.5); */
+} 
