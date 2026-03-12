@@ -28,9 +28,11 @@ section {
 
 ```bash
 # Instalamos pnpm
+curl -fsSL https://get.pnpm.io/install.sh | sh - ## Linux/MacOS
 pnpm --version
 
 # Instalamos Node (LTS)
+pnpm env use --global lts ## Linux/MacOS
 node --version
 ```
 
