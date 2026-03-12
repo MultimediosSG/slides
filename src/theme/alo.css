@@ -89,3 +89,8 @@ svg[data-marpit-svg] {
     /* padding: calc(var(--marpit-root-font-size, 1rem) * 2);
     padding-bottom: calc(var(--marpit-root-font-size, 1rem) * 0.5); */
 } 
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}

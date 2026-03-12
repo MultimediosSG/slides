@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "dev": "marp -I ./src -s -w --bespoke.progress=true --bespoke.osc=false",
     "build": "marp -I ./src -o ./dist --bespoke.progress=true --bespoke.osc=false && cp -r ./src/assets ./dist/assets",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",

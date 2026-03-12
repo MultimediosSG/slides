@@ -391,6 +391,8 @@ section {
 
 - Se basa en asegurar lo mínimo en HTML (y ampliarlo/mejorarlo con Javascript)
 - Ejemplo: Formulario HTML envía a backend + Se mejora con Javascript
+<div class="grid">
+
 ```html
 <form action="/search" method="get">
   <!-- ... --->
@@ -412,6 +414,8 @@ section {
 </script>
 
 ```
+
+</div>
 
 ---
 ## Acordeones con ``<details>``
@@ -466,6 +470,7 @@ section {
 - Acciones disponibles: ``toggle``, ``hide`` o ``show``
 - El pseudoelemento CSS ``::backdrop``
 - Light Dismiss (descartar auto) se desactiva con el atributo ``popover`` a "manual"
+<div class="grid">
 
 ```html
 <div id="message" popover>
@@ -491,6 +496,8 @@ section {
   padding: 0.05rem 1.25rem;
 }
 ```
+
+</div>
 
 ---
 ## Etiquetas como ``<search>`` o ``<hgroup>``
