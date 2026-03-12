@@ -525,4 +525,3 @@ Casos como encabezados ``<h1>`` con subtítulo ``<h2>`` no representan lo mismo
 - [CanIInclude](https://caniuse.com/mdn-html_elements)
 - [bootcamp.manz.dev](https://bootcamp.manz.dev/)
 
-
