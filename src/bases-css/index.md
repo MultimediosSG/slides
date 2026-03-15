@@ -7,7 +7,7 @@ paginate: true
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00027_.png);
+  --cover: url(../assets/img_00057_.png);
 }
 </style>
 # Bases CSS
@@ -46,7 +46,7 @@ section {
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00033_.png);
+  --cover: url(../assets/img_00056_.png);
 }
 </style>
 # Modelo de cajas
@@ -64,8 +64,8 @@ section {
 
 ```html
 <div class="avatar">
-  <img src="https://manz.dev/manzdev.png"
-       alt="ManzDev">
+  <img src="https://avotz.com/img/logo.png"
+       alt="Avotz">
 </div>
 
 <style>
@@ -79,8 +79,8 @@ section {
 ```
 ```html
 <div class="avatar">
-  <img src="https://manz.dev/manzdev.png"
-       alt="ManzDev">
+  <img src="https://avotz.com/img/logo.png"
+       alt="Avotz">
 </div>
 
 <style>
@@ -221,7 +221,7 @@ section {
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00033_.png);
+  --cover: url(../assets/img_00058_.png);
 }
 </style>
 # Colores y fondos
@@ -340,7 +340,7 @@ Las tipografías sólo se ven si el usuario las tiene instaladas
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00048_.png);
+  --cover: url(../assets/img_00059_.png);
 }
 </style>
 # Selectores CSS
@@ -403,14 +403,14 @@ section {
 ## Selectores CSS: Atributos
 
 ```html
-<a href="https://manz.dev/">Manz.dev</a>
-<a href="https://manz.dev/document.pdf">Descargar</a>
-<a href="https://manz.dev/audio.mp3">Descargar</a>
-<a href="http://manz.dev/insecure/">Acceder a la página</a>
+<a href="https://alons.dev/">alons.dev</a>
+<a href="https://alons.dev/document.pdf">Descargar</a>
+<a href="https://alons.dev/audio.mp3">Descargar</a>
+<a href="http://alons.dev/insecure/">Acceder a la página</a>
 
 <style>
 a[href] { /* ... */ }
-a[href="https://manz.dev/"] { /* ... */ }
+a[href="https://alons.dev/"] { /* ... */ }
 a[href^="http://"] { /* ... */ }
 a[href$=".pdf" i] { /* ... */ }
 </style>
@@ -454,7 +454,7 @@ p::first-letter { /* ... */ }
 ---
 ## Combinadores Lógicos CSS (Avanzado)
 - Combinador ``:is()``
-- Combinador ``:has()`` → Ejemplo de botón de selección sin Javascript
+- Combinador ``:has()`` → [Ejemplo de botón de selección sin Javascript](https://codepen.io/alons182/pen/NPRpBEa)
 - Combinador ``:not()``
 
 <div class="grid">
