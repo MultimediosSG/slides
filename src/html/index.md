@@ -383,7 +383,7 @@ section {
 ```
 - Mitos: No usar más de un ``<h1>`` por página
 - Mitos: No usar más de un ``<header>`` o ``<footer>``
-- Etiquetas dentro de otras: [CanIInclude](https://caniuse.com/mdn-html_elements)
+- Etiquetas dentro de otras: [CanIInclude](https://caninclude.onrender.com/)
 - Información de compatibilidad: [Baseline](https://lenguajehtml.com/baseline/)
 
 ---

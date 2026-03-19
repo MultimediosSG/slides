@@ -437,9 +437,9 @@ p::first-letter { /* ... */ }
 ```
 ```html
 <!-- HTML -->
-<h2 data-author="ManzDev">Tema 1</h2>
-<h2 data-author="felixicaza">Tema 2</h2>
-<h2 data-author="eiosoy">Tema 3</h2>
+<h2 data-author="Alons">Tema 1</h2>
+<h2 data-author="Luis">Tema 2</h2>
+<h2 data-author="Carlos">Tema 3</h2>
 
 <!-- Pseudoelementos -->
 <style>
