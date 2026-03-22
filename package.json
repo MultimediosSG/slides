@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "marp -I ./src -s -w --bespoke.progress=true --bespoke.osc=false --html=true",
-    "build": "marp -I ./src -o ./dist --bespoke.progress=true --bespoke.osc=false && cpx \"src/assets/**/*\" dist/assets",
+    "build": "marp -I ./src -o ./dist --bespoke.progress=true --bespoke.osc=false --html=true && cpx \"src/assets/**/*\" dist/assets",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [],
