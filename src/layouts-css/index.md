@@ -580,7 +580,7 @@ section {
   background: deeppink;
   width: 200px;
   height: 100px;
-  transition: all 0.5s;
+ 
 }
 .element:hover {
   width: 300px;
