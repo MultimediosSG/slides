@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: alolight
+theme: alo
 paginate: true
 ---
 
@@ -10,49 +10,84 @@ section {
   --cover: url(../assets/img_00057_.png);
 }
 </style>
-# Layouts CSS
+# CSS Avanzado
 ## Contenidos
+- Trucos de CSS
+- Responsive Design
+- Cascada CSS
+- Máscaras y recortes CSS
+- Lógica CSS
 
-- La propiedad ``display``
-- Layouts Flex
-- Layouts Grid
-- Position / Anchor position
-- Animaciones
 
 > Inspirado en el bootcamp de <br><strong>Manz.dev</strong> todos los créditos a el.
 
 ---
 
-## La propiedad display
+## Utilidades para imágenes
 
-- Los flujos inline se ajustan al contenido
-- Los flujos block ocupan el espacio disponible
-- 🆕 Nueva sintaxis (comportamiento exterior, comportamiento de hijos)
+- Uso de fallbacks con ``image-set`` (si soporta, no descarga el resto)
 
 <div class="grid">
 
 ```css
 .element {
-  display: inline;         /* ❌ Ignora width / height */
-  display: block;
-  display: inline-block;   /* ✅ width / height */
-  display: inline-flex;
-  display: flex;
-  display: inline-grid;
-  display: grid;
+  background: image-set(
+    url("image1.avif") type("image/avif"),
+    url("image1.webp") type("image/webp"),
+    url("image1.jpg") type("image/jpeg")
+  );
 }
 ```
-```css
-.element {
-  display: inline flow;         /* Antiguo inline ❌ Ignora width / height */
-  display: block flow;          /* Antiguo block */
-  display: inline flow-root;    /* Antiguo inline-block ✅ width / height */
-  display: inline flex;         /* Antiguo inline-flex */
-  display: block flex;          /* Antiguo flex */
-  display: inline grid;         /* Antiguo inline-grid */
-  display: block grid;          /* Antiguo grid */
+```html
+<img src="https://avotz.com/img/logo.png" alt="Avotz">
+
+<style>
+img {
+  width: 256px;  /* Cambiar a 128px */
+  height: 256px;
+  /* object-fit: cover; /* cover / contain */
+  /* object-position: top right; */
+  /* object-view-box: inset(15%); */
+  /* &:hover { object-view-box: inset(0); } */
 }
+</style>
 ```
+
+</div>
+
+---
+<style scoped>
+   .resize {
+    width: 256px;
+    height: 256px;
+    &.pix {
+      image-rendering: pixelated;
+    }
+  }
+</style>
+## Renderización de imágenes
+
+- Imagen original tamaño 18x18
+- Imagen redimensionada 256x256
+
+<div class="grid">
+
+```html
+<img src="manzdev.png" alt="ManzDev">
+
+<style>
+  img {
+    width: 256px;
+    height: 256px;
+    image-rendering: pixelated;
+  }
+</style>
+```
+<div>
+<img src="../assets/mario.png" alt="Mario">
+<img class="resize" src="../assets/mario.png" alt="mario">
+<img class="resize pix" src="../assets/mario.png" alt="mario">
+</div>
 
 </div>
 
