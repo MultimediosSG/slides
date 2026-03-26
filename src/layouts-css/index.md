@@ -135,8 +135,7 @@ section {
 - Aumentamos el ``gap`` a ``2rem`` para dar más espacio
 - Ajustamos: ``border: 3px solid black`` y ``width: max-content``
 - ⚠ Ajustamos las lineas con ``column-rule-inset: -1rem``
-
-Pro-tip:
+**Pro-tip:**
 - Añadimos un ``--offset: 2rem``
 - Mutamos ``column-rule-inset: calc(var(--offset) * -1)``
 - Mutamos ``padding: var(--offset)``
@@ -144,6 +143,7 @@ Pro-tip:
 </div>
 
 </div>
+
 ---
 ## Variables CSS
 
@@ -244,7 +244,7 @@ section {
   --cover: url(../assets/img_00067_.png);
 }
 </style>
-## Grid
+# Grid
 
 
 ---
