@@ -91,682 +91,583 @@ img {
 
 </div>
 
----
-<!-- _class: cover -->
-<style scoped>
-section {
-  --cover: url(../assets/img_00066_.png);
-}
-</style>
-# Flex
-
----
-
-## Flex CSS
-
-- Sistema de una sola dimensión [Flex](https://lenguajecss.com/css/flex/que-es-flex/)
-- Propiedad flex-direction:
-
-  - row (por defecto)
-  - column
-  - *-reverse
-
-<div class="grid">
-
-```html
-<div class="parent">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
-  <div class="item">5</div>
-  <div class="item">6</div>
-</div>
-
-```
-```css
-.parent {
-  display: flex;
-  flex-direction: row;
-  background: #999;
-
-  .item {
-    --size: 100px;
-
-    background: indigo;
-    border: 5px solid gold;
-    color: gold;
-    width: var(--size);
-    height: var(--size);
-  }
-}
-```
-
-</div>
-
----
-## Gaps (Huecos)
-
-- Propiedad ``gap`` → para añadir huecos entre items (no globales)
-- No es lo mismo ``gap`` (sólo entre items) que ``padding`` o ``margin``
-<div class="grid">
-
-```css
-.parent {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  background: #999;
-
-  .item {
-    /* ... */
-  }
-}
-```
-<div class="grid">
-
-- Añadimos un ``padding`` para border exteriores
-- Ponemos líneas con ``column-rule: 3px solid black``
-- Aumentamos el ``gap`` a ``2rem`` para dar más espacio
-- Ajustamos: ``border: 3px solid black`` y ``width: max-content``
-- ⚠ Ajustamos las lineas con ``column-rule-inset: -1rem``
-**Pro-tip:**
-- Añadimos un ``--offset: 2rem``
-- Mutamos ``column-rule-inset: calc(var(--offset) * -1)``
-- Mutamos ``padding: var(--offset)``
-- Mutamos ``gap: calc(var(--offset) * 2)``
-</div>
-
-</div>
-
----
-## Variables CSS
-
-- Variable definida en el elemento
-- Variable definida en el padre
-- Variable definida en el HTML
-- Uso de fallbacks
-- Ámbitos de variables de CSS
-
-```css
-.element {
-  --size: 50px;
-
-  width: var(--size);        /* No usa fallback */
-  height: var(--size, 50px); /* Usa fallback */
-}
-```
-
----
-## Flex multilínea (Wrap)
-
-- Se dice que Flex funciona con una dimensión, pero...
-- Propiedad ``flex-wrap*`` → con ``wrap`` permite multilínea (desborda items sin deformarlos)
-
-<div class="grid">
-
-```html
-<div class="parent">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
-  <div class="item">5</div>
-  <!-- ... hasta 10 -->
-</div>
-```
-```css
-.parent {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: space-between;
-  background: grey;
-  padding: 1rem;
-  width: 600px;
-  gap: 1rem;
-}
-```
-</div>
-
-- El modo ``wrap`` desbloquea ``align-content`` para alinear esas líneas extra.
 
 ---
 <style scoped>
-.order-example {
-  display: flex;
-  img {
-    width: 100px;
-    height: 100px;
-    background: indigo;
-    border: 5px solid gold;
+   .resize {
+    width: 256px;
+    height: 256px;
+    &.pix {
+      image-rendering: pixelated;
+    }
   }
-}
-.cat {
-  order: var(--cat-order, 0);
-}
 </style>
+## Filtros y modos de fusión
 
-## Extras de Flex
-- Con ``justify-content`` → eje primario (row → horizontal, column → vertical)
-- Con ``align-items`` → eje secundario (row → vertical, column → horizontal)
-- En modo wrap, ``align-content`` permite alinear eje extra multilinea
-- Extra: El maravilloso ``order``
+- ``filter:`` contrast(200%)
+- ``background-color:`` blue
+- ``background-blend-mode:`` darken
 
-<div class="order-example">
-  <img src="../assets/Official_CSS_Logo.svg.png" alt="Duck">
-  <img src="../assets/Official_CSS_Logo.svg.png" alt="Duck">
-  <img class="cat" src="https://avotz.com/img/logo.png" alt="Cat">
-  <img src="../assets/Official_CSS_Logo.svg.png" alt="Duck">
-</div>
-<div class="buttons">
- 
+<div class="grid">
 
-  <code>.cat { order: </code> <input type="number" oninput="document.body.style.setProperty('--cat-order', this.value)" value="0"><code>}</code>
+```css
+img {
+  background-color: red;
+  background-image: url("duck.png");
+  filter: grayscale(100%);
+}
+```
 
-  
-</div>
-Juegos para practicar:
-
-[FlexboxFroggy](https://flexboxfroggy.com/#es)
-[FlexboxDefense](https://flexboxdefense.com/)
 
 ---
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00067_.png);
+  --cover: url(../assets/img_00070_.png);
 }
 </style>
-# Grid
-
-
+# Responsive
+- Media Queries
+- Media Features
+- Preferencias de usuario
+- Container Queries
 ---
-## Grid
-- Sistema de dos dimensiones (cuadrículas) → Conceptos: [ Grid](https://lenguajecss.com/css/grid/que-es-grid/)
-- Definir el tamaño de ancho → grid-template-columns
-- Definir el tamaño de alto → grid-template-rows
-- Definir huecos con gap → (row + columns)
 
-<div class="grid">
+## Filosofía del responsive
 
-```html
-<div class="grid">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
-  <div class="item">5</div>
-  <div class="item">6</div>
-</div>
-```
-```css
-.grid {
-  display: grid;
-  grid-template-columns: 100px 100px 100px;
-  grid-template-rows: 50px 50px;
-  gap: 15px 15px;
-  width: max-content;
-  background: grey;
-
-  .item { background: indigo }
-}
-```
-</div>
+- Elige estrategia: ``Mobile-first`` / ``Desktop-first``, Olvídate del «pixel perfect»
+- Intenta reducir contenido en media queries (si puedes usar variables CSS, mejor)
+- Establece tus breakpoints y crea las [media queries modernas](https://lenguajecss.com/css/responsive-web-design/media-queries/) que necesites
 
 
----
-## Más características en Grid
-
-- La función ``repeat(num, size)`` ayuda a simplificar
-- La unidad ``fr`` (fracción restante)
-- Responsive one-line: ``repeat(auto-fill, minmax(var(--size), 1fr))``
 
 ```css
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 100px) 200px;
-  grid-template-rows: repeat(2, 50px);
-  gap: 15px 15px;
-  width: max-content;
-  background: grey;
-
-  .item { background: indigo }
-}
-```
-
----
-## Extras de Grid
-
-- Con las propiedades *-items y *-content se puede alinear elementos
-- Con justify-items y align-items (hijos, dentro de celdas)
-- Con justify-content y align-content (el propio grid)
-- Más info → [Alinear en Grid](https://lenguajecss.com/css/grid/alinear-centrar-css/)
-
-![bg contain right](../assets/alinear-grid-css.png)
-
----
-## Grid por áreas
-
-- [Grid por áreas](https://lenguajecss.com/css/grid/grid-template-areas/): ``grid-template-areas`` y ``grid-area``
-- Zonas vacías con ``.`` (asegúrate de tener mismo número de columnas)
-
-<div class="grid">
-
-```html
-<div class="parent">
-  <header>Logo</header>
-  <section>Content</section>
-  <aside>Menú</aside>
-  <footer>Footer</footer>
-</div>
-```
-```css
-.parent {
-  display: grid;
-  grid-template-areas: "head head"
-                       "body menu"
-                       "foot foot";
-  grid-template-rows: 100px 1fr 100px;
-  height: 700px;
-}
-
-header { grid-area: head; background: blue }
-section { grid-area: body; background: green }
-aside { grid-area: menu; background: grey }
-footer { grid-area: foot; background: #333 }
-```
-</div>
-
----
-## Grids irregulares
-
-- [Grids irregulares](https://lenguajecss.com/css/grid/irregular-grid/): ``grid-*-start`` y ``grid-*-end``
-- Zonas vacías con ``.`` (asegúrate de tener mismo número de columnas)
-
-<div class="grid">
-
-```html
-<div class="parent">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
-  <div class="item">5</div>
-</div>
-```
-```css
-.parent {
-  display: grid;
-  grid-template-columns: repeat(2, 100px);
-  grid-template-rows: 50px 1fr 100px;
-  gap: 5px;
-}
-
-.item { background: grey }
-
-.item:nth-child(2) {
-  grid-row-start: 2;       /* +1 */
-  grid-column: 1 / span 2; /* De 1 hasta 2 */
-}
-```
-</div>
-
-Juegos para prácticar:
-
-- [Grid Garden](https://cssgridgarden.com/#es)
-
----
-<!-- _class: cover -->
-<style scoped>
-section {
-  --cover: url(../assets/img_00068_.png);
-}
-</style>
-# Position
-
-
-
----
-
-## Posicionamiento CSS
-- La propiedad ``position``
-- 5 modalidades: ``static``, ``relative`` y ``absolute`` (variaciones: ``fixed`` y ``sticky``)
-- Desplazamientos: ``top``, ``bottom``, ``left``, ``right``
-<div class="grid">
-
-```css
-.item-1 {
-  position: relative;
-  left: 5px;            /* → 5px (desde la izquierda) */
-  left: -5px;           /* ← 5px (hacia la izquierda) */
-  top: 5px;             /* ↓ 5px (hacia abajo) */
-  top: -5px;            /* ↑ 5px (hacia arriba) */
-}
-```
-```css
-.parent {
-  position: relative;       /* Marco (referencia) */
-
-  .item {
-    position: absolute;     /* Busca padre != static */
-    left: 0;
-    top: 0;
-  }
-}
-```
-</div>
-
-
----
-## Posicionamiento CSS
-- La propiedad ``position``
-- 5 modalidades: ``static``, ``relative`` y ``absolute`` (variaciones: ``fixed`` y ``sticky``)
-- Desplazamientos: ``top``, ``bottom``, ``left``, ``right``
-
-<div class="grid">
-
-```css
-.parent {
-  .box {
-    background: indigo;
-    position: fixed;
-    width: 50px;
-    height: 50px;
-    right: 0;
-    top: 0;
-  }
-}
-```
-```css
-.parent {
-  .box {
-    background: indigo;
-    position: sticky;
-    top: 0;
-    height: 50px;
-  }
-}
-```
-</div>
-
----
-<style scoped>
-.item {
-  width: 50px;
-  height: 50px;
-  position: relative;
-
-  &.item-1 { background: deeppink }
-  &.item-2 { background: indigo; top: -40px; left: 40px }
-  &.item-3 { background: black; top: -80px; left: 80px }
-  &.item-1 { z-index: 1 }
-  &.item-2 { z-index: var(--item-index, 0) }
-  &.item-3 { z-index: 10 }
-}
-</style>
-
-## Profundidad CSS
-- La propiedad ``z-index`` (valores numéricos)
-<div class="grid">
-
-```html
-<div class="container">
-  <div class="item item-1"></div>
-  <div class="item item-2"></div>
-  <div class="item item-3"></div>
-</div>
-```
-```css
-.item {
-  width: 100px;
-  height: 100px;
-  position: relative;
-
-  &.item-1 { background: deeppink }
-  &.item-2 { background: indigo; top: -40px; left: 40px }
-  &.item-3 { background: black; top: -80px; left: 80px }
-  &.item-1 { z-index: 1 }
-  &.item-2 { z-index: var(--item-index, 0) }
-  &.item-3 { z-index: 10 }
-}
-```
-
-</div>
-
-<div>
-<div class="zindex-example">
-  <div class="item item-1">1</div>
-  <div class="item item-2"></div>
-  <div class="item item-3">10</div>
-</div>
-<div class="buttons">
-  <code>.item-2 { z-index: </code>
-  <input type="number" value="5" oninput="document.body.style.setProperty('--item-index', this.value)">
-  <code>&nbsp;}</code>
-</div>
-</div>
-
----
-<style scoped>
-
-.reference {
-  anchor-name: --ref;
-  background: deeppink;
-  width: 250px;
-  margin: auto;
-}
+/* Estilos comunes que no cambian de desktop a mobile */
 .element {
   background: indigo;
-  position: absolute;
-  position-anchor: --ref;
-  bottom: anchor(bottom); 
-  right: anchor(left);
+}
+
+/* Casos particulares: cambios de direccionalidad, paddings, etc... */
+/* (Bloques @media siempre al final, para aprovechar herencia) */
+@media ... {
+  /* ... */
+}
+
+```
+
+---
+## Filosofía del responsive
+
+- Elige estrategia: ``Mobile-first`` / ``Desktop-first``, Olvídate del «pixel perfect»
+- Intenta reducir contenido en media queries (si puedes usar variables CSS, mejor)
+- Establece tus breakpoints y crea las [media queries modernas](https://lenguajecss.com/css/responsive-web-design/media-queries/) que necesites
+
+```css
+/* Estilos aplicados a pantallas entre 640px y 1024px */
+
+@media screen and (min-width: 640px) and (max-width: 1024px) { }   /* ❌ LEGACY */
+
+@media (width >= 640px) and (width <= 1024px) { }                  /* ✅ MEJOR */
+
+@media (640px <= width <= 1024px) { }                              /* ✅✅ AÚN MEJOR */
+```
+
+
+
+```css
+.element {
+  --pad: 2rem;
+  background: indigo;
+  padding: var(--pad);
+  display: flex;
+
+  @media (width <= 1024px) {
+    --pad: 0.5rem;
+    flex-direction: column;
+  }
+}
+```
+
+---
+## No sólo de width vive el dev
+
+- Puedes usar height, aspect-ratio, orientation u otros
+- Hay muchos [media features](https://lenguajecss.com/css/responsive-web-design/media-features/)
+- También hay @media basados en las preferencias de usuario
+
+
+```css
+@media (aspect-ratio <= 6/2) { }        /* 6/2 === 3/1 === 3 */
+@media (orientation: landscape) { }     /* Landscape (apaisado) o portrait (retrato) */
+@media (scripting: none) { }            /* El usuario no tiene Javascript */
+@media (any-hover: none) { }            /* El usuario no tiene cursores (ratón) */
+@media (any-pointer: none) { }          /* Usuario sin táctil (coarse) ni ratón preciso (fine) */
+@media print { }                        /* Se aplica sólo cuando se imprime (físico o PDF) */
+```
+```css
+@media (prefers-reduced-motion: reduce) { }        /* Usuario prefiere sin animaciones */
+@media (prefers-reduced-transparency: reduce) { }  /* Usuario prefiere sin transparencias */
+@media (prefers-reduced-data: reduce) { }          /* ⚠ Usuario prefiere ahorrar datos */
+@media (prefers-color-scheme: dark) { }            /* Usuario prefiere modo oscuro (light=claro) */
+
+/* Forma alternativa (compacta y directa) */
+body {
+  background: light-dark(white, black);
+  color: light-dark(black, white);
+}
+```
+
+
+
+---
+## Container queries
+
+```css
+.container {
+  background: grey;
+  display: flex;
+  gap: 1rem;
+  container: parent / inline-size;      /* ⬅ Establecemos padre */
+  width: 600px;                         /* ⬅ Cambiar a 300px */
+
+  .item {
+    background: blue;
+    width: 200px;
+    height: 200px;
+    @container parent (width <= 500px) { background: red }  /* ⬅ Container query */
+  }
+}
+```
+
+---
+<!-- _class: cover -->
+<style scoped>
+section {
+  --cover: url(../assets/img_00071_.png);
 }
 </style>
+# Cascada CSS
+- Especificidad CSS
+- Capas de cascada @layer
+- :where() vs !important
+- Alcance con @scope
+- Shadow DOM declarativo
 
-## CSS Anchor position
+
+---
+## Especificidad CSS
+
+- CSS tiene varias reglas → Cascada
+- NO FUNCIONAN como la programación
+- Hay que entenderlas (no memorizarlas)
+
+Reglas
+
+- Herencia: Quien tiene preferencia
+- Estructura: Como se lee el CSS
+- Especificidad: Resolver conflictos
+- Alcance: Hasta donde se aplica el CSS
+
+![bg contain right](../assets/cascada.png)
+
+
+---
+
+## Herencia
+- [Propiedades heredables](https://lenguajecss.com/cascada-css/herencia/que-es/#propiedades-heredables): ``color``, ``font-family``, ``font-size``, etc...
+- Valores de herencia: ``inherit``, ``initial`` o ``unset`` (``inherit``/``initial`` según caso)
+- Resets si quieres algo ya hecho
+
 <div class="grid">
-
-```html
-<div class="reference">Reference</div>
-<div class="element">Element</div>
+  
+  ```html
+  <div class="parent">
+  Hello from parent!
+  <p class="child">Hello from child!</p>
+</div>
 
 <style>
-.reference { anchor-name: --ref }
-
-.element {
-  position: absolute;
-  position-anchor: --ref;
-  bottom: anchor(bottom); 1️⃣
-  right: anchor(left);    2️⃣
+.parent {
+  background: black;
+  color: gold;
 }
 </style>
 ```
-<div>
+```css
+.parent {
+  border: 2px solid deeppink;
 
-- 1️⃣ Ancla el borde inferior del elemento a la referencia
-- 2️⃣ Ancla el borde derecho del elemento a la referencia
-  <div>
-  <div class="reference">Reference</div>
-  <div class="element">Element</div>
-  </div>
+  .child {
+    border: inherit;
+  }
+}
+```
+
 </div>
+
+---
+<style scoped>
+spoiler {
+  color: transparent
+}
+</style>
+## Estructura (tradicional)
+- Fuente: [-] ``<link>`` → ``<style>`` → ``style=""`` [+]
+- Orden (mismo selector): herencia + ``!important``
+- Selector: Especificidad (A,B,C) → Calculadoras: [keegan](https://specificity.keegan.st/) / [wallace](https://www.projectwallace.com/specificity-calculator?selectors=.kid+%3Ahas%28.friend%29+%7E+%3Awhere%28.treehouse%29+%3Ais%28%23gross%29)
+
+<div class="grid">
+  
+  ```html
+  <div id="element" class="text">
+    Texto del elemento
+  </div>
+
+  <style>
+  div { background-color: red; }
+  #element { background-color: steelblue; }
+  .text { background-color: green; }
+  </style>
+```
+
+
+- El selector div tiene especificidad... <spoiler>0,0,1 (es un elemento)</spoiler>
+- El selector #element tiene especificidad... <spoiler>1,0,0 (es un id)</spoiler>
+- El selector .text tiene especificidad... <spoiler>0,1,0 (es una class)</spoiler>
+
+
+</div>
+
+---
+
+## Estructura (moderna)
+- Estilos globales ↔ Estilos locales (Shadow DOM)
+- Evita !important a favor de :where() (especificidad 0)
+- Usa @layer (capas, estilo «Photoshop», de especificidad)
+
+<div class="grid">
+  
+  ```html
+ <div class="text">       <!-- CSS inyectado -->
+  Texto del elemento
+</div>
+
+<style>
+:where(.text) { background-color: indigo }   ⬇
+.text { background-color: deeppink }         ⬆
+</style>
+```
+```css
+@layer base, theme;
+
+.primary {
+  @layer theme {
+    background: indigo;
+    color: white;
+  }
+  @layer base {
+    background: grey;
+    width: 250px;
+    height: 200px;
+    padding: 1rem;
+  }
+}
+```
+
+</div>
+
+---
+## Alcance (scope)
+- Nomenclatura BEM, ahora: ``@scope``
+
+<div class="grid">
+  
+  ```html
+ <!-- Estilos acotados al div padre -->
+<div class="parent">
+
+  <style>
+    @scope {
+      h1 { color: purple }
+    }
+  </style>
+  <h1>Hola a todos</h1>
+
+</div>
+<h1>Texto fuera</h1>
+```
+```css
+/* Nomenclatura BEM */
+.parent__element--modifier {
+  /* ... */
+}
+/* A partir de <div class="parent"> */
+@scope (.parent) {
+  div { color: red }
+}
+/* De div.parent a div.child */
+@scope (.parent) to (.child) {
+  div { color: blue }
+}
+```
+
 </div>
 
 ---
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00069_.png);
+  --cover: url(../assets/img_00072_.png);
 }
 </style>
-# Animaciones
-- La propiedad ``transition``
-- La regla ``@starting-style``
-- Animaciones con ``@keyframes``
-- Ritmo (funciones de tiempo)
-- Animaciones de scroll
+# Máscaras y recortes
+- Formas
+- Recortes (clip-path)
+- Shape (SVG-in-CSS)
+- Máscaras
+
+---
+
+## Formas CSS (Aplicadas con clip-path)
+
+<div class="grid">
+  
+<div class="shape-buttons">
+<ul>
+<li><button class="none">Sin recorte</button></li>
+<li>Rectángulos: <button>rect()</button>, <button>inset()</button> e <button>xywh()</button></li>
+<li>Círculos y elipses: <button>circle()</button> y <button>ellipse()</button></li>
+<li>Trayectos: <button>polygon()</button>, <button>path()</button> y <button>shape()</button></li>
+</ul>
+<p><output class="mask-status">clip-path: none</output></p>
+</div>
+<div class="mask-example-container">
+  <img id="mask-example" src="../assets/img_00067_.png" width="550" height="350" alt="Masks" style="clip-path: none;">
+</div>
+</div>
+
+<script>
+const image = document.querySelector("#mask-example");
+const buttons = document.querySelectorAll(".shape-buttons button");
+const output = document.querySelector("output.mask-status");
+
+const update = (prop, value) => {
+  image.style.setProperty(prop, value);
+  output.textContent = `${prop}: ${value}`;
+}
+
+// Sin recorte
+buttons[0].addEventListener("click", () => update("clip-path", `none`));
+
+// rect
+buttons[1].addEventListener("click", () => update("clip-path", `rect(50px 475px 240px 230px)`));
+
+buttons[2].addEventListener("click", () => update("clip-path", `inset(10% 10% 10% 10%)`));
+
+buttons[3].addEventListener("click", () => update("clip-path", `xywh(0 0 450px 250px)`));
+
+buttons[4].addEventListener("click", () => update("clip-path", `circle(30% at 50% 55%)`));
+
+buttons[5].addEventListener("click", () => update("clip-path", `ellipse(30% 30% at 50% 50%)`));
+
+buttons[6].addEventListener("click", () => update("clip-path", `polygon(0 0, 100% 0, 50% 100%)`));
+
+buttons[7].addEventListener("click", () => update("clip-path", `path("m 228 127 l 93 0 l 29 -84 l 29 84 l 93 0 l -76 52 l 29 84 l -76 -52 l -76 52 l 29 -84 l -76 -52 Z")`));
+
+buttons[8].addEventListener("click", () => update("clip-path", `shape(from 0 0, hline to calc(30% - 50px), arc by calc(350px) 0 of 50px, hline to 100%, vline to 100%, hline to 0, close)`));
+  </script>
 
 ---
 <style scoped>
-.element {
-  background: deeppink;
-  width: 200px;
-  height: 100px;
- 
-}
-.element:hover {
-  width: 300px;
-  background: indigo;
-}
-.transition {
-  transition: all 1s;
-}
-.t-fast {
-  transition-duration: 0.2s;
-}
+  #mask-1 {
+    mask-image:
+      radial-gradient(circle 50px at 50px 50px,
+        black 75%, transparent 78%),
+      radial-gradient(circle 400px,
+        black 50%, transparent 50.5%);
+    mask-repeat: repeat, no-repeat;
+    mask-size: 100px 100px, cover;
+    mask-composite: add;
+  }
 </style>
+## Máscaras
 
-## Transiciones
-- La palabra clave all aplica a todas las propiedades
-- Transiciones de entrada y de salida
+- Tenemos una imagen y aplicamos máscara compuesta
+- Un gradiente repetido y otro sin repetir
 
 <div class="grid">
 
 ```css
 .element {
-  background: deeppink;
-  width: 200px;
-  transition: all 0.5s;
-}
-
-.element:hover {
-  width: 300px;
-  background: indigo;
+  mask-image:
+    radial-gradient(circle 50px at 50px 50px,
+      black 75%, transparent 78%),
+    radial-gradient(circle 400px,
+      black 50%, transparent 50.5%);
+  mask-repeat: repeat, no-repeat;
+  mask-size: 100px 100px, cover;
+  mask-composite: add;
 }
 ```
-<div>
-<div class="element"></div>
-<br>
-<div class="element transition"></div>
-<br>
-<div class="element transition t-fast"></div>
-</div>
+<img id="mask-1" width="550" height="350" src="../assets/img_00067_.png" alt="">
 
 </div>
 
 ---
-## La regla ``@starting-style``
+<!-- _class: cover -->
+<style scoped>
+section {
+  --cover: url(../assets/img_00073_.png);
+}
+</style>
+# Lógica CSS
+- ¿CSS es programación?
+- if en CSS
+- function en CSS
+- Tipos de datos en CSS
 
-- Estilo inicial (útil para evitar saltos en entradas)
-- Se puede aplicar ``nesting`` en los estilos
+---
+## Condicionales en CSS
+
+- ``@media (...)`` según features del dispositivo
+- ``@media (prefers-*)`` según preferencias de usuario
+- ``@support (...)`` según soporte/compatibilidad
+- ``@container (...)`` según contenedor padre
+- ``var(..., fallback)`` según si existe variable
+- ``if(...; else: ...)`` según valor de variable
 
 ```css
+@media (width <= 800px) { /* ... */ }
+@media (prefers-color-scheme: dark) { /* ... */ }
+@supports not (object-view-box: none) { /* ... */ }
+@container name (width <= 800px) { /* ... */ }
+.element { background: var(--color, grey) }
 .element {
-  background: deeppink;
+  --name: "ManzDev";
+  background: if(
+    style(--name: "ManzDev"): indigo;
+    style(--name: "CyberManzDev"): red;
+    else: grey
+  );
+}
+```
+
+---
+## Funciones en CSS
+
+<div class="grid">
+
+```css
+@function --gradient(--colors) {
+  --shape: circle 150px;
+  --position: 100% 50%;
+  result: radial-gradient(
+    var(--shape) at var(--position), var(--colors)
+  );
+}
+
+.box {
+  --colors: black, indigo, deeppink;
   width: 200px;
   height: 75px;
-  transition: all 0.75s;
-  opacity: 1;
+  background: --gradient(var(--colors));
 }
+```
+- En CSS tenemos la regla ``@function``
+- Se usan como las variables CSS pero con paréntesis
+- Las funciones devuelven resultados
+- Permiten parámetros
+- Hacen más semántico y reutilizable el CSS
 
-@starting-style {
-  .element { opacity: 0 }
+</div>
+
+---
+## Funciones random
+
+- Con cache ``random()`` / ``random-item()``
+- Sin cache (usando ``per-element``)
+- Con cache selectivo (usando ``--id``)
+
+<div class="grid">
+
+```css
+.container {
+  width: random(100px, 500px);                /* Con cache: */
+  height: random(100px, 500px);               /* Mismo input, mismo valor aleatorio */
+
+  width: random(--id, 100px, 500px);          /* Con cache: Mismo valor aleatorio en mismo --id */
+  width: random(per-element, 100px, 500px);   /* Sin cache: Valor aleatorio */
+
+  width: random(100px, 500px, by 50px);       /* Con saltos de 50px en 50px */
+  background: random-item(indigo, deeppink, tomato);  /* Elige un valor aleatorio de la lista */
 }
 ```
 
----
-<style scoped>
-.element {
-  background: deeppink;
-  width: 200px;
-  height: 200px;
-  animation: move 2s alternate infinite;
-}
-@keyframes move {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(200px, 0); }
-}
-</style>
+</div>
 
-## Animaciones
-- Con ``@keyframes`` creamos la animación
-- Con ``animation`` la aplicamos → Más opciones de animación
+---
+## Tipos de datos en CSS
+
+- Ejemplo → en regla ``@property``
+- Ejemplo → en función ``attr()``
+- Hay muchos tipos de datos
+
+<div class="grid">
+
+```css
+@property --x {        /* La variable --x */
+  syntax: "<length>";  /* Es de tipo longitud */
+  inherits: true;      /* Es heredable */
+  initial-value: 0     /* Y tiene este valor por defecto */
+}
+
+.element {
+  display: inline flow-root;
+  padding: 4px 8px;
+  background: attr(data-color type(<color>));
+  color: white;
+}
+```
+```html
+<!-- El color se toma del atributo -->
+<div class="element"
+     data-color="indigo">Manz</div>
+```
+
+</div>
+
+---
+## Transpilar código CSS
 
 <div class="grid">
 
 ```css
 .element {
-  background: deeppink;
-  width: 200px;
-  height: 200px;
-  animation: move 2s alternate infinite;
+  background: color-mix(...);
+  color: light-dark(...);
+
+  &:is(...) { /* ... */ }
+
+  .child { /* ... */ }
 }
 
-@keyframes move {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(200px, 0); }
-}
 ```
-
-
-
-<div class="element">
-</div>
-
-
-</div>
-
----
-## Ritmo (funciones de tiempo)
-- Constante (mismo ritmo): ``linear``
-- [Ritmos variables](https://lenguajecss.com/animaciones/timing-functions/que-son/#valores-predefinidos): ``ease`` (por defecto), ``ease-in``, ``ease-out``, ``ease-in-out``
-- [Ritmo personalizado](https://cubic-bezier.com/#.17,.67,.83,.67): función ``cubic-bezier()``
-- [Ritmo lineal personalizado](https://lenguajecss.com/animaciones/timing-functions/linear/): función ``linear()``
-- [Ritmos escalonados](https://lenguajecss.com/animaciones/timing-functions/steps/): función ``steps()`` → [Ejemplo con SpriteSheets](https://lenguajecss.com/animaciones/animaciones/spritesheets-css/)
-
----
-## Animaciones de scroll
-- La función view() → [Ejemplo](https://codepen.io/alons182/pen/MYjEYEQ)
-
 ```css
 .element {
-  background: indigo;
-  animation: change linear both;
-  animation-timeline: view(block 20%);
+  background: #848833;    /* Color procesado y "aplanado" */
+  color: var(--light-dark); /* Versión compatible si no soporta light-dark() */
 }
 
-@keyframes change {
-  from { scale: 0; opacity: 0 }
-  to { scale: 1; opacity: 1; }
-}
+.parent .child-1,
+.parent .child-2,
+.parent .child-3 { /* ... */ }   /* Versión compatible si no se soporta :is() */
+
+.parent  .child { /* ... */ }    /* Sin CSS nesting (navegadores muy antiguos) */
 ```
+</div>
 
----
-## View Transition
-- ¿Qué son las [View Transition](https://lenguajecss.com/animaciones/view-transition/que-son/)?
-- Recomendable en un ``<style>`` inline (performance)
-
-```css
-/* Obligatorio */
-@view-transition { navigation: auto }
-
-/* Opcional */
-.container {
-  view-transition-name: page;
-}
-
-::view-transition-old(page) { animation: fade 0.2s linear forwards }
-::view-transition-new(page) { animation: fade 0.3s linear reverse }
-
-@keyframes fade {
-  from { opacity: 1 }
-  to { opacity: 0 }
-}
-```
-
+- [PostCSS](https://postcss.org/)
+- [LightningCSS](https://lightningcss.dev/)
 
 ---
 ## Referencias
