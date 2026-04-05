@@ -22,6 +22,27 @@ section {
 > Inspirado en el bootcamp de <br><strong>Manz.dev</strong> todos los créditos a el.
 
 ---
+## Colores derivados
+
+- Con ``color-mix()`` puedes mezclar varios colores (uno puede ser ``transparent``).
+- Con ``from`` puedes crear colores derivados (y no sólo ``rgb()`` → ``hsl()``, ``oklch()``, ``oklab()``...)
+
+```css
+.element {
+  --color: #ff0000;   /* Rojo */
+
+  /* Mezcla de colores */
+  --soft-color: color-mix(in srgb, var(--color), white 80%);
+  --dark-color: color-mix(in srgb, var(--color), white 20%);
+
+  /* Colores relativos */
+  --same-color: rgb(from var(--color) r g b);    /* Mismo color: rgb(255 0 0) */
+  --pink-color: rgb(from var(--color) r g 255);  /* Color rosa: rgb(255 0 255) */
+}
+```
+
+
+---
 
 ## Utilidades para imágenes
 
@@ -73,7 +94,7 @@ img {
 <div class="grid">
 
 ```html
-<img src="manzdev.png" alt="ManzDev">
+<img src="mario.png" alt="Mario">
 
 <style>
   img {
