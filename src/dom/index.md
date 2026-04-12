@@ -7,7 +7,7 @@ paginate: true
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00074_.png);
+  --cover: url(../assets/img_00001_dom.png);
 }
 </style>
 # DOM Moderno (Javascript)
@@ -24,7 +24,7 @@ section {
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00074_.png);
+  --cover: url(../assets/img_00005_dom.png);
 }
 </style>
 # Document Object Model
@@ -121,7 +121,7 @@ const ancient = container.closest(".page");
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00074_.png);
+  --cover: url(../assets/img_00002_dom.png);
 }
 </style>
 
@@ -161,7 +161,7 @@ const paragraph = document.querySelector(".container .post");
 
 // Sirve tanto para leer como para modificar
 paragraph.innerHTML              // '<p>Esto es un párrafo de texto</p>'
-paragraph.innerHTML = "<p>Hola, soy <strong>ManzDev</strong>.</p>";
+paragraph.innerHTML = "<p>Hola, soy <strong>Alonso</strong>.</p>";
 
 // Confusa en ciertas situaciones. No soporta ciertos detalles modernos.
 ```
@@ -181,7 +181,7 @@ const paragraph = document.querySelector(".container .post");
 
 // Métodos modernos (más intuitivos)
 paragraph.getHTML();          // '<p>Esto es un párrafo de texto</p>'
-paragraph.setHTMLUnsafe("<p>Hola, soy <strong>ManzDev</strong></p>");
+paragraph.setHTMLUnsafe("<p>Hola, soy <strong>Alonso</strong></p>");
 
 // Deja claro que puede insertar HTML inseguro (innerHTML también lo es)
 ```
@@ -297,7 +297,7 @@ element.classList.replace("rounded", "hide");   // Cambia "rounded" por "hide"
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00074_.png);
+  --cover: url(../assets/img_00003_dom.png);
 }
 </style>
 # Crear elementos con el DOM
@@ -448,7 +448,7 @@ cats.forEach(cat => {
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00075_.png);
+  --cover: url(../assets/img_00004_dom.png);
 }
 </style>
 # APIs relacionadas
@@ -617,7 +617,7 @@ const app = document.querySelector("#app");
 
 const template = (name) => html`<h1>Hola, soy <strong>${name}</strong></h1>`;
 
-render(template("ManzDev"), app);   // renderiza el contenido en el DOM
+render(template("Alonso"), app);   // renderiza el contenido en el DOM
 render(template("Patito"), app);    // re-render (no sobreescribe, solo detecta lo que cambia)
 ```
 
@@ -679,7 +679,7 @@ const tasks = [
   "Dejar un hype desde los comentarios de móvil",
   "Dejar un like al video de Youtube",
   "Unirte al servidor de Discord",
-  "Escuchar las canciones de music.manz.dev"
+  "Escuchar las canciones"
 ];
 
 const setItem = (name) => html`<li>${name}</li>`;
