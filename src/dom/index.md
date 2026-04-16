@@ -103,6 +103,7 @@ const imageWithLink = document.querySelectorAll("a:has(img)");
 const cells = document.querySelectorAll("table tr:nth-child(2) td");
 ```
 
+---
 ## Buscar en el DOM
 
 - ✅ Métodos modernos de selección: .querySelector*()
@@ -304,7 +305,7 @@ section {
 
 
 ---
-## Posición y fragmentos
+## Crear elementos
 - El método document.createElement()
 - Podemos crear un sistema para simplificar
 - [Fragmentos](https://lenguajejs.com/dom/crear/fragmentos/) en casos especiales (no queremos contenedor)
@@ -321,7 +322,7 @@ div.isConnected               // true (si está en el DOM)
 
 ---
 
-## Posición y fragmentos
+## Crear elementos
 - El método document.createElement()
 - Podemos crear un sistema para simplificar
 - [Fragmentos](https://lenguajejs.com/dom/crear/fragmentos/) en casos especiales (no queremos contenedor)
@@ -336,23 +337,6 @@ const createTag = (className = "element", tag = "div", options = {}) => {
 }
 
 createTag("container", "p", { text: "Hello!" });    // <p class="container">Hello!</p>
-```
-
----
-## Posición y fragmentos
-- Los métodos ``.search()``, ``.indexOf()`` e ``.lastIndexOf()`` buscan posiciones (index)
-- Los métodos ``.substring()`` e ``.slice()`` buscan y devuelven fragmentos
-- Los métodos ``.replace()`` y ``.replaceAll()`` buscan y reemplazan fragmentos
-
-```js
-//            ↓0   ↓5        ↓15           ↓29
-const text = "Estamos en el curso de Multimedios";
-
-// Ojo, no reemplaza, devuelve una copia (esto es importante)
-text.replace("curso", "clase");   // Reemplaza sólo el primero
-text.replaceAll("a", "i");            // Reemplaza todas las "a"
-text.replaceAll(/[aeiou]/, "i");      // Con expresiones regulares
-
 ```
 
 ---

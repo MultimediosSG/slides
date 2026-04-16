@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: alolight
+theme: alo
 paginate: true
 ---
 
