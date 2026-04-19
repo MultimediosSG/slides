@@ -1105,3 +1105,38 @@ regexp.exec(text);
 - [CheatSheet Javascript](https://lenguajejs.com/javascript/cheatsheets/)
 - [bootcamp.manz.dev](https://bootcamp.manz.dev/)
 
+<script>
+(function() {
+  const init = () => {
+    document.querySelectorAll('section:has(.steps-panels)').forEach(section => {
+      const el = document.createElement('div');
+      el.className = 'step-indicator';
+      section.appendChild(el);
+    });
+
+    const update = () => {
+      document.querySelectorAll('section:has(.steps-panels)').forEach(section => {
+        const panels = [...section.querySelectorAll('.steps-panels > .step-panel')];
+        const total = panels.length;
+        const lastActive = panels.findLastIndex(
+          p => p.getAttribute('data-bespoke-marp-fragment') === 'active'
+        );
+        const current = lastActive === -1 ? 1 : lastActive + 1;
+        const indicator = section.querySelector('.step-indicator');
+        if (indicator) indicator.textContent = `${current} / ${total}`;
+      });
+    };
+
+    const observer = new MutationObserver(update);
+    document.querySelectorAll('.steps-panels > [data-marpit-fragment]').forEach(el => {
+      observer.observe(el, { attributes: true, attributeFilter: ['data-bespoke-marp-fragment'] });
+    });
+    update();
+  };
+
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', init)
+    : requestAnimationFrame(init);
+})();
+</script>
+

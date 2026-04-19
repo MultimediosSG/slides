@@ -97,6 +97,25 @@ svg[data-marpit-svg] {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
+/* Step indicator */
+section:has(.steps-panels) {
+  position: relative;
+}
+.step-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.85em;
+  font-weight: 400;
+  padding: 0.3rem 0.8rem;
+  background: #fe704d22;
+  color: #fe704d;
+  border-radius: 0 0 0 0.5rem;
+  z-index: 100;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
 /* Steps component: muestra un panel a la vez, navega con flechas del teclado */
 .steps-panels > .step-panel:not(:first-child) {
   display: none;
