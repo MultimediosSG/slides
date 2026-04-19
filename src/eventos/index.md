@@ -1032,4 +1032,4 @@ regexp.exec(text);
 - [CheatSheet Javascript](https://lenguajejs.com/javascript/cheatsheets/)
 - [bootcamp.manz.dev](https://bootcamp.manz.dev/)
 
-<script src="../theme/steps.js"></script>
+<script src="../assets/steps.js"></script>
