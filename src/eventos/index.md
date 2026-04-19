@@ -7,7 +7,7 @@ paginate: true
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00001_dom.png);
+  --cover: url(../assets/img_00017_.png);
 }
 </style>
 # Eventos (Javascript)
@@ -191,7 +191,7 @@ element.addEventListener("click", () => {
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00002_dom.png);
+  --cover: url(../assets/img_00017_.png);
 }
 </style>
 
@@ -430,7 +430,7 @@ element.classList.replace("rounded", "hide");   // Cambia "rounded" por "hide"
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00003_dom.png);
+  --cover: url(../assets/img_00018_.png);
 }
 </style>
 # Propagación de eventos
@@ -594,7 +594,7 @@ container.addEventListener("messagereceived", (ev) => { /* ... */ });
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00004_dom.png);
+  --cover: url(../assets/img_00019_.png);
 }
 </style>
 # Optimización
@@ -790,7 +790,7 @@ observer.observe(element);
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00004_dom.png);
+  --cover: url(../assets/img_00020_.png);
 }
 </style>
 # APIs modernas
@@ -876,70 +876,255 @@ speechSynthesis.speak(message);
 
 ---
 
-## Plantillas HTML (con Lit)
-- Sistema de plantillas ultraligero, núcleo de [Lit](https://lit.dev/) → pnpm install lit-html
-- v3.3.2: 💾 → 1.71 MB 🌍 → 7.2KB 🔩 → 3.24KB
+## BroadcastChannel API
+- [BroadcastChannel](https://lenguajejs.com/eventos/tiempo-real/broadcastchannel/): Envío de eventos entre ventanas/pestañas del navegador → [Ejemplo](https://x.com/ahzam_shahnil/status/1937582661955997872)
+- Necesario: Abierto con el mismo navegador.
 
 ```js
-import { html, render } from "https://unpkg.com/lit-html";
+// Creamos un canal con un nombre único
+const channel = new BroadcastChannel("channel");
+channel.postMessage({ type: "logout" });
 
-const app = document.querySelector("#app");
-
-const addButton = (text, action) => html`<button @click=${action}>${text}</button>`;
-
-render(addButton("Click me", () => alert("Clicked!!")), app);
+// En las otras pestañas, escuchamos ese canal
+const channel = new BroadcastChannel("channel");
+channel.addEventListener("logout", () => {
+  /* ... */
+});
 ```
 
 ---
 
-## Plantillas HTML (con Lit)
-- Sistema de plantillas ultraligero, núcleo de [Lit](https://lit.dev/) → pnpm install lit-html
-- v3.3.2: 💾 → 1.71 MB 🌍 → 7.2KB 🔩 → 3.24KB
+## Websockets API
+- [Websockets](https://lenguajejs.com/eventos/tiempo-real/websocket/): Envío de eventos de alto rendimiento en tiempo real
 
 ```js
-import { html, render } from "https://unpkg.com/lit-html";
+import { client } from "https://unpkg.com/mtmi@0.0.8/dist/mtmi.js";
 
-const app = document.querySelector("#app");
+client.connect({ channels: ["manzdev"] });
 
-// Estado
-let isOpen = true;
+client.on("message", ({ username, channel, message }) => {
+  console.log(`${channel} [${username}]: ${message}`);
+});
+```
 
-// Modificación + render/re-render
-const toggle = () => {
-  isOpen = !isOpen;
-  renderApp(); // Re-render
+---
+
+## RESUMEN: ¿Por qué eventos?
+- Los eventos son una forma poco intrusiva de comunicarse.
+- Si comunicas directamente, al eliminar uno de los componentes, rompes todo.
+- Los eventos se transmiten y sólo los toma al que le interesa.
+- En caso contrario, se descartan.
+
+---
+## Expresiones regulares
+
+- Sirven para buscar, capturar o reemplazar textos utilizando patrones.
+- Sintaxis de la RegExp → sintaxis
+- [Flags de RegExp](https://lenguajejs.com/javascript/regexp/flags/)
+
+<div class="grid">
+
+```js
+const regexp = new RegExp("A.ns");
+const regexp = /A.ns/; // . significa 
+// "cualquier carácter"
+
+regexp.test("Hola");       // false
+regexp.test("Alons");       // true
+regexp.test("Alonso");    // true
+regexp.test("ALONS");       // false
+
+/A.ns/i.test("ALONS");      // true  
+// (flag "i" ignora minus/mayus)
+
+```
+![bg contain right](../assets/expresion_regular.png)
+
+</div>
+
+---
+## Comprobación con/sin RegExp
+- Sistema de validación de nombres que empiezan por ``s`` o ``p`` y acaben en ``o`` o ``a``.
+
+```js
+const names = ["Pedro", "Sara", "Miriam", "Nestor", "Adrián", "Sandro"];
+
+// Sin usar Regexp
+names.forEach((name) => {
+  const firstLetter = name.at(0).toLowerCase();
+  const lastLetter = name.at(-1).toLowerCase();
+
+  if ((firstLetter === "p" || firstLetter === "s") &&
+    (lastLetter === "o" || lastLetter === "a")) {
+    console.log(`El nombre ${name} cumple las restricciones.`);
+  }
+});
+```
+---
+## Comprobación con/sin RegExp
+- Sistema de validación de nombres que empiezan por ``s`` o ``p`` y acaben en ``o`` o ``a``.
+
+```js
+// Usando Regexp
+names.forEach((name) => {
+  const regex = /^(p|s).+(o|a)$/i;
+
+  if (regex.test(name)) {
+    console.log(`El nombre ${name} cumple las restricciones.`);
+  }
+});
+```
+
+---
+## Comprobación con/sin RegExp
+- Sistema de validación de nombres que empiezan por ``s`` o ``p`` y acaben en ``o`` o ``a``.
+
+```js
+const names = ["Pedro", "Sara", "Miriam", "Nestor", "Adrián", "Sandro"];
+
+// Sin usar Regexp (apoyo en Booleanos)
+names.forEach((name) => {
+  const firstLetter = name.at(0).toLowerCase();
+  const lastLetter = name.at(-1).toLowerCase();
+  const startsOk = "ps".includes(firstLetter);
+  const endsOk = "oa".includes(lastLetter);
+  const isValidName = startsOk && endsOk;
+
+  if (isValidName)
+    console.log(`El nombre ${name} cumple las restricciones.`);
+});
+```
+
+---
+## Ejecutar búsquedas con RegExp
+- Aprende más sobre [Expresiones regulares](https://lenguajejs.com/javascript/regexp/crear-expresiones-regulares/)
+- Juego para aprender expresiones regulares con pattern de HTML → [Pattern People](https://manzdev.github.io/regex-people/)
+
+<div class="grid">
+
+```js
+const text = `
+2026-04-24 Estudiar contenido de Javascript.
+2026-05-12 Dejar comentarios en su Youtube.
+2026-09-03 Hacer una aplicación web con Opencode.
+2027-03-19 Desplegarlo a GitHub Pages.
+2028-08-22 Descansar.
+`;
+
+1️⃣ const regexp = /([0-9]{4})-([0-9]{2})-([0-9]{2})/g;
+
+2️⃣ const regexp = /([0-9]{4})-([0-9]{2})-([0-9]{2})/gd;
+
+3️⃣ const regexp =
+  /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/g;
+```
+```js
+// Caso 1
+// Ejecuta una iteración de búsqueda
+regexp.exec(text);
+
+['2026-04-24', '2026', '04', '24']  // Parentizar
+→ index: 1  // Posición donde aparece
+
+// Una nueva iteración
+regexp.exec(text);
+
+['2026-05-12', '2026', '05', '12']
+→ index: 55
+
+// Tras varias iteraciones, devuelve null
+regexp.exec(text);
+
+```
+
+
+</div>
+
+---
+## Ejecutar búsquedas con RegExp
+- Aprende más sobre [Expresiones regulares](https://lenguajejs.com/javascript/regexp/crear-expresiones-regulares/)
+- Juego para aprender expresiones regulares con pattern de HTML → [Pattern People](https://manzdev.github.io/regex-people/)
+
+<div class="grid">
+
+```js
+const text = `
+2026-04-24 Estudiar contenido de Javascript.
+2026-05-12 Dejar comentarios en su Youtube.
+2026-09-03 Hacer una aplicación web con Opencode.
+2027-03-19 Desplegarlo a GitHub Pages.
+2028-08-22 Descansar.
+`;
+
+1️⃣ const regexp = /([0-9]{4})-([0-9]{2})-([0-9]{2})/g;
+
+2️⃣ const regexp = /([0-9]{4})-([0-9]{2})-([0-9]{2})/gd;
+
+3️⃣ const regexp =
+  /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/g;
+```
+```js
+// Caso 2 (flag d, indices)
+// Ejecuta una iteración de búsqueda
+regexp.exec(text);
+
+['2026-04-24', '2026', '04', '24']  // Igual
+→ indices: [
+    [1, 11],   // Fecha completa (desde, hasta)
+    [1, 5],    // Año (desde, hasta)
+    [6, 8],    // Mes (desde, hasta)
+    [9, 11]    // Día (desde, hasta)
+  ];
+
+// Puedes continuar ejecutando...
+
+```
+
+
+</div>
+
+---
+## Ejecutar búsquedas con RegExp
+- Aprende más sobre [Expresiones regulares](https://lenguajejs.com/javascript/regexp/crear-expresiones-regulares/)
+- Juego para aprender expresiones regulares con pattern de HTML → [Pattern People](https://manzdev.github.io/regex-people/)
+
+<div class="grid">
+
+```js
+const text = `
+2026-04-24 Estudiar contenido de Javascript.
+2026-05-12 Dejar comentarios en su Youtube.
+2026-09-03 Hacer una aplicación web con Opencode.
+2027-03-19 Desplegarlo a GitHub Pages.
+2028-08-22 Descansar.
+`;
+
+1️⃣ const regexp = /([0-9]{4})-([0-9]{2})-([0-9]{2})/g;
+
+2️⃣ const regexp = /([0-9]{4})-([0-9]{2})-([0-9]{2})/gd;
+
+3️⃣ const regexp =
+  /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/g;
+```
+```js
+// Caso 3 (parentización nombrada)
+// Ejecuta una iteración de búsqueda
+regexp.exec(text);
+
+['2026-04-24', '2026', '04', '24']  // Igual
+→ groups: {
+  day: "24",
+  month: "04",
+  year: "2026"
 };
-// Renderizado de la app
-// Ojo, es una función
-const renderApp = () => render(html`
-  <button @click=${toggle}>Toggle</button>
-  <p>Status: ${isOpen ? "Open" : "Closed"}</p>
-`, app);
 
-renderApp(); // Render inicial
+// Puedes continuar ejecutando...
+
 ```
 
-## Plantillas HTML (con Lit)
-- Sistema de plantillas ultraligero, núcleo de [Lit](https://lit.dev/) → pnpm install lit-html
-- v3.3.2: 💾 → 1.71 MB 🌍 → 7.2KB 🔩 → 3.24KB
 
-```js
-import { html, render } from "https://unpkg.com/lit-html";
+</div>
 
-const app = document.querySelector("#app");
-const tasks = [
-  "Dejar un comentario en este video de Youtube",
-  "Dejar un hype desde los comentarios de móvil",
-  "Dejar un like al video de Youtube",
-  "Unirte al servidor de Discord",
-  "Escuchar las canciones"
-];
-
-const setItem = (name) => html`<li>${name}</li>`;
-const setList = (items) => html`<ol>${ items.map((item) => setItem(item)) }</ol>`;
-
-render(setList(tasks), app);
-```
 
 ---
 ## Referencias
