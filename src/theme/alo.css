@@ -72,6 +72,7 @@ pre {
     background: #000;
     color: white;
     padding: 1rem;
+    margin: 0;
 }
 code {
     color: gold;
@@ -117,6 +118,7 @@ section:has(steps) {
 /* Web component <steps> / <step> */
 steps {
   display: block;
+  position: relative;
 }
 step {
   display: block;

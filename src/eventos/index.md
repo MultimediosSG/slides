@@ -1122,8 +1122,8 @@ regexp.exec(text);
     // Crear indicador y añadirlo a la <section> contenedora
     const indicator = document.createElement('div');
     indicator.className = 'step-indicator';
-    const section = steps.closest('section');
-    if (section) section.appendChild(indicator);
+   // const section = steps.closest('section');
+    steps.appendChild(indicator);
 
     const update = () => {
       const total = stepEls.length;
