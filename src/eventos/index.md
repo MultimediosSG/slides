@@ -39,7 +39,8 @@ section {
 - ❌ Desde DOM/BOM (legacy): Propiedad ``.on*``
 - ✅ Desde listeners de JS: Método ``.addEventListener()``
 
-<div class="grid">
+<steps>
+<step>
 
 ```html
 <button onClick="warning()">Warning!</button>
@@ -50,6 +51,8 @@ section {
   }
 </script>
 ```
+</step>
+<step>
 
 ```html
 <button class="warning">Warning!</button>
@@ -61,7 +64,8 @@ section {
   }
 </script>
 ```
-</div>
+</step>
+<step>
 
 ```html
 <button class="warning">Warning!</button>
@@ -72,6 +76,8 @@ section {
   🟩 warning.addEventListener("click", () => alert("¡Me has pulsado, sacrilegio!")); // arrow function
 </script>
 ```
+</step>
+</steps>
 
 ---
 ## El método .removeEventListener()
@@ -79,6 +85,9 @@ section {
 - ✅ El problema: MISMA función
 - ❌ Magias arcanas: ``bind()``, ``call()`` o ``apply()``
 - 🕑 Fugas de memoria (ver más adelante)
+
+<steps>
+<step>
 
 ```html
 <button class="warning">Warning!</button>
@@ -91,14 +100,8 @@ section {
   warning.removeEventListener("click", action);   // Elimina el listener
 </script>
 ```
-
-
----
-## El método .removeEventListener()
-
-- ✅ El problema: MISMA función
-- ❌ Magias arcanas: ``bind()``, ``call()`` o ``apply()``
-- 🕑 Fugas de memoria (ver más adelante)
+</step>
+<step>
 
 ```html
 <button class="warning">Warning!</button>
@@ -111,11 +114,16 @@ section {
   // ❌ No es la misma función, por lo que no la retira
 </script>
 ```
+</step>
+</steps>
 
 ---
 ## Forma «automágica» de gestionar eventos
 
 - La función mágica ``handleEvent()`` a nivel global, de objeto o clase
+
+<steps>
+<step>
 
 ```js
 const button = document.querySelector("button");
@@ -128,10 +136,8 @@ function handleEvent(ev) {
 button.addEventListener("click", globalThis);
 button.addEventListener("mouseleave", globalThis);
 ```
----
-## Forma «automágica» de gestionar eventos
-
-- La función mágica ``handleEvent()`` a nivel global, de objeto o clase
+</step>
+<step>
 
 ```js
 const button = document.querySelector("button");
@@ -145,11 +151,8 @@ const eventControl = {
 button.addEventListener("click", eventControl);
 button.addEventListener("mouseleave", eventControl);
 ```
-
----
-## Forma «automágica» de gestionar eventos
-
-- La función mágica ``handleEvent()`` a nivel global, de objeto o clase
+</step>
+<step>
 
 ```js
 class EventControl {
@@ -167,6 +170,8 @@ class EventControl {
 
 const ec = new EventControl();
 ```
+</step>
+</steps>
 
 ---
 ## Parámetros de .addEventListener()
@@ -205,7 +210,7 @@ section {
 - Evento ``click`` → Objeto ``PointerEvent``
 - No olvides la accesibilidad.
 
-<div class="grid">
+<split-slide>
 
 ```html
 <button>Click me!</button>
@@ -233,7 +238,7 @@ button.addEventListener("click", (ev) => {
   ...
 }
 ```
-</div>
+</split-slide>
 
 ---
 
@@ -242,9 +247,9 @@ button.addEventListener("click", (ev) => {
 - Evento ``keydown`` / ``keyup``
 - Escuchar un elemento o en la página completa ``document``
 
-<div class="grid">
+<split-slide>
 
-```js
+```html
 <input type="text">
 
 <script type="module">
@@ -268,7 +273,7 @@ input.addEventListener("keydown", (ev) => {
 
 </div>
 
-</div>
+</split-slide>
 
 ---
 
@@ -276,7 +281,7 @@ input.addEventListener("keydown", (ev) => {
 
 - Evento ``mouseEnter`` / ``mouseLeave``
 
-<div class="grid">
+<split-slide>
 
 ```html
 <div class="box">0</div>
@@ -304,7 +309,7 @@ box.addEventListener("mousedown", (ev) => {
 
 </div>
 
-</div>
+</split-slide>
 
 ---
 
@@ -449,7 +454,7 @@ section {
 ## Eventos nativos (click)
 - Ejemplo más adelante, primero entendamos el código:
 
-<div class="grid">
+<split-slide>
 
 ```html
 <div class="container"> <!-- ← Listener aquí -->
@@ -471,7 +476,8 @@ container.addEventListener("click", (ev) => update(ev));
 </script>
 ```
 
-<div>
+<steps>
+<step>
 
 - Escuchamos evento ``click`` en ``.container``
 - Importa si pulsamos ``.container``, ``.red`` o ``.element``
@@ -482,37 +488,8 @@ container.addEventListener("click", (ev) => update(ev));
   - ``ev.currentTarget`` → Elemento actual (bubbles DOM)
   - ``ev.relatedTarget`` → Sólo en eventos como ``mouseEnter`` (procedencia/destino)
 
-</div>
-
-</div>
-
----
-## Eventos nativos (click)
-- Ejemplo más adelante, primero entendamos el código:
-
-<div class="grid">
-
-```html
-<div class="container"> <!-- ← Listener aquí -->
-  <div class="element">
-    <div class="red"></div>
-  </div>
-</div>
-
-<script type="module">
-const container = document.querySelector(".container");
-const status = document.querySelector(".status");
-
-const update = (ev) => {
-  console.log("Target: ", ev.target.className);
-  console.log("currentTarget: ", ev.currentTarget.className);
-}
-
-container.addEventListener("click", (ev) => update(ev));
-</script>
-```
-
-<div>
+</step>
+<step>
 
 - 🖱 Hacemos click en .container:
 (evento 🫧 pero aquí no importa, no se ve, escuchamos directamente)
@@ -523,37 +500,8 @@ container.addEventListener("click", (ev) => update(ev));
   - ev.target → .red
   - ev.currentTarget → .container
 
-</div>
-
-</div>
-
----
-## Eventos nativos (click)
-- Ejemplo más adelante, primero entendamos el código:
-
-<div class="grid">
-
-```html
-<div class="container"> <!-- ← Listener aquí -->
-  <div class="element">
-    <div class="red"></div>
-  </div>
-</div>
-
-<script type="module">
-const container = document.querySelector(".container");
-const status = document.querySelector(".status");
-
-const update = (ev) => {
-  console.log("Target: ", ev.target.className);
-  console.log("currentTarget: ", ev.currentTarget.className);
-}
-
-container.addEventListener("click", (ev) => update(ev));
-</script>
-```
-
-<div>
+</step>
+<step>
 
 ```js
 const update = (ev) => {
@@ -566,9 +514,10 @@ const update = (ev) => {
 - Con ``.composedPath()`` obtienes el camino del evento
 - Ejemplo de [propagación de eventos](https://codepen.io/manz/pen/XJKxbeY)
 
-</div>
+</step>
+</steps>
 
-</div>
+</split-slide>
 
 ---
 ## Eventos personalizados (Custom Events)
@@ -646,7 +595,8 @@ const cancelEvent = () => {
 ---
 ## Disparar eventos por redimensión
 - ``ResizeObserver``: Detecta cuando se redimensiona la ventana y quieres ejecutar código más eficientemente.
-<div class="grid">
+
+<split-slide style="--left: 30%; --right: 70%;">
 
 ```html
 <div class="element"></div>
@@ -662,6 +612,9 @@ const cancelEvent = () => {
 }
 </style>
 ```
+<steps>
+<step>
+
 ```js
 const element = document.querySelector(".element");
 
@@ -675,28 +628,9 @@ globalThis.addEventListener("resize", () => {
     element.classList.remove("compact");
 });
 ```
-</div>
+</step>
+<step>
 
----
-
-## Disparar eventos por redimensión
-- ``ResizeObserver``: Detecta cuando se redimensiona la ventana y quieres ejecutar código más eficientemente.
-<div class="grid">
-
-```html
-<div class="element"></div>
-
-<style>
-.element {
-  background: deeppink;
-  min-height: 200px;
-}
-
-.compact {
-  background: indigo;
-}
-</style>
-```
 ```js
 const element = document.querySelector(".element");
 
@@ -714,13 +648,15 @@ const observer = new ResizeObserver((entries) => {
 
 observer.observe(element);
 ```
-</div>
+</step>
+</steps>
+</split-slide>
 
 ---
 ## Disparar eventos por visibilidad
 - IntersectionObserver: Detectar cuando elementos son visibles eficientemente → Mira la clase en el inspector
 
-<div class="grid">
+<split-slide style="--left: 30%; --right: 70%;">
 
 ```html
 <div class="element"></div>
@@ -737,6 +673,9 @@ body { height: 2000px }
 }
 </style>
 ```
+<steps>
+<step>
+
 ```js
 const element = document.querySelector(".element");
 
@@ -746,29 +685,9 @@ globalThis.addEventListener("scroll", () => {
   if (rect.top < window.innerHeight) { /* ... */ }
 });
 ```
-</div>
+</step>
+<step>
 
----
-## Disparar eventos por visibilidad
-- IntersectionObserver: Detectar cuando elementos son visibles eficientemente → Mira la clase en el inspector
-
-<div class="grid">
-
-```html
-<div class="element"></div>
-
-<style>
-body { height: 2000px }
-
-.element {
-  width: 200px;
-  height: 200px;
-  background: deeppink;
-  position: absolute;
-  top: 1000px;
-}
-</style>
-```
 ```js
 const element = document.querySelector(".element");
 
@@ -784,7 +703,10 @@ const observer = new IntersectionObserver((entries) => {
 
 observer.observe(element);
 ```
-</div>
+</step>
+</steps>
+</split-slide>
+
 
 ---
 <!-- _class: cover -->
@@ -808,6 +730,9 @@ section {
 - Capacidad → ``~10MB`` (puede variar dependiendo del navegador)
 - Evento tipo ``StorageEvent``
 
+<steps>
+<step>
+
 ```js
 localStorage.length                       // 0 (información almacenada)
 localStorage.setItem("name", "ManzDev");  // Guarda información en la key "name"
@@ -818,15 +743,8 @@ localStorage.clear();                     // Vacía el almacén de ese dominio
 
 // Usando "sessionStorage" en lugar de "localStorage" → se guarda sólo durante la sesión actual
 ```
-
----
-
-## Storage API
-- Storage API → dos apis ``localStorage`` y ``sessionStorage``
-- Acceso a un almacenamiento por dominio / sólo en la pestaña actual en ``sessionStorage``
-- Duración → Persistentes en ``localStorage`` / Sólo en sesión actual en ``sessionStorage``
-- Capacidad → ``~10MB`` (puede variar dependiendo del navegador)
-- Evento tipo ``StorageEvent``
+</step>
+<step>
 
 ```js
 // Se dispara cuando cambian almacénn desde otra pestaña...
@@ -836,11 +754,16 @@ globalThis.addEventListener("storage", (ev) => {
   console.log(ev.oldValue);   // valor anterior
 });
 ```
+</step>
+</steps>
 
 ---
 ## SpeechSynthesis API
 - [SpeechSynthesis](https://lenguajejs.com/javascript/web-apis/speechsynthesis/): Sintetizar texto a voz (TTS)
 - Dependiendo del navegador, puedes tener más o menos voces
+
+<steps>
+<step>
 
 ```js
 const text = "¿Aún no has dejado un comentario en Youtube?";
@@ -855,11 +778,8 @@ message.pitch = 0.5; // 0 - 2
 message.rate = 0; // 0 - 2
 speechSynthesis.speak(message);
 ```
-
----
-## SpeechSynthesis API
-- [SpeechSynthesis](https://lenguajejs.com/javascript/web-apis/speechsynthesis/): Sintetizar texto a voz (TTS)
-- Dependiendo del navegador, puedes tener más o menos voces
+</step>
+<step>
 
 ```js
 const text = "¿Aún no has dejado un comentario en Youtube?";
@@ -873,6 +793,9 @@ message.addEventListener("boundary", (ev) => {
 });
 speechSynthesis.speak(message);
 ```
+</step>
+</steps>
+
 
 ---
 
@@ -897,15 +820,18 @@ channel.addEventListener("logout", () => {
 ## Websockets API
 - [Websockets](https://lenguajejs.com/eventos/tiempo-real/websocket/): Envío de eventos de alto rendimiento en tiempo real
 
+<split-slide>
+
 ```js
 import { client } from "https://unpkg.com/mtmi@0.0.8/dist/mtmi.js";
 
-client.connect({ channels: ["manzdev"] });
+client.connect({ channels: ["alons"] });
 
 client.on("message", ({ username, channel, message }) => {
   console.log(`${channel} [${username}]: ${message}`);
 });
 ```
+</split-slide>
 
 ---
 
@@ -922,7 +848,7 @@ client.on("message", ({ username, channel, message }) => {
 - Sintaxis de la RegExp → sintaxis
 - [Flags de RegExp](https://lenguajejs.com/javascript/regexp/flags/)
 
-<div class="grid">
+<split-slide>
 
 ```js
 const regexp = new RegExp("A.ns");
@@ -938,9 +864,10 @@ regexp.test("ALONS");       // false
 // (flag "i" ignora minus/mayus)
 
 ```
-![bg contain right](../assets/expresion_regular.png)
 
-</div>
+![contain right top](../assets/expresion_regular.png)
+
+</split-slide>
 
 ---
 ## Comprobación con/sin RegExp
@@ -1009,7 +936,7 @@ names.forEach((name) => {
 - Aprende más sobre [Expresiones regulares](https://lenguajejs.com/javascript/regexp/crear-expresiones-regulares/)
 - Juego para aprender expresiones regulares con pattern de HTML → [Pattern People](https://manzdev.github.io/regex-people/)
 
-<div class="grid">
+<split-slide>
 
 ```js
 const text = `
@@ -1096,7 +1023,7 @@ regexp.exec(text);
 
 </steps>
 
-</div>
+</slit-slide>
 
 
 ---
@@ -1105,42 +1032,4 @@ regexp.exec(text);
 - [CheatSheet Javascript](https://lenguajejs.com/javascript/cheatsheets/)
 - [bootcamp.manz.dev](https://bootcamp.manz.dev/)
 
-<script>
-(function() {
-  // Registra cada <steps> como componente: añade data-marpit-fragment
-  // a los <step> hijos (excepto el primero) y crea el indicador de progreso.
-  // Se ejecuta sincrónicamente aquí para que bespoke.js encuentre los
-  // atributos data-marpit-fragment al inicializar su lista de fragmentos.
-  document.querySelectorAll('steps').forEach(steps => {
-    const stepEls = [...steps.querySelectorAll(':scope > step')];
-
-    // Asignar índices de fragmento a partir del segundo <step>
-    stepEls.slice(1).forEach((step, i) => {
-      step.setAttribute('data-marpit-fragment', String(i + 1));
-    });
-
-    // Crear indicador y añadirlo a la <section> contenedora
-    const indicator = document.createElement('div');
-    indicator.className = 'step-indicator';
-   // const section = steps.closest('section');
-    steps.appendChild(indicator);
-
-    const update = () => {
-      const total = stepEls.length;
-      const lastActive = stepEls.findLastIndex(
-        s => s.getAttribute('data-bespoke-marp-fragment') === 'active'
-      );
-      const current = lastActive === -1 ? 1 : lastActive + 1;
-      indicator.textContent = `${current} / ${total}`;
-    };
-
-    // Observar cambios de atributo que hace bespoke al navegar
-    const observer = new MutationObserver(update);
-    stepEls.slice(1).forEach(step => {
-      observer.observe(step, { attributes: true, attributeFilter: ['data-bespoke-marp-fragment'] });
-    });
-    update();
-  });
-})();
-</script>
-
+<script src="../theme/steps.js"></script>

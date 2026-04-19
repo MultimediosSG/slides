@@ -73,6 +73,7 @@ pre {
     color: white;
     padding: 1rem;
     margin: 0;
+    font-size: 0.75rem;
 }
 code {
     color: gold;
@@ -142,4 +143,13 @@ step[data-bespoke-marp-fragment=active] {
 }
 step[data-bespoke-marp-fragment=active]:has(~ step[data-bespoke-marp-fragment=active]) {
   display: none !important;
+}
+
+split-slide {
+    --left:50%;
+    --right:50%;
+
+    display: grid;
+    grid-template-columns: var(--left) var(--right);
+    gap: 1rem;
 }
