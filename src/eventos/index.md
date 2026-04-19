@@ -946,9 +946,9 @@ regexp.test("ALONS");       // false
 ## Comprobación con/sin RegExp
 - Sistema de validación de nombres que empiezan por ``s`` o ``p`` y acaben en ``o`` o ``a``.
 
-<div class="steps-panels">
+<steps>
 
-<div class="step-panel">
+<step>
 
 ```js
 const names = ["Pedro", "Sara", "Miriam", "Nestor", "Adrián", "Sandro"];
@@ -965,9 +965,9 @@ names.forEach((name) => {
 });
 ```
 
-</div>
+</step>
 
-<div class="step-panel" data-marpit-fragment="1">
+<step>
 
 ```js
 // Usando Regexp
@@ -980,9 +980,9 @@ names.forEach((name) => {
 });
 ```
 
-</div>
+</step>
 
-<div class="step-panel" data-marpit-fragment="2">
+<step>
 
 ```js
 const names = ["Pedro", "Sara", "Miriam", "Nestor", "Adrián", "Sandro"];
@@ -1000,9 +1000,9 @@ names.forEach((name) => {
 });
 ```
 
-</div>
+</step>
 
-</div>
+</steps>
 
 ---
 ## Ejecutar búsquedas con RegExp
@@ -1028,9 +1028,9 @@ const text = `
   /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/g;
 ```
 
-<div class="steps-panels">
+<steps>
 
-<div class="step-panel">
+<step>
 
 ```js
 // Caso 1
@@ -1051,9 +1051,9 @@ regexp.exec(text);
 
 ```
 
-</div>
+</step>
 
-<div class="step-panel" data-marpit-fragment="1">
+<step>
 
 ```js
 // Caso 2 (flag d, indices)
@@ -1072,9 +1072,9 @@ regexp.exec(text);
 
 ```
 
-</div>
+</step>
 
-<div class="step-panel" data-marpit-fragment="2">
+<step>
 
 ```js
 // Caso 3 (parentización nombrada)
@@ -1092,9 +1092,9 @@ regexp.exec(text);
 
 ```
 
-</div>
+</step>
 
-</div>
+</steps>
 
 </div>
 
@@ -1107,36 +1107,40 @@ regexp.exec(text);
 
 <script>
 (function() {
-  const init = () => {
-    document.querySelectorAll('section:has(.steps-panels)').forEach(section => {
-      const el = document.createElement('div');
-      el.className = 'step-indicator';
-      section.appendChild(el);
+  // Registra cada <steps> como componente: añade data-marpit-fragment
+  // a los <step> hijos (excepto el primero) y crea el indicador de progreso.
+  // Se ejecuta sincrónicamente aquí para que bespoke.js encuentre los
+  // atributos data-marpit-fragment al inicializar su lista de fragmentos.
+  document.querySelectorAll('steps').forEach(steps => {
+    const stepEls = [...steps.querySelectorAll(':scope > step')];
+
+    // Asignar índices de fragmento a partir del segundo <step>
+    stepEls.slice(1).forEach((step, i) => {
+      step.setAttribute('data-marpit-fragment', String(i + 1));
     });
+
+    // Crear indicador y añadirlo a la <section> contenedora
+    const indicator = document.createElement('div');
+    indicator.className = 'step-indicator';
+    const section = steps.closest('section');
+    if (section) section.appendChild(indicator);
 
     const update = () => {
-      document.querySelectorAll('section:has(.steps-panels)').forEach(section => {
-        const panels = [...section.querySelectorAll('.steps-panels > .step-panel')];
-        const total = panels.length;
-        const lastActive = panels.findLastIndex(
-          p => p.getAttribute('data-bespoke-marp-fragment') === 'active'
-        );
-        const current = lastActive === -1 ? 1 : lastActive + 1;
-        const indicator = section.querySelector('.step-indicator');
-        if (indicator) indicator.textContent = `${current} / ${total}`;
-      });
+      const total = stepEls.length;
+      const lastActive = stepEls.findLastIndex(
+        s => s.getAttribute('data-bespoke-marp-fragment') === 'active'
+      );
+      const current = lastActive === -1 ? 1 : lastActive + 1;
+      indicator.textContent = `${current} / ${total}`;
     };
 
+    // Observar cambios de atributo que hace bespoke al navegar
     const observer = new MutationObserver(update);
-    document.querySelectorAll('.steps-panels > [data-marpit-fragment]').forEach(el => {
-      observer.observe(el, { attributes: true, attributeFilter: ['data-bespoke-marp-fragment'] });
+    stepEls.slice(1).forEach(step => {
+      observer.observe(step, { attributes: true, attributeFilter: ['data-bespoke-marp-fragment'] });
     });
     update();
-  };
-
-  document.readyState === 'loading'
-    ? document.addEventListener('DOMContentLoaded', init)
-    : requestAnimationFrame(init);
+  });
 })();
 </script>
 

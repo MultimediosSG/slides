@@ -96,7 +96,7 @@ svg[data-marpit-svg] {
 }
 
 /* Step indicator */
-section:has(.steps-panels) {
+section:has(steps) {
   position: relative;
 }
 .step-indicator {
@@ -114,24 +114,30 @@ section:has(.steps-panels) {
   pointer-events: none;
 }
 
-/* Steps component: muestra un panel a la vez, navega con flechas del teclado */
-.steps-panels > .step-panel:not(:first-child) {
+/* Web component <steps> / <step> */
+steps {
+  display: block;
+}
+step {
+  display: block;
+}
+step:not(:first-child) {
   display: none;
 }
-.steps-panels > [data-marpit-fragment] {
+step[data-marpit-fragment] {
   display: none;
 }
-.steps-panels:has(> [data-bespoke-marp-fragment=active]) > .step-panel:first-child {
+steps:has(> step[data-bespoke-marp-fragment=active]) > step:first-child {
   display: none;
 }
-.steps-panels > [data-bespoke-marp-fragment=inactive] {
+step[data-bespoke-marp-fragment=inactive] {
   visibility: visible !important;
   display: none !important;
 }
-.steps-panels > [data-bespoke-marp-fragment=active] {
+step[data-bespoke-marp-fragment=active] {
   display: block !important;
   visibility: visible !important;
 }
-.steps-panels > [data-bespoke-marp-fragment=active]:has(~ [data-bespoke-marp-fragment=active]) {
+step[data-bespoke-marp-fragment=active]:has(~ step[data-bespoke-marp-fragment=active]) {
   display: none !important;
 }
