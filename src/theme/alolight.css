@@ -96,3 +96,25 @@ svg[data-marpit-svg] {
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
+
+/* Steps component: muestra un panel a la vez, navega con flechas del teclado */
+.steps-panels > .step-panel:not(:first-child) {
+  display: none;
+}
+.steps-panels > [data-marpit-fragment] {
+  display: none;
+}
+.steps-panels:has(> [data-bespoke-marp-fragment=active]) > .step-panel:first-child {
+  display: none;
+}
+.steps-panels > [data-bespoke-marp-fragment=inactive] {
+  visibility: visible !important;
+  display: none !important;
+}
+.steps-panels > [data-bespoke-marp-fragment=active] {
+  display: block !important;
+  visibility: visible !important;
+}
+.steps-panels > [data-bespoke-marp-fragment=active]:has(~ [data-bespoke-marp-fragment=active]) {
+  display: none !important;
+}

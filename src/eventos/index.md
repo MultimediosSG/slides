@@ -946,6 +946,10 @@ regexp.test("ALONS");       // false
 ## Comprobación con/sin RegExp
 - Sistema de validación de nombres que empiezan por ``s`` o ``p`` y acaben en ``o`` o ``a``.
 
+<div class="steps-panels">
+
+<div class="step-panel">
+
 ```js
 const names = ["Pedro", "Sara", "Miriam", "Nestor", "Adrián", "Sandro"];
 
@@ -960,9 +964,10 @@ names.forEach((name) => {
   }
 });
 ```
----
-## Comprobación con/sin RegExp
-- Sistema de validación de nombres que empiezan por ``s`` o ``p`` y acaben en ``o`` o ``a``.
+
+</div>
+
+<div class="step-panel" data-marpit-fragment="1">
 
 ```js
 // Usando Regexp
@@ -975,9 +980,9 @@ names.forEach((name) => {
 });
 ```
 
----
-## Comprobación con/sin RegExp
-- Sistema de validación de nombres que empiezan por ``s`` o ``p`` y acaben en ``o`` o ``a``.
+</div>
+
+<div class="step-panel" data-marpit-fragment="2">
 
 ```js
 const names = ["Pedro", "Sara", "Miriam", "Nestor", "Adrián", "Sandro"];
@@ -994,6 +999,10 @@ names.forEach((name) => {
     console.log(`El nombre ${name} cumple las restricciones.`);
 });
 ```
+
+</div>
+
+</div>
 
 ---
 ## Ejecutar búsquedas con RegExp
@@ -1018,6 +1027,11 @@ const text = `
 3️⃣ const regexp =
   /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/g;
 ```
+
+<div class="steps-panels">
+
+<div class="step-panel">
+
 ```js
 // Caso 1
 // Ejecuta una iteración de búsqueda
@@ -1037,32 +1051,10 @@ regexp.exec(text);
 
 ```
 
-
 </div>
 
----
-## Ejecutar búsquedas con RegExp
-- Aprende más sobre [Expresiones regulares](https://lenguajejs.com/javascript/regexp/crear-expresiones-regulares/)
-- Juego para aprender expresiones regulares con pattern de HTML → [Pattern People](https://manzdev.github.io/regex-people/)
+<div class="step-panel" data-marpit-fragment="1">
 
-<div class="grid">
-
-```js
-const text = `
-2026-04-24 Estudiar contenido de Javascript.
-2026-05-12 Dejar comentarios en su Youtube.
-2026-09-03 Hacer una aplicación web con Opencode.
-2027-03-19 Desplegarlo a GitHub Pages.
-2028-08-22 Descansar.
-`;
-
-1️⃣ const regexp = /([0-9]{4})-([0-9]{2})-([0-9]{2})/g;
-
-2️⃣ const regexp = /([0-9]{4})-([0-9]{2})-([0-9]{2})/gd;
-
-3️⃣ const regexp =
-  /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/g;
-```
 ```js
 // Caso 2 (flag d, indices)
 // Ejecuta una iteración de búsqueda
@@ -1080,32 +1072,10 @@ regexp.exec(text);
 
 ```
 
-
 </div>
 
----
-## Ejecutar búsquedas con RegExp
-- Aprende más sobre [Expresiones regulares](https://lenguajejs.com/javascript/regexp/crear-expresiones-regulares/)
-- Juego para aprender expresiones regulares con pattern de HTML → [Pattern People](https://manzdev.github.io/regex-people/)
+<div class="step-panel" data-marpit-fragment="2">
 
-<div class="grid">
-
-```js
-const text = `
-2026-04-24 Estudiar contenido de Javascript.
-2026-05-12 Dejar comentarios en su Youtube.
-2026-09-03 Hacer una aplicación web con Opencode.
-2027-03-19 Desplegarlo a GitHub Pages.
-2028-08-22 Descansar.
-`;
-
-1️⃣ const regexp = /([0-9]{4})-([0-9]{2})-([0-9]{2})/g;
-
-2️⃣ const regexp = /([0-9]{4})-([0-9]{2})-([0-9]{2})/gd;
-
-3️⃣ const regexp =
-  /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/g;
-```
 ```js
 // Caso 3 (parentización nombrada)
 // Ejecuta una iteración de búsqueda
@@ -1122,6 +1092,9 @@ regexp.exec(text);
 
 ```
 
+</div>
+
+</div>
 
 </div>
 
