@@ -414,24 +414,6 @@ details.addEventListener("click", (ev) => {
 ```
 
 ---
-## Las clases HTML
-- ❌ La propiedad .style (inline styles) y .className (clase como texto)
-- ✅ El objeto .classList con métodos de clases
-
-```js
-element.className = "parent element";           // ❌ Debes añadirlas directamente
-
-element.classList.length                        // 2
-element.classList.item(2);                      // "element"
-element.classList.contains("rounded");          // false
-element.classList.add("rounded");               // Añade la clase
-element.classList.remove("rounded");            // Elimina la clase
-element.classList.toggle("rounded");            // Añade (si no existe) o elimina (si existe)
-element.classList.replace("rounded", "hide");   // Cambia "rounded" por "hide"
-
-```
-
----
 <!-- _class: cover -->
 <style scoped>
 section {
