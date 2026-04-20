@@ -54,6 +54,9 @@ section {
 - ✅ Métodos modernos de selección: .querySelector*()
 - ❌ Métodos «legacy» tradicionales: .getElement*() (limitado por ID, colecciones vivas...)
 
+<steps>
+<step>
+
 ```js
 document           // Representa al árbol completo: el documento HTML
 
@@ -65,12 +68,8 @@ const elements = document.querySelectorAll("div");        // ✅ Equivalente (No
 const elements = document.getElementsByClassName("pato"); // ❌ Devuelve HTMLCollection
 const elements = document.querySelectorAll(".pato");      // ✅ Equivalente (NodeList)
 ```
-
----
-## Buscar en el DOM
-
-- ✅ Métodos modernos de selección: .querySelector*()
-- ❌ Métodos «legacy» tradicionales: .getElement*() (limitado por ID, colecciones vivas...)
+</step>
+<step>
 
 ```js
 const element = document.querySelector(".container");  // ✅ Busca/selecciona el PRIMER elemento
@@ -82,12 +81,8 @@ const elements = document.querySelectorAll("div");     // ✅ Busca/selecciona T
 // Puedes hacer búsquedas acotadas (no sobre todo el documento)
 element.querySelector("p");
 ```
-
----
-## Buscar en el DOM
-
-- ✅ Métodos modernos de selección: .querySelector*()
-- ❌ Métodos «legacy» tradicionales: .getElement*() (limitado por ID, colecciones vivas...)
+</step>
+<step>
 
 ```js
 // Imágenes que no tienen atributo "alt" (obligatorio)
@@ -102,12 +97,8 @@ const imageWithLink = document.querySelectorAll("a:has(img)");
 // Las celdas de la segunda fila de cada tabla de la página
 const cells = document.querySelectorAll("table tr:nth-child(2) td");
 ```
-
----
-## Buscar en el DOM
-
-- ✅ Métodos modernos de selección: .querySelector*()
-- ❌ Métodos «legacy» tradicionales: .getElement*() (limitado por ID, colecciones vivas...)
+</step>
+<step>
 
 ```js
 // Buscamos un elemento HTML concreto
@@ -118,6 +109,9 @@ const container = document.querySelector(".container");
 // Busca el elemento más cercano (hacia arriba)
 const ancient = container.closest(".page");
 ```
+</step>
+</steps>
+
 ---
 <!-- _class: cover -->
 <style scoped>
@@ -135,7 +129,8 @@ section {
 - ✅ Preferir propiedad .textContent
 - ❌ Evitar .innerText (más lento, oculta partes no renderizadas)
 
-
+<steps>
+<step>
 
 ```js
 const paragraph = document.querySelector(".container .post p");
@@ -146,16 +141,8 @@ paragraph.textContent = "Hola";   // Modifica el contenido actual por "Hola"
 // 🔒 Esto es muy importante en temas de seguridad
 paragraph.textContent = "<div>Hola</div>";    // Inserta código HTML literalmente
 ```
-
----
-
-## Modificar HTML
-
-- ❌ Propiedades «legacy» tradicionales: .innerHTML y .outerHTML
-- ✅ Métodos modernos: .setHTMLUnsafe() y .getHTML()
-- 🟧 Método futuro: .setHTML() (solo en Chrome aún)
-
-
+</step>
+<step>
 
 ```js
 const paragraph = document.querySelector(".container .post");
@@ -166,16 +153,8 @@ paragraph.innerHTML = "<p>Hola, soy <strong>Alonso</strong>.</p>";
 
 // Confusa en ciertas situaciones. No soporta ciertos detalles modernos.
 ```
-
----
-
-## Modificar HTML
-
-- ❌ Propiedades «legacy» tradicionales: .innerHTML y .outerHTML
-- ✅ Métodos modernos: .setHTMLUnsafe() y .getHTML()
-- 🟧 Método futuro: .setHTML() (solo en Chrome aún)
-
-
+</step>
+<step>
 
 ```js
 const paragraph = document.querySelector(".container .post");
@@ -186,16 +165,8 @@ paragraph.setHTMLUnsafe("<p>Hola, soy <strong>Alonso</strong></p>");
 
 // Deja claro que puede insertar HTML inseguro (innerHTML también lo es)
 ```
-
----
-
-## Modificar HTML
-
-- ❌ Propiedades «legacy» tradicionales: .innerHTML y .outerHTML
-- ✅ Métodos modernos: .setHTMLUnsafe() y .getHTML()
-- 🟧 Método futuro: .setHTML() (solo en Chrome aún)
-
-
+</step>
+<step>
 
 ```js
 const options = {
@@ -208,6 +179,8 @@ const options = {
 document.body.setHTMLUnsafe("<p onmouseenter='alert(1)'>Hola amigo mío.</p>");     // Inseguro
 document.body.setHTML("<p onmouseenter='alert(1)'>Hola amigo mío.</p>", options);  // Seguro
 ```
+</step>
+</steps>
 
 ---
 
@@ -217,7 +190,8 @@ document.body.setHTML("<p onmouseenter='alert(1)'>Hola amigo mío.</p>", options
 - ✅ Mediante métodos .setAttribute(), getAttribute() o .style.setProperty()
 - ✅ Extras: .toggleAttribute() y .removeAttribute()
 
-
+<steps>
+<step>
 
 ```js
 const element = document.querySelector(".element");
@@ -231,16 +205,8 @@ element.id                        // "presentation"
 element.getAttribute("id")        // "presentation"
 // Es la misma porque ciertos atributos HTML los REFLEJA AUTOMÁTICAMENTE
 ```
-
----
-
-## Atributos HTML
-
-- ❌ Mediante propiedades .id, .style → Ojo, una propiedad != un atributo
-- ✅ Mediante métodos .setAttribute(), getAttribute() o .style.setProperty()
-- ✅ Extras: .toggleAttribute() y .removeAttribute()
-
-
+</step>
+<step>
 
 ```js
 const element = document.querySelector(".element");
@@ -254,16 +220,8 @@ element.setAttribute("id", "name");
 element.setAttribute("style", "background-color: red");
 element.style.setProperty("background-color", "red");
 ```
-
----
-
-## Atributos HTML
-
-- ❌ Mediante propiedades .id, .style → Ojo, una propiedad != un atributo
-- ✅ Mediante métodos .setAttribute(), getAttribute() o .style.setProperty()
-- ✅ Extras: .toggleAttribute() y .removeAttribute()
-
-
+</step>
+<step>
 
 ```js
 // Caso especial: Booleanos
@@ -275,6 +233,8 @@ video.setAttribute("controls", "");     // Atributo HTML booleano: false = no ex
 video.removeAttribute("controls");
 video.toggleAttribute("controls");      // Si existe, lo elimina. Si no existe, lo añade
 ```
+</step>
+</steps>
 
 ---
 ## Las clases HTML
@@ -310,6 +270,9 @@ section {
 - Podemos crear un sistema para simplificar
 - [Fragmentos](https://lenguajejs.com/dom/crear/fragmentos/) en casos especiales (no queremos contenedor)
 
+<steps>
+<step>
+
 ```js
 const div = document.createElement("div");
 div.classList.add("duck-element");
@@ -319,13 +282,8 @@ div.isConnected               // false (no está en el DOM, está en memoria)
 document.body.append(div);
 div.isConnected               // true (si está en el DOM)
 ```
-
----
-
-## Crear elementos
-- El método document.createElement()
-- Podemos crear un sistema para simplificar
-- [Fragmentos](https://lenguajejs.com/dom/crear/fragmentos/) en casos especiales (no queremos contenedor)
+</step>
+<step>
 
 ```js
 const createTag = (className = "element", tag = "div", options = {}) => {
@@ -338,12 +296,17 @@ const createTag = (className = "element", tag = "div", options = {}) => {
 
 createTag("container", "p", { text: "Hello!" });    // <p class="container">Hello!</p>
 ```
+</step>
+</steps>
 
 ---
 ## APIs inserción
 - ❌ [API de Nodos](https://lenguajejs.com/dom/crear/node-api/): La más vieja, clásica y genérica
 - ✅✅ [API de Element](https://lenguajejs.com/dom/crear/element-api/): La intermedia: Corta y práctica
 - ✅ [API de inserción adyacente](https://lenguajejs.com/dom/crear/insertadjacent-api/): La más flexible 
+
+<steps>
+<step>
 
 ```js
 const parent = document.querySelector(".parent");
@@ -357,13 +320,8 @@ parent.appendChild(tag);
 // <div class="parent">Mensaje: </div>
 
 ```
-
----
-
-## APIs inserción
-- ❌ [API de Nodos](https://lenguajejs.com/dom/crear/node-api/): La más vieja, clásica y genérica
-- ✅✅ [API de Element](https://lenguajejs.com/dom/crear/element-api/): La intermedia: Corta y práctica
-- ✅ [API de inserción adyacente](https://lenguajejs.com/dom/crear/insertadjacent-api/): La más flexible 
+</step>
+<step>
 
 ```js
 const parent = document.querySelector(".parent");
@@ -376,13 +334,8 @@ parent.after(tag);      // <div class="parent">Mensaje:</div> (↓)
 
 tag.remove();           // Elimina el elemento del documento HTML
 ```
-
----
-
-## APIs inserción
-- ❌ [API de Nodos](https://lenguajejs.com/dom/crear/node-api/): La más vieja, clásica y genérica
-- ✅✅ [API de Element](https://lenguajejs.com/dom/crear/element-api/): La intermedia: Corta y práctica
-- ✅ [API de inserción adyacente](https://lenguajejs.com/dom/crear/insertadjacent-api/): La más flexible 
+</step>
+<step>
 
 ```js
 const tag = createTag("welcome", "p", { text: "¡Bienvenido, usuario!" });
@@ -392,6 +345,8 @@ parent.insertAdjacentElement("beforeend", tag);
 parent.insertAdjacentHTML("beforeend", `<p>Puedes insertar el HTML directamente</p>`);
 parent.insertAdjacentText("beforeend", `O insertar textos directamente sin etiquetas HTML`);
 ```
+</step>
+</steps>
 
 ---
 ## Plantillas HTML
