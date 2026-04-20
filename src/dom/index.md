@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: alolight
+theme: alo
 paginate: true
 ---
 
@@ -397,7 +397,7 @@ parent.insertAdjacentText("beforeend", `O insertar textos directamente sin etiqu
 ## Plantillas HTML
 - Etiqueta ``<template>`` de HTML → [template](https://lenguajehtml.com/html/interactivas/etiqueta-html-template/)
 
-<div class="grid">
+<split-slide style="--left: 30%; --right: 70%;">
 
 ```html
 <template>
@@ -426,7 +426,7 @@ cats.forEach(cat => {
 
 ```
 
-</div>
+</split-slide>
 
 ---
 <!-- _class: cover -->
@@ -462,7 +462,7 @@ element.shadowRoot.setHTMLUnsafe(`<p>Contenido del Shadow DOM</p>`);
 ## API de Animaciones del DOM
 - Animaciones CSS (pero desde Javascript) → [WebAnimations](https://lenguajecss.com/animaciones/webanimations/que-es/)
 
-<div class="grid">
+<split-slide>
 
 ```js
 const element = document.querySelector(".element");
@@ -489,13 +489,15 @@ element.animate({ /* ... */ }, {
   100% { height: 0; }
 }
 ```
-</div>
+</split-slide>
 
 ---
 ## API de CSS Highlight
 - Posibilidad de dar estilo a fragmentos sin usar DOM → [CSS Highlight API](https://lenguajejs.com/javascript/web-apis/css-highlight/)
 
-<div class="grid">
+<steps>
+<step>
+<split-slide style="--font-size: 1rem;">
 
 ```html
 <pre><code class="language-css">
@@ -527,13 +529,10 @@ element.animate({ /* ... */ }, {
   }
 </code></pre>
 ```
-</div>
-
----
-## API de CSS Highlight
-- Posibilidad de dar estilo a fragmentos sin usar DOM → [CSS Highlight API](https://lenguajejs.com/javascript/web-apis/css-highlight/)
-
-<div class="grid">
+</split-slide>
+</step>
+<step>
+<split-slide style="--font-size: 1rem;">
 
 ```html
 <pre><code class="language-css">
@@ -567,7 +566,9 @@ range.setEnd(textNode, 13);
 // Le damos nombre
 CSS.highlights.set("css-at-rule", new Highlight(range));
 ```
-</div>
+</split-slide>
+</step>
+</steps>
 
 ---
 
@@ -594,6 +595,9 @@ setTimeout(() => addRandomMessage(), 3000);
 - Sistema de plantillas ultraligero, núcleo de [Lit](https://lit.dev/) → pnpm install lit-html
 - v3.3.2: 💾 → 1.71 MB 🌍 → 7.2KB 🔩 → 3.24KB
 
+<steps>
+<step>
+
 ```js
 import { html, render } from "https://unpkg.com/lit-html";  // o "lit-html" si usas pnpm
 
@@ -604,12 +608,8 @@ const template = (name) => html`<h1>Hola, soy <strong>${name}</strong></h1>`;
 render(template("Alonso"), app);   // renderiza el contenido en el DOM
 render(template("Patito"), app);    // re-render (no sobreescribe, solo detecta lo que cambia)
 ```
-
----
-
-## Plantillas HTML (con Lit)
-- Sistema de plantillas ultraligero, núcleo de [Lit](https://lit.dev/) → pnpm install lit-html
-- v3.3.2: 💾 → 1.71 MB 🌍 → 7.2KB 🔩 → 3.24KB
+</step>
+<step>
 
 ```js
 import { html, render } from "https://unpkg.com/lit-html";
@@ -620,12 +620,9 @@ const addButton = (text, action) => html`<button @click=${action}>${text}</butto
 
 render(addButton("Click me", () => alert("Clicked!!")), app);
 ```
-
----
-
-## Plantillas HTML (con Lit)
-- Sistema de plantillas ultraligero, núcleo de [Lit](https://lit.dev/) → pnpm install lit-html
-- v3.3.2: 💾 → 1.71 MB 🌍 → 7.2KB 🔩 → 3.24KB
+</step>
+<step>
+<split-slide style="--font-size: 1rem;">
 
 ```js
 import { html, render } from "https://unpkg.com/lit-html";
@@ -640,6 +637,8 @@ const toggle = () => {
   isOpen = !isOpen;
   renderApp(); // Re-render
 };
+```
+```js
 // Renderizado de la app
 // Ojo, es una función
 const renderApp = () => render(html`
@@ -649,10 +648,9 @@ const renderApp = () => render(html`
 
 renderApp(); // Render inicial
 ```
-
-## Plantillas HTML (con Lit)
-- Sistema de plantillas ultraligero, núcleo de [Lit](https://lit.dev/) → pnpm install lit-html
-- v3.3.2: 💾 → 1.71 MB 🌍 → 7.2KB 🔩 → 3.24KB
+</split-slide>
+</step>
+<step>
 
 ```js
 import { html, render } from "https://unpkg.com/lit-html";
@@ -663,7 +661,7 @@ const tasks = [
   "Dejar un hype desde los comentarios de móvil",
   "Dejar un like al video de Youtube",
   "Unirte al servidor de Discord",
-  "Escuchar las canciones"
+  "Escuchar las canciones de music.manz.dev"
 ];
 
 const setItem = (name) => html`<li>${name}</li>`;
@@ -671,6 +669,10 @@ const setList = (items) => html`<ol>${ items.map((item) => setItem(item)) }</ol>
 
 render(setList(tasks), app);
 ```
+</step>
+
+</steps>
+
 
 ---
 ## Referencias
@@ -678,3 +680,5 @@ render(setList(tasks), app);
 - [CheatSheet Javascript](https://lenguajejs.com/javascript/cheatsheets/)
 - [bootcamp.manz.dev](https://bootcamp.manz.dev/)
 
+
+<script src="../assets/steps.js"></script>

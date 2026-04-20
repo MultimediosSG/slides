@@ -1,32 +1,31 @@
 /* @theme alolight */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/monokai.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.css');
 
 :root {
     font-family: "Outfit", sans-serif;
     font-weight: 200;
     font-size: 20px;
     padding: 2.5rem;
-    background: white;
-    color: black;
-    
-
+    background: #f7f7f7;
+    color: #1a1a1a;
 }
+
 .bespoke-marp-parent {
   position: absolute;
   inset: 0;
   overflow: hidden;
   aspect-ratio: 16/9 !important;
   align-self: center;
-  
 }
+
 section {
     &.cover {
         background: 
-        linear-gradient(to bottom, black, transparent 40% 96%, black 100%), 
-        linear-gradient(to right, #000 3%, #000e 15%, #000c 20%, transparent 28%), 
+        linear-gradient(to bottom, #fff, transparent 40% 96%, #fff 100%), 
+        linear-gradient(to right, #fff 3%, #fffe 15%, #fffc 20%, transparent 28%), 
         var(--cover, url(cover.jpg));
-        background-color: white;
+        background-color: #f7f7f7;
         background-size: auto 765px;
         background-position: top right;
         background-repeat: no-repeat;
@@ -37,7 +36,7 @@ section {
         }
 
         li {
-            background: white;
+            background: #fffd;
             margin: 1rem 0;
             padding: 1rem;
             box-shadow: 3px 3px 0 #fe704d;
@@ -54,12 +53,14 @@ section {
             bottom: 5rem;
             right: 5rem;
             padding: 1rem;
-            background: white;
+            background: #fffd;
         }
     }
+
     h1 {
         color: #3179ed;
     }
+
     h2 {
         color: #fe704d;
     }
@@ -67,20 +68,19 @@ section {
     li {
         margin: .5rem 0;
     }
-    
 }
 
 pre {
-    background: white;
-    color: black;
+    background: #eaeaea;
+    color: #1a1a1a;
     padding: 1rem;
     margin: 0;
-    font-size: 0.75rem; 
 }
+
 code {
-    color: gold;
+    color: #c0392b;
     pre & {
-        color: black;
+        color: inherit;
     }
 }
 
@@ -88,15 +88,63 @@ a {
     color: #3179ed;
     text-decoration: none;
 }
+
 svg[data-marpit-svg] {
     background: linear-gradient(126deg, indigo, deeppink);
-    /* padding: calc(var(--marpit-root-font-size, 1rem) * 2);
-    padding-bottom: calc(var(--marpit-root-font-size, 1rem) * 0.5); */
-} 
+}
+
 .grid {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Step indicator */
+section:has(steps) {
+  position: relative;
+}
+.step-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.85em;
+  font-weight: 400;
+  padding: 0.3rem 0.8rem;
+  background: #fe704d22;
+  color: #c0392b;
+  border-radius: 0 0 0 0.5rem;
+  z-index: 100;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+/* Web component <steps> / <step> */
+steps {
+  display: block;
+  position: relative;
+}
+step {
+  display: block;
+}
+step:not(:first-child) {
+  display: none;
+}
+step[data-marpit-fragment] {
+  display: none;
+}
+steps:has(> step[data-bespoke-marp-fragment=active]) > step:first-child {
+  display: none;
+}
+step[data-bespoke-marp-fragment=inactive] {
+  visibility: visible !important;
+  display: none !important;
+}
+step[data-bespoke-marp-fragment=active] {
+  display: block !important;
+  visibility: visible !important;
+}
+step[data-bespoke-marp-fragment=active]:has(~ step[data-bespoke-marp-fragment=active]) {
+  display: none !important;
 }
 
 /* Step indicator */
@@ -145,4 +193,18 @@ step[data-bespoke-marp-fragment=active] {
 }
 step[data-bespoke-marp-fragment=active]:has(~ step[data-bespoke-marp-fragment=active]) {
   display: none !important;
+}
+
+split-slide {
+    --left:50%;
+    --right:50%;
+    --font-size: 1rem;
+
+    display: grid;
+    grid-template-columns: var(--left) var(--right);
+    gap: 1rem;
+
+    pre {
+        font-size: var(--font-size);
+    }
 }
