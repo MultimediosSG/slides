@@ -332,7 +332,7 @@ details.addEventListener("click", (ev) => {
 
 ## Eventos multimedia
 
-<div class="grid">
+<split-slide style="--left: 60%; --right: 40%; --font-size: 1rem;">
 
 ```html
 <audio controls src="./bootcamp.mp3"></audio>
@@ -355,12 +355,22 @@ details.addEventListener("click", (ev) => {
   audio.addEventListener("ratechange", (ev) => register("change speed rate"));
 </script>
 ```
+<div>
+<iframe width="100%" height="200" src="../assets/audio.html"></iframe>
+
+- Evento ``play`` / ``pause`` / ``ended``
+- Evento ``seeking`` / ``seeked``
+- Evento ``volumechange`` / ``ratechange``
+</div>
+</split-slide>
 
 
 
 ---
 
 ## Eventos de input (foco)
+
+<split-slide style="--left: 60%; --right: 40%;">
 
 ```html
 <input type="text">
@@ -381,13 +391,21 @@ details.addEventListener("click", (ev) => {
   input.addEventListener("blur", (ev) => register("blur"));
 </script>
 ```
+<div>
+<iframe width="100%" height="200" src="../assets/focus.html"></iframe>
 
 - Un elemento tiene el foco → pasa a estar activo
 - Un elemento pierde el foco → pasa a estar inactivo
+</div>
+<split-slide>
+
+
 
 ---
 
 ## Eventos de Drag & Drop
+
+<split-slide style="--left: 50%; --right: 50%; --font-size: 0.9rem;">
 
 ```html
 <section>
@@ -412,6 +430,10 @@ details.addEventListener("click", (ev) => {
   box.addEventListener("drop", () => register("Drop on box"));
 </script>
 ```
+<div>
+<iframe width="100%" height="300" src="../assets/dragdrop.html"></iframe>
+</div>
+</split-slide>
 
 ---
 <!-- _class: cover -->
@@ -436,7 +458,7 @@ section {
 ## Eventos nativos (click)
 - Ejemplo más adelante, primero entendamos el código:
 
-<split-slide>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
 
 ```html
 <div class="container"> <!-- ← Listener aquí -->
@@ -467,20 +489,20 @@ container.addEventListener("click", (ev) => update(ev));
 - Si pulsas ``.red``, estás pulsando el resto también
 - En la función ``update()``:
   - ``ev.target`` → Origen del evento
-  - ``ev.currentTarget`` → Elemento actual (bubbles DOM)
+  - ``ev.currentTarget`` → Elemento actual (``bubbles`` DOM)
   - ``ev.relatedTarget`` → Sólo en eventos como ``mouseEnter`` (procedencia/destino)
 
 </step>
 <step>
 
-- 🖱 Hacemos click en .container:
+- 🖱 Hacemos click en ``.container``:
 (evento 🫧 pero aquí no importa, no se ve, escuchamos directamente)
-  - ev.target → .container
-  - ev.currentTarget → .container
-- 🖱 Hacemos click en .red
-(evento 🫧 → .element → .container → body → document → window)
-  - ev.target → .red
-  - ev.currentTarget → .container
+  - ``ev.target`` → ``.container``
+  - ``ev.currentTarget`` → ``.container``
+- 🖱 Hacemos click en ``.red``
+(evento 🫧 → ``.element`` → ``.container`` → ``body`` → ``document`` → ``window``)
+  - ``ev.target`` → ``.red``
+  - ``ev.currentTarget`` → ``.container``
 
 </step>
 <step>
@@ -578,7 +600,7 @@ const cancelEvent = () => {
 ## Disparar eventos por redimensión
 - ``ResizeObserver``: Detecta cuando se redimensiona la ventana y quieres ejecutar código más eficientemente.
 
-<split-slide style="--left: 30%; --right: 70%;">
+<split-slide style="--left: 30%; --right: 70%; --font-size: 1.1rem;">
 
 ```html
 <div class="element"></div>
@@ -638,7 +660,7 @@ observer.observe(element);
 ## Disparar eventos por visibilidad
 - IntersectionObserver: Detectar cuando elementos son visibles eficientemente → Mira la clase en el inspector
 
-<split-slide style="--left: 30%; --right: 70%;">
+<split-slide style="--left: 30%; --right: 70%; --font-size: 1.1rem;">
 
 ```html
 <div class="element"></div>
@@ -802,7 +824,7 @@ channel.addEventListener("logout", () => {
 ## Websockets API
 - [Websockets](https://lenguajejs.com/eventos/tiempo-real/websocket/): Envío de eventos de alto rendimiento en tiempo real
 
-<split-slide>
+
 
 ```js
 import { client } from "https://unpkg.com/mtmi@0.0.8/dist/mtmi.js";
@@ -813,7 +835,7 @@ client.on("message", ({ username, channel, message }) => {
   console.log(`${channel} [${username}]: ${message}`);
 });
 ```
-</split-slide>
+
 
 ---
 
@@ -918,7 +940,7 @@ names.forEach((name) => {
 - Aprende más sobre [Expresiones regulares](https://lenguajejs.com/javascript/regexp/crear-expresiones-regulares/)
 - Juego para aprender expresiones regulares con pattern de HTML → [Pattern People](https://manzdev.github.io/regex-people/)
 
-<split-slide>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
 
 ```js
 const text = `

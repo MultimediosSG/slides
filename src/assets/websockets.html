@@ -1,0 +1,78 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+  <div id="results">
+  </div>
+
+  <style>
+    body {
+      font-family: Outfit;
+    }
+
+    #results {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .line {
+      display: flex;
+      gap: 4px;
+    }
+
+    .channel {
+      background: deeppink;
+      color: white;
+      padding: 4px;
+      font-size: 14px;
+      height: max-content;
+    }
+
+    .username {
+      border: 1px solid var(--color);
+      corner-shape: scoop;
+      border-radius: 4px;
+      color: white;
+      padding: 4px 8px;
+      font-size: 14px;
+      height: max-content;
+    }
+
+    .message {
+      color: white;
+      font-size: 16px;
+    }
+  </style>
+
+  <script type="module">
+    import { client } from "./mtmi.js";
+
+    const results = document.querySelector("#results");
+    client.connect({ channels: ["manzdev"] });
+
+    const addSpan = (classname, text) => {
+      const span = document.createElement("span");
+      span.textContent = text;
+      span.classList.add(classname);
+      return span;
+    }
+
+    client.on("message", ({ username, userInfo, channel, message }) => {
+      const line = document.createElement("div");
+      line.classList.add("line");
+      line.style.setProperty("--color", userInfo.color);
+      line.append(
+        addSpan("channel", channel),
+        addSpan("username", username),
+        addSpan("message", message)
+      );
+      results.append(line);
+    });
+  </script>
+</body>
+
+</html>
