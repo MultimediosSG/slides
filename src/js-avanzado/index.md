@@ -7,7 +7,7 @@ paginate: true
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00017_.png);
+  --cover: url(../assets/img_00021_.png);
 }
 </style>
 # Javascript Avanzado
@@ -357,7 +357,7 @@ export default defineConfig({
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00017_.png);
+  --cover: url(../assets/img_00022_.png);
 }
 </style>
 
@@ -898,7 +898,7 @@ const data = {
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00018_.png);
+  --cover: url(../assets/img_00024_.png);
 }
 </style>
 # Código limpio
@@ -1161,7 +1161,7 @@ function processOrder(user, cart) {
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00019_.png);
+  --cover: url(../assets/img_00025_.png);
 }
 </style>
 # Patrones
