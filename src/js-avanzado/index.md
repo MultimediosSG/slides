@@ -329,7 +329,7 @@ import styles from "./assets/file.css";         // Obtiene CSS y parsea directam
 ```
 - Consejo: Prefiere siempre que puedas la vía estándar (funcionará en proyectos sin Vite) → [Rolldown no soporta CSS modules aún](https://rolldown.rs/guide/notable-features#css-bundling)
 ```js
-import data from "./assets/file.json" with { type: "json" }; // ❌ Actualmente, no compatible con Vite
+import data from "./assets/file.json" with { type: "json" }; // Actualmente compatible con Vite
 import styles from "./assets/file.css" with { type: "css" }; // ❌ Actualmente, no compatible con Vite
 ```
 
@@ -397,7 +397,7 @@ th, td {
 ```js
 // No devuelve nada nunca (undefined)
 animals.forEach((animal, index) => {
-  console.log(`Elemento #${index}: ${el}`);
+  console.log(`Elemento #${index}: ${animal}`);
 });
 ```
 <div>
