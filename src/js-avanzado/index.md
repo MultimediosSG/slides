@@ -1127,6 +1127,7 @@ const rubberDuck = { ...canQuack };
 ## Cláusulas de guarda / Early returns
 - Retorna lo antes posible cuando una condición no se cumple.
 - Evita anidamiento excesivo y hace que el flujo del código sea más fácil de leer.
+
 <split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
 
 ```js
