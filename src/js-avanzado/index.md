@@ -721,7 +721,7 @@ th, td {
 
 ## Complejidad
 
-<split-slide>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
 
 ```js
 {
@@ -1285,6 +1285,7 @@ console.log(total.get()); // 450 (150 * 3)
 ## Introducción a componentes
 - Cambiar el enfoque global por un enfoque local
 - Pequeños fragmentos de HTML/CSS/JS reutilizables, enfocados en una parte concreta
+
 <split-slide style="--left: 50%; --right: 50%; --font-size: 1.1rem;">
 
 ```html
