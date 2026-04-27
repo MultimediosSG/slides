@@ -739,9 +739,9 @@ section {
 
 ```js
 localStorage.length                       // 0 (información almacenada)
-localStorage.setItem("name", "ManzDev");  // Guarda información en la key "name"
+localStorage.setItem("name", "Alons");  // Guarda información en la key "name"
 localStorage.key(0);                      // Devuelve la key número 0 → "name"
-localStorage.getItem("name");             // Obtiene la key "name" → "ManzDev"
+localStorage.getItem("name");             // Obtiene la key "name" → "Alons"
 localStorage.removeItem("name");          // Elimina la key "name"
 localStorage.clear();                     // Vacía el almacén de ese dominio
 

@@ -547,14 +547,14 @@ animals.some(el => el.endsWith("o")); // T
 
 ```js
 const users = [
-  { name: "ManzDev", life: 39 },
+  { name: "Alons", life: 39 },
   { name: "felixicaza", life: 75 },
   { name: "krepssi", life: 99 },
   { name: "DHardySD", life: -5 },
 ];
 
 users.find(el => el.life < 50);
-// { name: "ManzDev", life: 39 }
+// { name: "Alons", life: 39 }
 
 users.findIndex(el => el.life < 50);
 // 0
