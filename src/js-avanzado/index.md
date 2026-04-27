@@ -542,7 +542,7 @@ animals.some(el => el.endsWith("o")); // T
 
 
 
-<split-slide>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
 <div>
 
 ```js
