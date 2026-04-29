@@ -7,7 +7,7 @@ paginate: true
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00021_.png);
+  --cover: url(../assets/img_00026_.png);
 }
 </style>
 #  Javascript (Módulos)
@@ -190,7 +190,7 @@ export const method = () => {
 </script>
 ```
 
-- ERROR: Uncaught SyntaxError: Cannot use import statement outside a module
+- **ERROR**: Uncaught SyntaxError: Cannot use import statement outside a module
 
 ```html
 <script type="module">
@@ -306,7 +306,7 @@ import { element } from "package";
 - Si usamos Node, busca el paquete en la carpeta ``node_modules/``.
 - [Import Maps](https://lenguajejs.com/javascript/modulos/import-map/) sirven como índices.
 - Se puede redireccionar a ficheros concretos, URL/CDN, carpetas o incluso alias.
-- JSON externos aún no soportados. [¿O si?](https://lea.verou.me/blog/2026/external-import-maps-today/)
+- JSON **externos** aún no soportados. [¿O si?](https://lea.verou.me/blog/2026/external-import-maps-today/)
   - No uses ``src``, no está soportado aún
   - Usa ``import`` o ``fetch`` + DOM
 </div>
@@ -332,7 +332,7 @@ import { element } from "package";
 <!-- _class: cover -->
 <style scoped>
 section {
-  --cover: url(../assets/img_00022_.png);
+  --cover: url(../assets/img_00027_modules.png);
 }
 </style>
 
@@ -342,9 +342,9 @@ section {
 ---
 
 ## Barrel imports
-- ¡Evitarlos! (o al menos ser muy cuidadoso si usas transpiladores) → Razones
+- ¡Evitarlos! (o al menos ser muy cuidadoso si usas transpiladores) → [Razones](https://lenguajejs.com/javascript/modulos/barrel-imports/)
 - ✅ Ventajas: Rutas cortas, centralizado todo en un "barrel".
-- ❌ Desventajas: Herramientas automáticas no pueden optimizar con tree-shaking (Ver más adelante)
+- ❌ Desventajas: Herramientas automáticas no pueden optimizar con **tree-shaking** (Ver más adelante)
 <split-slide>
 
 ```js
@@ -434,8 +434,8 @@ const songs = [
 <div>
 
 - Módulos JSON
-- Equivale a leer un .json + parsearlo
-- ✅ Soporte completo → CanIUse
+- Equivale a leer un ``.json`` + parsearlo
+- ✅ Soporte completo → [CanIUse](https://caniuse.com/wf-json-modules)
 </div>
 </split-slide>
 </step>
@@ -685,7 +685,7 @@ subscribe(state => {
 ---
 
 ## Módulos como bus de eventos
-- Los módulos son un singleton natural. Sólo una instancia en memoria.
+- Los módulos son un **singleton natural**. Sólo una instancia en memoria.
 
 <steps>
 <step>
@@ -739,7 +739,7 @@ export const emit = (ev, payload) => {
 // ***** user.js **********
 import { emit } from "./eventBus.js";
 
-emit("login", { user: "Manz" });
+emit("login", { user: "Alons" });
 
 // ***** analytics.js *****
 import { on } from "./eventBus.js";
@@ -752,8 +752,6 @@ on("login", (data) => {
 ---
 
 ## Estructura de carpetas
-
-- Iterar es avanzar por una estructura de forma eficiente (bajo demanda)
 
 <steps>
 <step>
@@ -770,9 +768,11 @@ on("login", (data) => {
  │    :
  :
 ```
-Hay que comenzar a separar en archivos individuales.
-Intenta que cada archivo tenga, como máximo, ~**150-300** líneas.
+- Hay que comenzar a separar en archivos individuales.
+- Intenta que cada archivo tenga, como máximo, ~**150-300** líneas.
+
 </step>
+
 <step>
 
 ```bash
@@ -788,8 +788,11 @@ Intenta que cada archivo tenga, como máximo, ~**150-300** líneas.
  │    :
  :
 ```
+
 - Más adelante, añadiremos archivos para testear nuestro código.
+
 </step>
+
 <step>
 
 ```bash
@@ -809,6 +812,7 @@ Intenta que cada archivo tenga, como máximo, ~**150-300** líneas.
  :
 ```
 </step>
+
 <step>
 
 ```bash
@@ -824,7 +828,9 @@ Intenta que cada archivo tenga, como máximo, ~**150-300** líneas.
 - Es buena práctica mantener los componentes sólo para la parte visual.
 - En ``modules/`` o ``features/`` puedes añadir lógica separable y reutilizable.
 - Existen muchas variaciones de estas arquitecturas.
+
 </step>
+
 <step>
 
 ```bash
@@ -843,6 +849,7 @@ Intenta que cada archivo tenga, como máximo, ~**150-300** líneas.
 ```
 
 - Ej: **Screaming Architecture**, «grita» directamente carpetas con **lo que hace** en lugar de separar por tecnologías
+
 </step>
 </steps>
 
@@ -852,15 +859,17 @@ Intenta que cada archivo tenga, como máximo, ~**150-300** líneas.
 
 - [CheatSheet Javascript](https://lenguajejs.com/javascript/cheatsheets/)
 - [bootcamp.manz.dev](https://bootcamp.manz.dev/)
-- [Vite](https://vitejs.dev/)
-- [Axios compromised on npm](https://www.stepsecurity.io/blog/axios-compromised-on-npm-malicious-versions-drop-remote-access-trojan)
-- [LightningCSS](https://lightningcss.dev/)
-- [Custom Media Queries - LightningCSS](https://lightningcss.dev/transpilation.html#custom-media-queries)
-- [Rolldown - CSS bundling](https://rolldown.rs/guide/notable-features#css-bundling)
-- [Búsqueda de plugins vite-plugin-](https://npmx.dev/search?q=vite-plugin-)
-- [vite-plugin-standard-css-modules](https://npmx.dev/package/vite-plugin-standard-css-modules)
-- [La notación Big O(N)](https://www.luisllamas.es/complejidad-algoritmica-big-o/#la-notaci%C3%B3n-big-on)
-- [Oxlint](https://lenguajejs.com/javascript/calidad-de-codigo/oxlint/)
+- [Módulos ESM](https://lenguajejs.com/javascript/modulos/que-es-esm/)
+- [CommonJS vs ESM](https://lenguajejs.com/nodejs/fundamentos/commonjs-vs-esm/)
+- [require.js (AMD)](https://requirejs.org/)
+- [npmx.dev](https://npmx.dev/)
+- [node-modules.dev](https://node-modules.dev/)
+- [Bare imports / Import Maps](https://lenguajejs.com/javascript/modulos/import-map/)
+- [External Import Maps hoy](https://lea.verou.me/blog/2026/external-import-maps-today/)
+- [Otros módulos (CSS/JSON/...)](https://lenguajejs.com/javascript/modulos/import-with-type/)
+- [unpkg CDN](https://unpkg.com/)
+- [JSDelivr CDN](https://www.jsdelivr.com/)
+- [CDNjs (Cloudflare)](https://cdnjs.com/)
 
 
 

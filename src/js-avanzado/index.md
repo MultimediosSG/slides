@@ -369,14 +369,8 @@ section {
 
 ---
 <style scoped>
-table {
-  width: 15%;
-  border-collapse: collapse;
-}
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
+table{
+  --width: 15%;
 }
 </style>
 ## Repaso: Array functions: ``.forEach()``
@@ -413,14 +407,8 @@ El resultado sería el siguiente:
 
 ---
 <style scoped>
-table {
-  width: 15%;
-  border-collapse: collapse;
-}
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
+table{
+  --width: 15%;
 }
 </style>
 ## Array functions: ``.forEach()`` vs ``.map()``
@@ -473,14 +461,8 @@ const sizes = animals.map((el) => el.length);
 
 ---
 <style scoped>
-table {
-  width: 15%;
-  border-collapse: collapse;
-}
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
+table{
+  --width: 15%;
 }
 </style>
 ## Array functions: ``.every()`` vs ``.some()``
@@ -654,17 +636,7 @@ values.reduceRight((acc, first) => acc - first, 0);
 </split-slide>
 
 ---
-<style scoped>
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-}
-</style>
+
 ## Notación Big O(N)
 
 - Complejidad: [La notación Big O(N)](https://www.luisllamas.es/complejidad-algoritmica-big-o/#la-notaci%C3%B3n-big-on)
