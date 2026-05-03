@@ -169,3 +169,18 @@ th, td {
   padding: 8px;
   text-align: center;
 }
+
+a:is([href$=".png"], [href$=".jpg"], [href$=".jpeg"], [href$=".webp"], [href$=".gif"]) {
+   &::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.2rem;
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../assets/icon-img.png);
+   }
+}

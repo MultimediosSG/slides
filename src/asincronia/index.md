@@ -417,7 +417,7 @@ section {
 <step>
 
 ```js
-const url = new URL("https://bootcamp.manz.dev/no/?tech=react&debug=yes");
+const url = new URL("https://avotz.com/no/?tech=react&debug=yes");
 
 url.pathname;                                 // '/no/'
 url.searchParams.get("tech");                 // 'react'
@@ -431,13 +431,13 @@ sp.get("debug");                              // 'yes'
 
 ```js
 const url = new URLPattern({
-  hostname: "bootcamp.manz.dev",
+  hostname: "app.avotz.com",
   pathname: "/:path/"
 });
 
-url.test("https://manz.dev/no/")              // ❌ false
-url.test("https://bootcamp.manz.dev/no/")     // ✅ true
-url.test("https://lenguajejs.com/no/")        // ❌ false
+url.test("https://avotz.com/no/")              // ❌ false
+url.test("https://app.avotz.com/no/")          // ✅ true
+url.test("https://lenguajejs.com/no/")         // ❌ false
 ```
 </step>
 </steps>
