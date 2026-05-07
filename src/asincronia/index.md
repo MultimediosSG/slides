@@ -681,7 +681,7 @@ section {
   --cover: url(../assets/img_00034_.png);
 }
 </style>
-# Laboratorio
+# Ejercicio
 
 ---
 
