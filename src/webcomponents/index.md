@@ -776,12 +776,505 @@ section {
 - Slots
 - Aplicar CSS
 
+---
+## Crear un Shadow DOM
+
+<split-slide style="--font-size: 1rem;">
+<steps>
+<step>
+
+```html
+<div class="element">Contenido</div>
+
+<script>
+  const $el = document.querySelector(".element");
+
+  // Modificamos el DOM normal de la página
+  $el.setHTMLUnsafe(/* html */`Light DOM`);
+
+  // Añadimos un Shadow DOM (oculta el DOM normal)
+  $el.attachShadow({ mode: "open" });
+
+  // Modificamos el DOM particular (Shadow DOM)
+  $el.shadowRoot.setHTMLUnsafe(/* html */`Shadow DOM`);
+</script>
+```
+</step>
+<step>
+
+```html
+<!-- Declarative Shadow DOM (SSR/Backend) -->
+
+<div class="element">
+  <template shadowrootmode="open">
+    Shadow DOM
+  </template>
+  Light DOM
+</div>
+```
+</step>
+</steps>
+<div>
+
+- **Shadow DOM** es un DOM particular en un elemento.
+- Cuando lo añades, ocultas el **DOM general** (Light DOM).
+- Sigue existiendo y es modificable, pero no se ve.
+
+- Con ``element`` accedes → Light DOM (no visible)
+- Con ``element.shadowRoot`` accedes → Shadow DOM (visible)
+
+
+- El CSS añadido al **Shadow DOM**, sólo afecta a ese DOM.
+
+- [➡ Declarative Shadow DOM](https://lenguajecss.com/cascada-css/alcance/declarative-shadow-dom/): ideal para backend y SSR
+</div>
+</split-slide>
+
+---
+## WebComponent con Shadow DOM
+
+<split-slide style="--font-size: 1rem;">
+<steps>
+<step>
+
+```js
+class UserCard extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" }); 1️⃣
+  }
+
+  connectedCallback() { 2️⃣
+    this.shadowRoot.setHTMLUnsafe(/* html */`
+      <style>
+        .container {
+          background: black;
+          color: white;
+          padding: 5px;
+        }
+      </style>
+      <div class="container">ManzDev</div>
+    `);
+  }
+}
+customElements.define("user-card", UserCard);
+```
+</step>
+<step>
+
+```js
+import styles from "./UserCard.css" with { type: "css" };
+
+class UserCard extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.adoptedStyleSheets.push(styles);
+  }
+
+  connectedCallback() {
+    const html = /* html */`<div class="container">
+      ManzDev
+    </div>`;
+    this.shadowRoot.setHTMLUnsafe(html);
+  }
+}
+customElements.define("user-card", UserCard);
+```
+</step>
+</steps>
+<div>
+Nuestro WebComponent quedaría así:
+
+- 1️⃣ El ``.attachShadow()`` se hace sobre ``this`` (la clase)
+- 2️⃣ El ``.setHTML*()`` sobre ``this.shadowRoot`` (Shadow DOM)
+
+➡ Pero el CSS tiende a hacerse MUY grande...
+
+- Podemos usar ``import`` y ``.adoptedStyleSheets`` para externalizarlo.
+- 💖 Separamos en diferentes ficheros (más manejable)
+- 💖 Evita FOUC (Son módulos y se aplica antes del render)
+- 💔 Requiere descargar 2 archivos (importante sólo en HTTP/1)
+
+✨ **TRUCAZO**: Las variables CSS si atraviesan el Shadow DOM.
+</div>
+</split-slide>
+
+---
+## Slots (ranuras HTML)
+- Con **Shadow DOM** podemos crear ranuras en el HTML
+
+<steps>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+```html
+<!-- Web Component -->
+<div>
+  <slot></slot>
+</div>
+
+<style>
+  ::slotted(span) {
+    background: black;
+    color: white;
+    padding: 4px;
+  }
+</style>
+```
+<div>
+
+```html
+<!-- Documento HTML -->
+<user-card>
+  <span>ManzDev</span>
+</user-card>
+```
+<div>
+
+1️⃣ Slots
+- Son ranuras para enviar datos
+  -🌔 Light DOM → 🌒 Shadow DOM
+
+- Vía ::slotted() → 💖 Dar estilo a elementos en un <slot>
+- Vía ::slotted() → 💔 Dar estilo SÓLO a elementos de nivel 1
+</div>
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+```html
+<!-- Web Component -->
+<style>
+  ::slotted(h2) {
+    background: red;
+    color: white;
+  }
+</style>
+
+<div>
+  Name: <slot name="name"></slot>
+  Text: <slot name="description"></slot>
+</div>
+```
+<div>
+
+```html
+<!-- Documento HTML -->
+<user-card>
+  <h2 slot="name">Nombre</h2>
+  <p slot="description">Descripción</p>
+</user-card>
+```
+<div>
+
+2️⃣ Slots nombrados
+- Puedes tener múltiples <slot> con un name para diferenciarlos
+- Cada <slot> se conecta con el elemento con slot y su nombre
+- 💔 Misma limitación: solo a elementos HTML de nivel 1
+</div>
+</div>
+</split-slide>
+</step>
+</steps>
+
+---
+## Utilizar variables de CSS en Shadow DOM
+- Forma recomendada de enviar datos de estilos desde fuera
+
+<split-slide style="--font-size: 1rem;">
+
+```css
+user-card {
+  --theme-color: deeppink; 2️⃣
+}
+
+1️⃣ El color temático por defecto es indigo
+2️⃣ Si el usuario define un color, se toma ese como temático
+3️⃣ El interior del componente crea colores derivados
+
+/* Recuerda:
+   Las variables CSS se filtran a través del Shadow DOM
+*/
+```
+```css
+/* Dentro del componente */
+.container { 3️⃣
+  --light-color: color-mix(
+    in srgb, var(--theme-color, indigo), white 50%
+  );
+
+  background: black;
+  color: white;
+  border-bottom: 2px solid var(--theme-color, indigo);
+
+  strong { color: var(--light-color); }
+
+  .decoration { background: var(--theme-color, indigo); }
+}
+```
+</split-slide>
+
+---
+## CSS Scoping (CSS en Shadow DOM)
+- Forma recomendada de estilar con CSS en un Shadow DOM
+- Compatibilidad: ✅ :host ✅ :host() ❌ :host-context()
+
+<split-slide style="--left: 40%; --right: 60%; --font-size: 1rem;">
+
+```css
+:host {
+  display: block flow;
+  background: indigo;
+  padding: 0.5rem;
+}
+
+:host([open]) {
+  /* ... */
+}
+
+:host-context(.dark) {
+  /* ... */
+}
+```
+```html
+<!-- `:host` es el contenedor del custom element: `<user-card>` -->
+<user-card></user-card>
+
+<!-- `:host()` es el contenedor con un selector específico -->
+<user-card open></user-card>
+
+<!-- `:host-context()` es el contenedor dentro de un contexto -->
+<body class="dark">
+  <div class="container">
+    <user-card></user-card>
+  </div>
+</body>
+```
+</split-slide>
+
+---
+## CSS Parts
+- Forma de preparar un WebComponent para que otros desarrolladores le puedan dar estilo a ciertas partes desde fuera del componente, simplificándolo todo.
+
+<split-slide style="--font-size: 1rem;">
+
+```js
+class UserCard extends HTMLElement {
+  /* ... */
+
+  connectedCallback() { 2️⃣
+    this.shadowRoot.setHTMLUnsafe(/* html */`
+      <div class="container">
+        <img part="image" src="image.png" alt="Image">
+        <h2 part="name">${this.name}</h2>
+      </div>
+    `);
+  }
+}
+
+customElements.define("user-card", UserCard);
+```
+<div>
+
+```css
+user-card::part(image) {
+  /* ... */
+}
+
+user-card::part(name) {
+  /* ... */
+}
+```
+Con ``::part()`` podemos preparar partes de un componente para que los devs que usen el componente puedan dar estilo a partes del mismo desde fuera.
+</div>
+</split-slide>
+
+---
+<!-- _class: cover -->
+<style scoped>
+section {
+  --cover: url(../assets/img_00038_.png);
+}
+</style>
+# Comunicar componentes
+- Atributos / propiedades
+- Eventos Javascript
+- Emisores de eventos
+- Gestores de estado
+
+---
+## Comunicar componentes
+- En algún momento necesitaremos pasar información de un componente a otro (hay varias formas)
+
+<steps>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+```html
+<!-- Si es sencillo, atributos es buena opción -->
+<user-card name="CatLord"></user-card>
+<user-card
+  name='{"name":"ManzDev","role":"streamer"}'> ❌
+</user-card>
+
+<script>
+  const userCard = document.querySelector("user-card");
+  userCard.setAttribute("name", "ManzDev"); // Reactividad
+</script>
+```
+<div>
+
+A un componente:
+
+- ✅ Mediante Atributos HTML
+- ✅ Mediante setAttribute() (Reactividad)
+- ❌ Si no son sencillas, no uses atributos
+
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+```html
+<user-card></user-card>
+
+<script>
+  const userCard = document.querySelector("user-card");
+
+  const data = { name: "ManzDev", role: "streamer" };
+
+  userCard.setData(data);       // (Manual → método)
+  userCard.data                 // (Manual → prop/getter)
+</script>
+```
+<div>
+A un componente:
+
+- ✅ Mediante Propiedades (API Javascript)
+- ✅ Utiliza métodos para inyectar datos
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+```js
+class UserCard extends HTMLElement {
+  connectedCallback() {
+    this.userConfirm(); // Usuario confirma. Enviemos esos datos
+  }
+
+  userConfirm() {
+    const options = {
+      bubbles: true,    // Envia eventos burbujeando por el DOM
+      composed: true    // Atraviesa Shadow DOM
+    };
+    const event = new CustomEvent("usercard:confirm", options);
+    this.dispatchEvent(event);
+  }
+}
+```
+<div>
+
+A múltiples componentes:
+
+- ❌ Desacoplar: No «atarse» al DOM
+- ✅ Mediante eventos Javascript
+
+- 1️⃣ Llamamos al método cuando nos interese
+- 2️⃣ Le damos un nombre al evento
+- 3️⃣ Enviamos evento a quien lo escuche
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+```js
+class OtherComponent extends HTMLElement {
+  connectedCallback() {
+    document.addEventListener("usercard:confirm", () => {
+      // Escuchamos el evento en el raíz del HTML
+      // Si algún otro componente lo ha enviado lo
+      // escucharemos desde aquí
+    });
+
+    this.addEventListener("usercard:confirm", () => {
+      // Escuchamos el evento en el componente
+      // Puede ser útil si otro componente hijo lo
+      // ha enviado y ha burbujeando hasta llegar a él
+    });
+  }
+}
+```
+<div>
+
+Otras opciones:
+
+- ✅ Escuchar en document es más fácil.
+  - Si burbujeas, acabarás llegando al raíz y lo escucharás.
+- ❌ Escuchar en this → menos riesgo de leaks.
+  - Si eliminas componente del DOM, más fácil.
+  - Si escuchas document, debes limpiar listeners manualmente.
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+```js
+// https://github.com/developit/mitt
+
+import mitt from "mitt";
+
+const emitter = mitt();
+
+emitter.on("foo", (e) => console.log("foo", e));
+emitter.on("*", (type, e) => console.log(type, e));
+
+emitter.emit("foo", { a: "b" });
+```
+<div>
+
+Otras opciones:
+
+- ✅ Mediante librerías de terceros
+- ✅ Mediante gestores de estado
+
+Gestores de estado:
+
+- 🏹 [NanoStores](https://github.com/nanostores/nanostores)
+- 🏹 [Zustand](https://zustand.docs.pmnd.rs/learn/getting-started/introduction)
+
+Librerías reactivas:
+
+- 🏹 [flyd](https://github.com/paldepind/flyd)
+- 🏹 [alien-signals](https://github.com/stackblitz/alien-signals)
+- 🏹 [signals preact](https://preactjs.com/blog/introducing-signals/)
+</div>
+</split-slide>
+</step>
+</steps>
 
 ---
 ## Referencias
 
 - [CheatSheet Javascript](https://lenguajejs.com/javascript/cheatsheets/)
 - [bootcamp.manz.dev](https://bootcamp.manz.dev/)
+- [warning-badge - CodePen](https://codepen.io/manz/pen/NPRryXw)
+- [goweather API](https://goweather.xyz/)
+- [mitt - Event Emitter](https://github.com/developit/mitt)
+- [NanoStores](https://github.com/nanostores/nanostores)
+- [Zustand](https://zustand.docs.pmnd.rs/learn/getting-started/introduction)
+- [flyd](https://github.com/paldepind/flyd)
+- [alien-signals](https://github.com/stackblitz/alien-signals)
+- [Signals - Preact](https://preactjs.com/blog/introducing-signals/)
+- [Declarative Shadow DOM - lenguajecss.com](https://lenguajecss.com/cascada-css/alcance/declarative-shadow-dom/)
+
 
 
 
