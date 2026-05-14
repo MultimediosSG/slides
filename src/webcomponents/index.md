@@ -198,7 +198,7 @@ class WarningBadge extends HTMLElement {
 ```js
 class WarningBadge extends HTMLElement {
   #private = 42;
-  public = "ManzDev";
+  public = "Alo";
 
   get value() {
     return `Data: ${this.#private}`;
@@ -853,7 +853,7 @@ class UserCard extends HTMLElement {
           padding: 5px;
         }
       </style>
-      <div class="container">ManzDev</div>
+      <div class="container">Alo</div>
     `);
   }
 }
@@ -874,7 +874,7 @@ class UserCard extends HTMLElement {
 
   connectedCallback() {
     const html = /* html */`<div class="container">
-      ManzDev
+      Alo
     </div>`;
     this.shadowRoot.setHTMLUnsafe(html);
   }
@@ -927,7 +927,7 @@ Nuestro WebComponent quedaría así:
 ```html
 <!-- Documento HTML -->
 <user-card>
-  <span>ManzDev</span>
+  <span>Alo</span>
 </user-card>
 ```
 <div>
@@ -1117,12 +1117,12 @@ section {
 <!-- Si es sencillo, atributos es buena opción -->
 <user-card name="CatLord"></user-card>
 <user-card
-  name='{"name":"ManzDev","role":"streamer"}'> ❌
+  name='{"name":"Alo","role":"Profesor"}'> ❌
 </user-card>
 
 <script>
   const userCard = document.querySelector("user-card");
-  userCard.setAttribute("name", "ManzDev"); // Reactividad
+  userCard.setAttribute("name", "Alo"); // Reactividad
 </script>
 ```
 <div>
@@ -1145,7 +1145,7 @@ A un componente:
 <script>
   const userCard = document.querySelector("user-card");
 
-  const data = { name: "ManzDev", role: "streamer" };
+  const data = { name: "Alo", role: "Profesor" };
 
   userCard.setData(data);       // (Manual → método)
   userCard.data                 // (Manual → prop/getter)
