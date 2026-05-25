@@ -648,10 +648,612 @@ Más información sobre los [Barrels](https://lenguajejs.com/javascript/modulos/
 </steps>
 
 ---
+## Sistemas de caché
+- El caché es un almacenamiento temporal para evitar repetir acciones y hacerlas más rápido → Cache
+
+<steps>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+```bash
+🅰 Sin caché (primera visita)
+💻 Browser +-→ /index.html ←→ 🌍 Internet ←→ 💻 Server
+               /index.css  ←→ 🌍 Internet ←→ 💻 Server
+               /index.js   ←→ 🌍 Internet ←→ 💻 Server
+               /logo.webp  ←→ 🌍 Internet ←→ 💻 Server
+
+🅱 Con caché (segunda visita)
+💻 Browser +-→ /page2.html ←→ 🌍 Internet ←→ 💻 Server
+               /index.css  ☑ Cacheado. Ya lo tiene.
+               /index.js   ☑ Cacheado. Ya lo tiene.
+               /logo.webp  ☑ Cacheado. Ya lo tiene.
+```
+<div>
+
+### 1️⃣ Cachea el «pasado»
+- Aquí hablamos de **caché en el navegador**
+- 🅰 Descargas **sin caché** de navegador
+- 🅱 Descargas **con caché** de navegador
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+```bash
+[⚡] Caché a nivel de navegador
+💻 Browser [⚡] → 🌍 Internet → 💻 Server
+
+[⚡] Caché a nivel de red (Internet)
+💻 Browser → 🌍 Internet [⚡] → 💻 Server
+
+[⚡] Caché a nivel de servidor
+💻 Browser → 🌍 Internet → 💻 Server [⚡]
+```
+<div>
+
+### 2️⃣ Niveles de caché
+- 1️⃣ Caché de navegador
+→ ``index.js``
+
+- 2️⃣ Caché de red
+→ 🛡 Uso de CDN (Ej: Cloudflare)
+→ [Distribuidos geográficamente](../assets/cloudflare-datacenters.png)
+→ ``index.a73b2f.js`` (Útil para evitar caché red)
+
+- 3️⃣ Caché de servidor
+→ Guarda copias, evita operaciones costosas
+→ Bases de datos, calculos...
+→ Ejemplos: Redis, caché SQL, etc...
+
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+```bash
+HTTP/1.1:  GET /1 → ⌛ → 🟦 → GET /2 → ⌛ → 🟦 → ...
+
+HTTP/2:    GET /1 ┐          ┌ 🟦
+           GET /2 ├─ misma ──┤ 🟦  (todo a la vez)
+           GET /3 ┘ conexión └ 🟦
+
+HTTP/2 sobre TCP:
+  stream A ──────────❌ (pérdida) ➡ todos ⌛
+  stream B ──────────⏸ ⌛
+  stream C ──────────⏸ ⌛
+
+HTTP/3 sobre QUIC:
+  stream A ──────────❌ (pérdida) ➡ solo A ⌛
+  stream B ────────────────────── ✅ sigue
+  stream C ────────────────────── ✅ sigue
+```
+<div>
+
+### 3️⃣ Protocolos de red
+- 1️⃣ HTTP/1.1
+❌ Sólo una petición TCP a la vez
+🟧 Navegadores usan 6 peticiones paralelas
+🔥 Técnicas agresivas (todo en un bundle) 🆘
+
+- 2️⃣ HTTP/2
+✅ Multiplexing: Múltiples peticiones
+✅ No es necesario bundling agresivo
+
+- 3️⃣ HTTP/3
+✅ Reemplaza TCP por QUIC/UDP
+✅ Mejor rendimiento si se pierden paquetes
+
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+```js
+<script type="speculationrules">
+{
+  "prefetch": [{
+    "urls": ["/productos", "/sobre-nosotros"]
+  }],
+  "prerender": [{
+    "where": { "href_matches": "/productos/*" },
+    "eagerness": "moderate"
+  }]
+}
+</script>
+```
+<div>
+
+### 3️⃣ Cachear el «futuro»
+- 🆕 Speculation Rules: API moderna
+- Cachea/renderiza anticipadamente
+- ``prefetch`` → Sólo descarga HTML (coste bajo)
+- ``prerender`` → Descarga + Ejecuta JS + Renderiza (coste muy alto)
+- ``eagerness`` → Controla CUANDO comienza:
+  - 🟥 ``eager`` (urgente, desde parsear la regla)
+  - 🟨 ``moderate`` (cursor se acerca a enlace)
+  - 🟩 ``conservative`` (empieza a hacer clic)
+
+</div>
+</split-slide>
+</step>
+</steps>
+
+---
+<!-- _class: cover -->
+<style scoped>
+section {
+  --cover: url(../assets/img_00036_.png);
+}
+</style>
+# Uso de paquetes NPM
+- Evaluar antes de instalar
+- Analizando bundle
+- Limitar tamaño (CI)
+- Dependencias no usadas
+
+---
+## Análisis de paquetes NPM
+- Los proyectos suelen tener y necesitar dependencias → [Visualizador de dependencias](https://npm.anvaka.com/#/)
+
+<steps>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+<div>
+
+### Coste de dependencias
+- ✅ Hacen que sea más fácil y rápido desarrollar
+- ⚠️ Tienen un **coste**:
+  - 1️⃣ Tamaño → Debe descargarse
+  - 2️⃣ Parseo → Debe leerse y procesarse
+  - 3️⃣ Ejecución → Debe ejecutarse y actuar
+- ⚠️ Tienen un **riesgo**:
+  - 1️⃣ Mantenimiento → Debes mantenerla actualizada
+  - 2️⃣ Seguridad → Es un posible vector de ataque
+  - 3️⃣ Futuro → Debes adaptarte a su evolución
+- 💔 Cada dependencia tiene **más dependencias**
+</div>
+<div>
+
+### 🟥 ¿Qué podemos hacer?
+- 🔥 Vigila bien si son imprescindibles
+  - Ten siempre alternativas presentes y viables.
+  - ¿Tiene alternativa nativa?
+  - ¿Se puede reutilizar otra dependencia?
+  - ¿Se puede buscar alternativas más ligeras?
+
+- 📦 Detalles de las dependencias: [npmjs](https://www.npmjs.com/package/dayjs) vs [npmx](https://npmx.dev/package/dayjs)
+- 👀 Evaluar antes de instalar
+  - [packagephobia](https://packagephobia.com/)
+  - [bundlephobia](https://bundlephobia.com/)
+  - [package-size](https://npmx.dev/package/package-size) (instalable)
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--font-size: 1rem;">
+
+<div>
+
+### Bundle (Todo el JS unido en un archivo final)
+![w:600 contain](../assets/rollup-plugin-visualizer-small.png)
+
+</div>
+<div>
+
+- 🔎 Analiza bundle (busca alternativas más ligeras)
+  - [node-modules-inspector](https://github.com/antfu/node-modules-inspector) → [node-modules.dev](https://node-modules.dev/) → [ejemplo](https://everything.antfu.dev/chart)
+  - [rollup-plugin-visualizer](https://github.com/btd/rollup-plugin-visualizer)
+  - [source-map-explorer](https://npmx.dev/package/source-map-explorer)
+- 🛑 Limitar tamaño bundle:
+  - [size-limit](https://npmx.dev/package/size-limit)
+  - [bundlesize](https://npmx.dev/package/bundlesize)
+- 🕵️‍♀️ Dependencias no utilizadas:
+  - [knip](https://knip.dev/)
+  - [depcheck](https://npmx.dev/package/depcheck)
+</div>
+</split-slide>
+</step>
+</steps>
+
+---
+<!-- _class: cover -->
+<style scoped>
+section {
+  --cover: url(../assets/img_00036_.png);
+}
+</style>
+# Minificación de recursos
+- Imágenes
+- Multimedia
+- Código (HTML/CSS/JS)
+
+---
+## Optimización de imágenes
+
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<steps>
+<step>
+
+```bash
+sudo apt install imagemagick gmic
+pnpm install -g sharp
+
+sudo apt install optipng
+cargo install oxipng
+
+sudo apt install libjxl-tools
+sudo apt install libavif-bin
+
+sudo apt install svgo
+cargo install oxvg
+```
+</step>
+<step>
+
+```bash
+# Imagemagick / Sharp
+convert input.png output.webp
+sharp -i input.png -o output.webp
+
+# Optimizadores
+oxipng image.png
+cjxl input.png output.jxl
+avifenc input.png output.avif
+
+# SVG
+svgo input.svg -o output.svg
+oxvg optimise input.svg -o output.svg
+```
+</step>
+<step>
+
+
+![w:500 contain](../assets/svg-sprite.png)
+
+</step>
+</steps>
+<div>
+
+- Conversores: ✅ [imagemagick](https://imagemagick.org/), ✅ [sharp](https://sharp.pixelplumbing.com/) y ✅ [gmic](https://gmic.eu/)
+- ❌ [squoosh](https://squoosh.app/) (cli deprecated)
+- Optimizadores:
+  - PNG: ``optipng`` → 🆕 ``oxipng``
+  - JXL: ``cjxl``
+  - AVIF: ``avifenc``
+  - SVG: ``svgo`` → ``oxvg``
+- Plugin vite → [vite-plugin-supersvg](https://github.com/ManzDev/vite-plugin-supersvg)
+</div>
+</split-slide>
+
+---
+## Optimización multimedia
+
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<steps>
+<step>
+
+```bash
+# Mostrar codecs concretos
+ffmpeg -codecs
+
+# Convertir de un formato a otro
+ffmpeg -i input.mp4 output.webm
+
+# Convertir usando codecs concretos
+ffmpeg -i input.mkv -vcodec libx264 output.mp4
+ffmpeg -i input.mkv -vcodec libx265 output.mp4
+```
+</step>
+<step>
+
+```bash
+# Mediante ghostscript
+sudo apt install ghostscript
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 \
+   -dPDFSETTINGS=/ebook \
+   -dNOPAUSE -dQUIET -dBATCH \
+   -sOutputFile=output.pdf input.pdf
+
+# Mediante qpdf
+sudo apt install qpdf
+qpdf --linearize --optimize-images \
+   input.pdf output.pdf
+```
+</step>
+</steps>
+<div>
+
+- Conversor multimedia: [ffmpeg](https://www.ffmpeg.org/)
+- Sirve para video: ``.mp4`` (H.264), ``.webm`` (VP8/VP9/AV1)
+- Sirve para audio: ``.mp3``, ``.aac``, ``.ogg``, ``.opus``, ``.flac`` o ``.wav``
+- [Tutorial completo sobre ffmpeg](https://terminaldelinux.com/terminal/multimedia/ffmpeg/)
+
+- Optimizar ficheros PDF con [GhostScript](https://ghostscript.com/)
+- Calidades: ``/screen`` < ``/ebook`` < ``/printer``
+- Optimizar ficheros PDF con [qpdf](https://github.com/qpdf/qpdf)
+</div>
+</split-slide>
+
+---
+## Optimización HTML/CSS/JS
+
+- 1️⃣ Optimización HTML
+  - [@minify-html/node](https://npmx.dev/package/@minify-html/node) → ``rust``
+- 2️⃣ Optimización JS
+  - [build.minify](https://vite.dev/config/build-options#build-minify) → ``oxc``, ``terser`` o ``esbuild``
+- 3️⃣ Optimización CSS
+  - [build.cssMinify](https://vite.dev/config/build-options#build-cssminify) → ``lightningcss`` o ``esbuild``
+
+---
+<!-- _class: cover -->
+<style scoped>
+section {
+  --cover: url(../assets/img_00036_.png);
+}
+</style>
+# Medición y análisis (Monitorización)
+- Testing
+- Core Web Vitals
+- Lighthouse
+
+---
+## Vitest (Testing)
+
+<split-slide style="--left: 60%; --right: 40%; --font-size: 1rem;">
+<div>
+
+- 🏆 Importancia del testing:
+  - «¿Cómo sabes que tu código funciona?» Probando manualmente
+  - «¿Cómo sabes que un cambio no va a romperlo?» No lo sabes
+  - Tener tests **no garantiza** que no hayan bugs
+
+- 🌀 Tipos de testing
+  - **Estático**: Errores en editor (antes) → ``Typescript`` o ``ESLint``
+  - **Unitarios**: Aislados (sin dependencias) → ``function`` o ``class``
+  - **Integración**: Como colaboran varias piezas → Componente ► DOM
+  - **End-to-end (e2e)**: Simulas usuario real del navegador → [Playwright](https://playwright.dev/)
+</div>
+<div>
+
+  ![w:300 contain](../assets/js-tests.png)
+</div>
+</split-slide>
+
+---
+## Primeros pasos
+
+<split-slide style="--left: 60%; --right: 40%; --font-size: 1rem;">
+<div>
+
+- [Jest](https://jestjs.io/es-ES/): framework de tests para Node.
+- [Vitest](https://vitest.dev/): Jest para Vite, más moderno, rápido y actualizado.
+
+```bash
+pnpm install -D vite vitest happy-dom
+
+```
+
+- [Vitest Explorer](https://marketplace.visualstudio.com/items?itemName=vitest.explorer): Extensión para VSCode.
+
+```js
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  root: "./src",
+  test: {
+    environment: "happy-dom",
+    globals: true
+  }
+});
+```
+
+</div>
+
+<steps>
+<step>
+
+- Desde una terminal:
+
+![w:400 contain](../assets/vitest-tests.png)
+
+</step>
+<step>
+
+- Desde VSCode:
+
+![w:400 contain](../assets/vitest-vscode.png)
+
+</step>
+</steps>
+</split-slide>
+
+---
+## Creando tests unitarios
+- API básica: ``describe``, ``it``, ``test``, ``expect`` y matchers ``toBe``, ``toEqual``...
+
+<split-slide style="--left: 30%; --right: 70%; --font-size: 1rem;">
+
+```js
+// Fichero add.js
+export function add(a, b) {
+  return a + b
+}
+
+/**
+ *
+ * add(1, 2) devuelve 3
+ *
+ * add(-1, -1) devuelve -2
+ *
+ * add(5, 0) devuelve 5
+ *
+ * add(2) devuelve
+ *
+ */
+```
+```js
+// Fichero add.test.js
+import { describe, it, test, expect } from "vitest";
+
+describe("add", () => {
+  it("suma dos números positivos", () => {
+    expect(add(1, 2)).toBe(3)                // Si sumas 1 + 2, esperas 3
+  })
+
+  it("suma números negativos", () => {
+    expect(add(-1, -2)).toBe(-3)             // Si sumas -1 + -2, esperas -3
+  })
+
+  test("suma cero", () => {                  // it() y test() son idénticos
+    expect(add(5, 0)).toBe(5)                // Si sumas 5 + 0, esperas 5
+  })
+});
+```
+
+---
+## Componente ClickCounter.js
+
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+
+```js
+class ClickCounter extends HTMLElement {
+  #count = 0
+
+  handleEvent(ev) {
+    if (!ev.target.closest("button")) return;
+    if (ev.type === "click") this.incr();
+  }
+
+  connectedCallback() {
+    this.addEventListener("click", this);
+    this.render();
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener("click", this);
+  }
+
+  reset() {
+    this.#count = 0;
+    this.render()
+  }
+```
+```js
+incr() {
+    this.#count++;
+    this.render();
+    const event = new CustomEvent("count-changed", {
+      detail: this.#count
+    });
+    this.dispatchEvent(event);
+  }
+
+  render() {
+    this.innerHTML = /* html */`<button>
+      Clicks: ${this.#count}
+    </button>`;
+  }
+}
+
+customElements.define("click-counter", ClickCounter);
+```
+
+- Repositorio de ejemplo: [click-counter](https://github.com/MultimediosSG/click-counter)
+
+---
+## Tests ClickCounter.test.js
+
+```js
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import "./ClickCounter.js";
+
+describe("ClickCounter", () => {
+  let el;
+
+  beforeEach(() => {
+    el = document.createElement("click-counter");
+    document.body.append(el);
+  });
+
+  afterEach(() => el.remove());
+
+  describe("registro y renderizado inicial", () => {
+    it("se registra como custom element", () => expect(customElements.get("click-counter")).toBeDefined());
+    it("renderiza un botón al conectarse", () => expect(el.querySelector("button")).not.toBeNull());
+    it("empieza en 0", () => expect(el.querySelector("button").textContent).toBe("Clicks: 0"));
+  });
+
+  /* ... */
+});
+```
+
+---
+## Core Web Vitals
+- [Core Web Vitals](https://web.dev/articles/vitals?hl=es-419) → Métricas de Google para medir performance de una web
+
+<split-slide style="--left: 65%; --right: 35%; --font-size: 1rem;">
+<div>
+  <img src="../assets/lcp.svg" width="240">
+  <img src="../assets/inp.svg" width="240">
+  <img src="../assets/cls.svg" width="240">
+  <img src="../assets/fcp.svg" width="365">
+  <img src="../assets/ttfb.svg" width="365">
+</div>
+<div>
+
+- ``LCP`` → El contenido más grande (ej: hero)
+- ``INP`` → ``t`` desde interacción hasta respuesta
+- ``CLS`` → Salto de layout acumulado
+- ``FCP`` → ``t`` hasta aparecer el primer contenido visible
+- ``TTFB`` → ``t`` hasta el primer byte
+</div>
+</split-slide>
+
+---
+## Lighthouse / PageSpeed
+
+<split-slide style="--left: 30%; --right: 70%; --font-size: 1rem;">
+
+<div>
+
+- [PageSpeed Insights](https://pagespeed.web.dev/)
+- Lighthouse (Dev Tools):
+  - CLI [lighthouse-ci](https://googlechrome.github.io/lighthouse-ci/)
+
+</div>
+
+<steps>
+<step>
+
+![w:600 contain](../assets/core-web-vitals.png)
+
+</step>
+<step>
+
+![w:600 contain](../assets/lighthouse.png)
+
+</step>
+</steps>
+</split-slide>
+
+---
 ## Referencias
 
 - [CheatSheet Javascript](https://lenguajejs.com/javascript/cheatsheets/)
 - [bootcamp.manz.dev](https://bootcamp.manz.dev/)
+- [MDN Web Docs: Performance](https://developer.mozilla.org/en-US/docs/Web/Performance)
+- [web.dev: Core Web Vitals](https://web.dev/articles/vitals)
+- [web.dev: LCP](https://web.dev/articles/lcp)
+- [web.dev: INP](https://web.dev/articles/inp)
+- [web.dev: CLS](https://web.dev/articles/cls)
+- [web.dev: FCP](https://web.dev/articles/fcp)
+- [web.dev: TTFB](https://web.dev/articles/ttfb)
+- [PageSpeed Insights](https://pagespeed.web.dev/)
+- [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview)
 
 
 
