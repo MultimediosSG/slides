@@ -11,6 +11,11 @@
     color: #1a1a1a;
 }
 
+spoiler {
+  color: transparent;
+  text-shadow: none;
+}
+
 .bespoke-marp-parent {
   position: absolute;
   inset: 0;
@@ -79,6 +84,7 @@ pre {
 
 code {
     color: #c0392b;
+    text-wrap: auto;
     pre & {
         color: inherit;
     }

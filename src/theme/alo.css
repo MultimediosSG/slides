@@ -3,96 +3,109 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/monokai.css');
 
 :root {
-    font-family: "Outfit", sans-serif;
-    font-weight: 200;
-    font-size: 20px;
-    padding: 2.5rem;
-    background: #181818;
-    color: #ccc;
-    
+  font-family: "Outfit", sans-serif;
+  font-weight: 200;
+  font-size: 20px;
+  padding: 2.5rem;
+  background: #181818;
+  color: #ccc;
+
 
 }
+
+spoiler {
+  color: transparent;
+  text-shadow: none;
+}
+
 .bespoke-marp-parent {
   position: absolute;
   inset: 0;
   overflow: hidden;
   aspect-ratio: 16/9 !important;
   align-self: center;
-  
+
 }
+
 section {
-    &.cover {
-        background: 
-        linear-gradient(to bottom, black, transparent 40% 96%, black 100%), 
-        linear-gradient(to right, #000 3%, #000e 15%, #000c 20%, transparent 28%), 
-        var(--cover, url(cover.jpg));
-        background-color: black;
-        background-size: auto 765px;
-        background-position: top right;
-        background-repeat: no-repeat;
+  &.cover {
+    background:
+      linear-gradient(to bottom, black, transparent 40% 96%, black 100%),
+      linear-gradient(to right, #000 3%, #000e 15%, #000c 20%, transparent 28%),
+      var(--cover, url(cover.jpg));
+    background-color: black;
+    background-size: auto 765px;
+    background-position: top right;
+    background-repeat: no-repeat;
 
-        ul {
-            padding-left: 5px;
-            list-style: none;
-        }
-
-        li {
-            background: #000c;
-            margin: 1rem 0;
-            padding: 1rem;
-            box-shadow: 3px 3px 0 #fe704d;
-            max-width: max-content;
-
-            &:hover {
-                background: #fe704d;
-                cursor: pointer;
-            }
-        }
-
-        blockquote {
-            position: absolute;
-            bottom: 5rem;
-            right: 5rem;
-            padding: 1rem;
-            background: #000c;
-        }
-    }
-
-    h2 {
-        color: #fe704d;
+    ul {
+      padding-left: 5px;
+      list-style: none;
     }
 
     li {
-        margin: .5rem 0;
+      background: #000c;
+      margin: 1rem 0;
+      padding: 1rem;
+      box-shadow: 3px 3px 0 #fe704d;
+      max-width: max-content;
+
+      &:hover {
+        background: #fe704d;
+        cursor: pointer;
+      }
     }
-    strong {
-        color: white;
+
+    blockquote {
+      position: absolute;
+      bottom: 5rem;
+      right: 5rem;
+      padding: 1rem;
+      background: #000c;
     }
-    
+  }
+
+  h2 {
+    color: #fe704d;
+  }
+
+  li {
+    margin: .5rem 0;
+  }
+
+  strong {
+    color: white;
+  }
+
 }
 
 pre {
-    background: #000;
-    color: white;
-    padding: 1rem;
-    margin: 0;
+  background: #000;
+  color: white;
+  padding: 1rem;
+  margin: 0;
 }
+
 code {
-    color: gold;
-    pre & {
-        color: white;
-    }
+  color: gold;
+  text-wrap: auto;
+
+  pre & {
+    color: white;
+  }
 }
 
 a {
-    color: #3179ed;
-    text-decoration: none;
+  color: #3179ed;
+  text-decoration: none;
 }
+
 svg[data-marpit-svg] {
-    background: linear-gradient(126deg, indigo, deeppink);
-    /* padding: calc(var(--marpit-root-font-size, 1rem) * 2);
+  background: linear-gradient(126deg, indigo, deeppink);
+  /* padding: calc(var(--marpit-root-font-size, 1rem) * 2);
     padding-bottom: calc(var(--marpit-root-font-size, 1rem) * 0.5); */
-} 
+}
+
 .grid {
   display: grid;
   gap: 1rem;
@@ -103,6 +116,7 @@ svg[data-marpit-svg] {
 section:has(steps) {
   position: relative;
 }
+
 .step-indicator {
   position: absolute;
   top: 0;
@@ -123,42 +137,49 @@ steps {
   display: block;
   position: relative;
 }
+
 step {
   display: block;
 }
+
 step:not(:first-child) {
   display: none;
 }
+
 step[data-marpit-fragment] {
   display: none;
 }
-steps:has(> step[data-bespoke-marp-fragment=active]) > step:first-child {
+
+steps:has(> step[data-bespoke-marp-fragment=active])>step:first-child {
   display: none;
 }
+
 step[data-bespoke-marp-fragment=inactive] {
   visibility: visible !important;
   display: none !important;
 }
+
 step[data-bespoke-marp-fragment=active] {
   display: block !important;
   visibility: visible !important;
 }
+
 step[data-bespoke-marp-fragment=active]:has(~ step[data-bespoke-marp-fragment=active]) {
   display: none !important;
 }
 
 split-slide {
-    --left:50%;
-    --right:50%;
-    --font-size: 1rem;
+  --left: 50%;
+  --right: 50%;
+  --font-size: 1rem;
 
-    display: grid;
-    grid-template-columns: var(--left) var(--right);
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: var(--left) var(--right);
+  gap: 1rem;
 
-    pre {
-        font-size: var(--font-size);
-    }
+  pre {
+    font-size: var(--font-size);
+  }
 }
 
 table {
@@ -167,14 +188,16 @@ table {
   width: var(--width);
   border-collapse: collapse;
 }
-th, td {
+
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
 }
 
 a:is([href$=".png"], [href$=".jpg"], [href$=".jpeg"], [href$=".webp"], [href$=".gif"]) {
-   &::before {
+  &::before {
     content: "";
     display: inline-block;
     vertical-align: middle;
@@ -185,5 +208,5 @@ a:is([href$=".png"], [href$=".jpg"], [href$=".jpeg"], [href$=".webp"], [href$=".
     background-repeat: no-repeat;
     background-position: center;
     background-image: url(../assets/icon-img.png);
-   }
+  }
 }
