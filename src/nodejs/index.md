@@ -87,7 +87,7 @@ No te olvides → <spoiler>pnpm init --init-type module</spoiler>
 import { hostname, type } from "node:os";
 
 const greet = "¡Hola mundo!";
-const message = `Ejecutando en ${hostname} bajo ${type}`;
+const message = `Ejecutando en ${hostname()} bajo ${type()}`;
 
 console.log(`${greet} ${message}`);
 ```
@@ -328,7 +328,7 @@ console.log(`Contenido de ${path}`);
 
 for await (const file of files) {
   const fstat = await stat(file);
-  const icon = fstat.isDirectory() ? `"` : `"`;
+  const icon = fstat.isDirectory() ? `` : ``;
   const time = new Date(fstat.mtime);
   const size = fstat.size;
   console.log(icon, file, time, size);
@@ -351,7 +351,7 @@ console.log(`Contenido de ${path}`);
 
 for await (const file of files) {
   const fstat = await stat(file);
-  const icon = fstat.isDirectory() ? `"` : `"`;
+  const icon = fstat.isDirectory() ? `` : ``;
   const time = new Date(fstat.mtime);
   const size = formatSize(fstat.size);  // ⬅ formatSize()
   console.log(icon, file, time, size);
@@ -387,7 +387,7 @@ console.log(`Contenido de ${path}`);
 
 for await (const file of files) {
   const fstat = await stat(file);
-  const icon = fstat.isDirectory() ? styleText("blue", `"`) : styleText("green", `"`);
+  const icon = fstat.isDirectory() ? styleText("blue", ``) : styleText("green", ``);
   const time = new Date(fstat.mtime).toISOString().slice(0, 10);
   const size = styleText("magenta", formatSize(fstat.size));
   console.log(icon, basename(file), time, size);
