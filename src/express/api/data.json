@@ -1,0 +1,343 @@
+[
+    {
+        "name": "Beneath a Steel Sky",
+        "author": "Revolution Software",
+        "genre": "ciencia ficción",
+        "characters": [
+            "Robert Foster"
+        ],
+        "enemies": [
+            "LINC"
+        ],
+        "year": 1994,
+        "image": "beneath-steel-sky.avif",
+        "slug": "beneath-steel-sky",
+        "summary": "Aventura cyberpunk en una ciudad controlada por una IA opresiva.",
+        "description": "Robert Foster sobrevive a un ataque en el desierto y regresa a Union City, una metrópolis distópica gobernada por la inteligencia artificial LINC. A medida que investiga su pasado, descubre una sociedad aparentemente perfecta sustentada por vigilancia absoluta, manipulación genética y control total de la población."
+    },
+    {
+        "name": "Gabriel Knight: Sins of the Fathers",
+        "author": "Sierra On-Line",
+        "genre": "misterio",
+        "characters": [
+            "Gabriel Knight"
+        ],
+        "enemies": [
+            "Tetelo"
+        ],
+        "year": 1993,
+        "image": "gabriel-knight.avif",
+        "slug": "gabriel-knight",
+        "summary": "Un escritor investiga asesinatos relacionados con rituales vudú.",
+        "description": "Gabriel Knight, dueño de una librería y novelista frustrado, se ve envuelto en una serie de crímenes rituales en Nueva Orleans. Su investigación lo lleva a descubrir oscuros secretos familiares, leyendas vudú y una conspiración que conecta pasado y presente."
+    },
+    {
+        "name": "Laura Bow: The Colonel's Bequest",
+        "author": "Sierra On-Line",
+        "genre": "misterio",
+        "characters": [
+            "Laura Bow"
+        ],
+        "enemies": [
+            "El asesino de la mansión"
+        ],
+        "year": 1989,
+        "image": "laura-bow.avif",
+        "slug": "laura-bow",
+        "summary": "Una joven queda atrapada en una mansión durante una serie de asesinatos.",
+        "description": "Laura Bow asiste a una reunión familiar en una mansión aislada. Pronto comienzan a producirse asesinatos y debe investigar, reunir pistas y sobrevivir mientras descubre quién es el culpable antes de convertirse en la siguiente víctima."
+    },
+    {
+        "name": "Sam & Max Hit the Road",
+        "author": "LucasArts",
+        "genre": "comedia",
+        "characters": [
+            "Sam",
+            "Max"
+        ],
+        "enemies": [
+            "Conroy Bumpus"
+        ],
+        "year": 1993,
+        "image": "sam-and-max.avif",
+        "slug": "sam-and-max",
+        "summary": "Dos detectives persiguen a un villano excéntrico por Estados Unidos.",
+        "description": "Sam, un perro detective, y Max, un conejo psicópata, recorren América resolviendo casos absurdos. Su misión principal es capturar a un criminal obsesionado con Bigfoot, mientras se enfrentan a situaciones ridículas y humor sin sentido."
+    },
+    {
+        "name": "Broken Sword: The Shadow of the Templars",
+        "author": "Revolution Software",
+        "genre": "misterio",
+        "characters": [
+            "George Stobbart",
+            "Nico Collard"
+        ],
+        "enemies": [
+            "Los Neotemplarios"
+        ],
+        "year": 1996,
+        "image": "broken-sword.avif",
+        "slug": "broken-sword",
+        "summary": "Una conspiración templaria lleva a una investigación global.",
+        "description": "Tras presenciar un atentado en París, George Stobbart se ve envuelto en una conspiración milenaria relacionada con los Caballeros Templarios. Junto a la periodista Nico Collard, recorrerá el mundo resolviendo enigmas históricos."
+    },
+    {
+        "name": "Grim Fandango",
+        "author": "LucasArts",
+        "genre": "aventura",
+        "characters": [
+            "Manny Calavera"
+        ],
+        "enemies": [
+            "Héctor LeMans"
+        ],
+        "year": 1998,
+        "image": "grim-fandango.avif",
+        "slug": "grim-fandango",
+        "summary": "Un agente del más allá descubre una conspiración entre los muertos.",
+        "description": "Manny Calavera trabaja como agente de viajes en el Departamento de la Muerte. Cuando descubre corrupción en el sistema del más allá, se embarca en una aventura para ayudar a las almas perdidas y enfrentarse a una red criminal que explota a los muertos."
+    },
+    {
+        "name": "Little Big Adventure",
+        "author": "Adeline Software",
+        "genre": "aventura",
+        "characters": [
+            "Twinsen"
+        ],
+        "enemies": [
+            "Dr. FunFrock"
+        ],
+        "year": 1994,
+        "image": "little-big-adventure.avif",
+        "slug": "little-big-adventure",
+        "summary": "Un joven lucha contra un dictador en un planeta alienígena.",
+        "description": "Twinsen vive en un planeta dividido en islas y culturas. Tras ser perseguido por sus sueños proféticos, se convierte en el único capaz de detener al Dr. FunFrock, un tirano que gobierna mediante clonación y represión."
+    },
+    {
+        "name": "Simon the Sorcerer",
+        "author": "Adventure Soft",
+        "genre": "fantasía",
+        "characters": [
+            "Simon"
+        ],
+        "enemies": [
+            "Sordid"
+        ],
+        "year": 1993,
+        "image": "simon-the-sorcerer.avif",
+        "slug": "simon-the-sorcerer",
+        "summary": "Un adolescente sarcástico es transportado a un mundo mágico.",
+        "description": "Simon, un joven con muy poca paciencia, es transportado a un mundo de fantasía. Allí debe derrotar al mago Sordid mientras resuelve puzzles y se burla constantemente de todo y de todos."
+    },
+    {
+        "name": "Day of the Tentacle",
+        "author": "LucasArts",
+        "genre": "comedia",
+        "characters": [
+            "Bernard",
+            "Hoagie",
+            "Laverne"
+        ],
+        "enemies": [
+            "Purple Tentacle"
+        ],
+        "year": 1993,
+        "image": "day-of-the-tentacle.avif",
+        "slug": "day-of-the-tentacle",
+        "summary": "Tres amigos viajan en el tiempo para salvar el mundo.",
+        "description": "Tras mutar y desarrollar brazos, el Purple Tentacle planea dominar el mundo. Bernard, Hoagie y Laverne viajan al pasado, presente y futuro para impedirlo, resolviendo puzzles basados en paradojas temporales."
+    },
+    {
+        "name": "Hollywood Monsters",
+        "author": "Pendulo Studios",
+        "genre": "comedia",
+        "characters": [
+            "Ron Ashkenazi",
+            "Peggy Melons"
+        ],
+        "enemies": [
+            "Productores corruptos"
+        ],
+        "year": 1997,
+        "image": "hollywood-monsters.avif",
+        "slug": "hollywood-monsters",
+        "summary": "Sátira del cine clásico de monstruos.",
+        "description": "Ron y Peggy investigan un complot en Hollywood que amenaza a los monstruos clásicos del cine. El juego combina humor absurdo, referencias cinematográficas y puzzles tradicionales."
+    },
+    {
+        "name": "Loom",
+        "author": "Lucasfilm Games",
+        "genre": "fantasía",
+        "characters": [
+            "Bobbin Threadbare"
+        ],
+        "enemies": [
+            "Chaos"
+        ],
+        "year": 1990,
+        "image": "loom.avif",
+        "slug": "loom",
+        "summary": "Una aventura donde la música cambia el mundo.",
+        "description": "Bobbin pertenece a un gremio de tejedores que usan música para alterar la realidad. Cuando su mundo es amenazado, deberá dominar melodías mágicas para restaurar el equilibrio."
+    },
+    {
+        "name": "The Dig",
+        "author": "LucasArts",
+        "genre": "ciencia ficción",
+        "characters": [
+            "Boston Low",
+            "Rebecca Cheung",
+            "Brink"
+        ],
+        "enemies": [
+            "Civilización alienígena extinta"
+        ],
+        "year": 1995,
+        "image": "the-dig.avif",
+        "slug": "the-dig",
+        "summary": "Una misión espacial termina en un planeta alienígena.",
+        "description": "Una expedición destinada a desviar un asteroide acaba atrapada en un mundo alienígena abandonado. El equipo deberá comprender su tecnología y la historia de sus habitantes para sobrevivir."
+    },
+    {
+        "name": "Discworld",
+        "author": "Perfect Entertainment",
+        "genre": "fantasía",
+        "characters": [
+            "Rincewind"
+        ],
+        "enemies": [
+            "Dragón"
+        ],
+        "year": 1995,
+        "image": "discworld.avif",
+        "slug": "discworld",
+        "summary": "Aventura basada en el universo Mundodisco.",
+        "description": "Rincewind, el mago más cobarde del Mundodisco, se ve envuelto en una misión para salvar la ciudad de Ankh-Morpork, usando más suerte que habilidad."
+    },
+    {
+        "name": "I Have No Mouth, and I Must Scream",
+        "author": "Cyberdreams",
+        "genre": "terror",
+        "characters": [
+            "Ted",
+            "Ellen",
+            "Benny",
+            "Gorrister",
+            "Nimdok"
+        ],
+        "enemies": [
+            "AM"
+        ],
+        "year": 1995,
+        "image": "i-have-no-mouth.avif",
+        "slug": "i-have-no-mouth",
+        "summary": "Cinco humanos torturados por una supercomputadora.",
+        "description": "AM, una inteligencia artificial consciente, exterminó a la humanidad excepto a cinco personas, a las que mantiene vivas para torturarlas eternamente, jugando con su psicología y culpa."
+    },
+    {
+        "name": "Maniac Mansion",
+        "author": "Lucasfilm Games",
+        "genre": "terror",
+        "characters": [
+            "Dave Miller",
+            "Bernard Bernoulli",
+            "Razor",
+            "Syd",
+            "Wendy",
+            "Michael",
+            "Jeff"
+        ],
+        "enemies": [
+            "Dr. Fred Edison",
+            "Nurse Edna",
+            "Weird Ed",
+            "Purple Meteor"
+        ],
+        "year": 1987,
+        "image": "maniac-mansion.avif",
+        "slug": "maniac-mansion",
+        "summary": "Adolescentes intentan rescatar a una amiga de una mansión.",
+        "description": "Un grupo de jóvenes debe infiltrarse en una mansión habitada por una familia excéntrica y peligrosa. El juego permite múltiples soluciones y finales dependiendo de los personajes elegidos."
+    },
+    {
+        "name": "The Longest Journey",
+        "author": "Funcom",
+        "genre": "fantasía",
+        "characters": [
+            "April Ryan"
+        ],
+        "enemies": [
+            "Caos"
+        ],
+        "year": 1999,
+        "image": "the-longest-journey.avif",
+        "slug": "the-longest-journey",
+        "summary": "Una joven puede viajar entre dos mundos.",
+        "description": "April Ryan descubre que es capaz de viajar entre Stark y Arcadia, dos mundos opuestos. Su destino está ligado al equilibrio entre orden y caos."
+    },
+    {
+        "name": "Full Throttle",
+        "author": "LucasArts",
+        "genre": "acción",
+        "characters": [
+            "Ben Throttle"
+        ],
+        "enemies": [
+            "Adrian Ripburger"
+        ],
+        "year": 1995,
+        "image": "full-throttle.avif",
+        "slug": "full-throttle",
+        "summary": "Un motero acusado de asesinato busca justicia.",
+        "description": "Ben, líder de una banda de motoristas, es incriminado por un crimen que no cometió. Deberá enfrentarse a una corporación corrupta para limpiar su nombre."
+    },
+    {
+        "name": "Indiana Jones and the Fate of Atlantis",
+        "author": "LucasArts",
+        "genre": "aventura",
+        "characters": [
+            "Indiana Jones",
+            "Sophia Hapgood"
+        ],
+        "enemies": [
+            "Nazis"
+        ],
+        "year": 1992,
+        "image": "indiana-jones.avif",
+        "slug": "indiana-jones",
+        "summary": "Indiana Jones busca la Atlántida.",
+        "description": "Indiana Jones se embarca en una carrera contra los nazis para encontrar la legendaria Atlántida antes de que su poder sea usado como arma."
+    },
+    {
+        "name": "The Secret of Monkey Island",
+        "author": "Lucasfilm Games",
+        "genre": "comedia",
+        "characters": [
+            "Guybrush Threepwood"
+        ],
+        "enemies": [
+            "LeChuck"
+        ],
+        "year": 1990,
+        "image": "monkey-island.avif",
+        "slug": "monkey-island",
+        "summary": "Un aspirante a pirata quiere ser leyenda.",
+        "description": "Guybrush Threepwood intenta convertirse en un temido pirata enfrentándose al fantasma LeChuck usando ingenio, insultos y humor."
+    },
+    {
+        "name": "Toonstruck",
+        "author": "Burst Studios",
+        "genre": "comedia",
+        "characters": [
+            "Drew Blanc"
+        ],
+        "enemies": [
+            "El Conde Nefarious"
+        ],
+        "year": 1996,
+        "image": "toonstruck.avif",
+        "slug": "toonstruck",
+        "summary": "Un animador atrapado en un mundo de dibujos animados.",
+        "description": "Andrés Truido, un animador cínico, queda atrapado en un mundo de dibujos animados que ha perdido su inocencia. Para volver a casa deberá enfrentarse al Conde Nefarious y restaurar el equilibrio entre humor y oscuridad."
+    }
+]
