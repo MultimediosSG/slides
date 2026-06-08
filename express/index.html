@@ -1,0 +1,1226 @@
+<!DOCTYPE html><html lang="en-US"><head><title>APIs con NodeJS</title><meta property="og:title" content="APIs con NodeJS"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"><meta name="apple-mobile-web-app-capable" content="yes"><meta http-equiv="X-UA-Compatible" content="ie=edge"><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><style>@media screen{body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container button{appearance:none;background-color:initial;border:0;color:inherit;cursor:pointer;font-size:inherit;opacity:.8;outline:none;padding:0;transition:opacity .2s linear;-webkit-tap-highlight-color:transparent}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button:disabled,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button:disabled,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button:disabled,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container button:disabled{cursor:not-allowed;opacity:.15!important}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button:hover,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button:hover,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button:hover,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container button:hover{opacity:1}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button:hover:active,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button:hover:active,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button:hover:active,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container button:hover:active{opacity:.6}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button:hover:not(:disabled),body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button:hover:not(:disabled),body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button:hover:not(:disabled),body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container button:hover:not(:disabled){transition:none}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=prev],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=prev],body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button.bespoke-marp-presenter-info-page-prev{background:#0000 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI1IiBkPSJNNjggOTAgMjggNTBsNDAtNDAiLz48L3N2Zz4=") no-repeat 50%;background-size:contain;overflow:hidden;text-indent:100%;white-space:nowrap}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=next],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=next],body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button.bespoke-marp-presenter-info-page-next{background:#0000 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI1IiBkPSJtMzIgOTAgNDAtNDAtNDAtNDAiLz48L3N2Zz4=") no-repeat 50%;background-size:contain;overflow:hidden;text-indent:100%;white-space:nowrap}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=fullscreen],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=fullscreen]{background:#0000 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48c3R5bGU+LmF7ZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2Utd2lkdGg6NXB4fTwvc3R5bGU+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgeD0iMTAiIHk9IjIwIiBjbGFzcz0iYSIgcng9IjUuNjciLz48cGF0aCBkPSJNNDAgNzBIMjBWNTBtMjAgMEwyMCA3MG00MC00MGgyMHYyMG0tMjAgMCAyMC0yMCIgY2xhc3M9ImEiLz48L3N2Zz4=") no-repeat 50%;background-size:contain;overflow:hidden;text-indent:100%;white-space:nowrap}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button.exit[data-bespoke-marp-osc=fullscreen],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button.exit[data-bespoke-marp-osc=fullscreen]{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48c3R5bGU+LmF7ZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2Utd2lkdGg6NXB4fTwvc3R5bGU+PC9kZWZzPjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgeD0iMTAiIHk9IjIwIiBjbGFzcz0iYSIgcng9IjUuNjciLz48cGF0aCBkPSJNMjAgNTBoMjB2MjBtLTIwIDAgMjAtMjBtNDAgMEg2MFYzMG0yMCAwTDYwIDUwIiBjbGFzcz0iYSIvPjwvc3ZnPg==")}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=presenter],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=presenter]{background:#0000 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI1IiBkPSJNODcuOCA0Ny41Qzg5IDUwIDg3LjcgNTIgODUgNTJIMzVhOC43IDguNyAwIDAgMS03LjItNC41bC0xNS42LTMxQzExIDE0IDEyLjIgMTIgMTUgMTJoNTBhOC44IDguOCAwIDAgMSA3LjIgNC41ek02MCA1MnYzNm0tMTAgMGgyME00NSA0MmgyMCIvPjwvc3ZnPg==") no-repeat 50%;background-size:contain;overflow:hidden;text-indent:100%;white-space:nowrap}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container button.bespoke-marp-presenter-note-bigger{background:#0000 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI1IiBkPSJNMTIgNTBoODBNNTIgOTBWMTAiLz48L3N2Zz4=") no-repeat 50%;background-size:contain;overflow:hidden;text-indent:100%;white-space:nowrap}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container button.bespoke-marp-presenter-note-smaller{background:#0000 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI1IiBkPSJNMTIgNTBoODAiLz48L3N2Zz4=") no-repeat 50%;background-size:contain;overflow:hidden;text-indent:100%;white-space:nowrap}}@keyframes __bespoke_marp_transition_reduced_outgoing__{0%{opacity:1}to{opacity:0}}@keyframes __bespoke_marp_transition_reduced_incoming__{0%{mix-blend-mode:plus-lighter;opacity:0}to{mix-blend-mode:plus-lighter;opacity:1}}.bespoke-marp-note,.bespoke-marp-osc,.bespoke-progress-parent{display:none;transition:none}@media screen{::view-transition-group(*){animation-duration:var(--marp-bespoke-transition-animation-duration,.5s);animation-timing-function:ease}::view-transition-new(*),::view-transition-old(*){animation-delay:0s;animation-direction:var(--marp-bespoke-transition-animation-direction,normal);animation-duration:var(--marp-bespoke-transition-animation-duration,.5s);animation-fill-mode:both;animation-name:var(--marp-bespoke-transition-animation-name,var(--marp-bespoke-transition-animation-name-fallback,__bespoke_marp_transition_no_animation__));mix-blend-mode:normal}::view-transition-old(*){--marp-bespoke-transition-animation-name-fallback:__bespoke_marp_transition_reduced_outgoing__;animation-timing-function:ease}::view-transition-new(*){--marp-bespoke-transition-animation-name-fallback:__bespoke_marp_transition_reduced_incoming__;animation-timing-function:ease}::view-transition-new(root),::view-transition-old(root){animation-timing-function:linear}::view-transition-new(__bespoke_marp_transition_osc__),::view-transition-old(__bespoke_marp_transition_osc__){animation-duration:0s!important;animation-name:__bespoke_marp_transition_osc__!important}::view-transition-new(__bespoke_marp_transition_osc__){opacity:0!important}.bespoke-marp-transition-warming-up::view-transition-group(*),.bespoke-marp-transition-warming-up::view-transition-new(*),.bespoke-marp-transition-warming-up::view-transition-old(*){animation-play-state:paused!important}body,html{height:100%;margin:0}body{background:#000;overflow:hidden}svg.bespoke-marp-slide{content-visibility:hidden;opacity:0;pointer-events:none;z-index:-1}svg.bespoke-marp-slide:not(.bespoke-marp-active) *{view-transition-name:none!important}svg.bespoke-marp-slide.bespoke-marp-active{content-visibility:visible;opacity:1;pointer-events:auto;z-index:0}svg.bespoke-marp-slide.bespoke-marp-active.bespoke-marp-active-ready *{animation-name:__bespoke_marp__!important}@supports not (content-visibility:hidden){svg.bespoke-marp-slide[data-bespoke-marp-load=hideable]{display:none}svg.bespoke-marp-slide[data-bespoke-marp-load=hideable].bespoke-marp-active{display:block}}}@media screen and (prefers-reduced-motion:reduce){svg.bespoke-marp-slide *{view-transition-name:none!important}}@media screen{[data-bespoke-marp-fragment=inactive]{visibility:hidden}body[data-bespoke-view=""] .bespoke-marp-parent,body[data-bespoke-view=next] .bespoke-marp-parent{inset:0;position:absolute}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc{background:#000000a6;border-radius:7px;bottom:50px;color:#fff;contain:paint;display:block;font-family:Helvetica,Arial,sans-serif;font-size:16px;left:50%;line-height:0;opacity:1;padding:12px;position:absolute;touch-action:manipulation;transform:translateX(-50%);transition:opacity .2s linear;-webkit-user-select:none;user-select:none;white-space:nowrap;will-change:transform;z-index:1;view-transition-name:__bespoke_marp_transition_osc__}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>*,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>*{margin-left:6px}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>:first-child,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>:first-child{margin-left:0}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>span,body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>span{opacity:.8}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>span[data-bespoke-marp-osc=page],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>span[data-bespoke-marp-osc=page]{display:inline-block;min-width:140px;text-align:center}body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=fullscreen],body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=next],body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=presenter],body[data-bespoke-view=""] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=prev],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=fullscreen],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=next],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=presenter],body[data-bespoke-view=next] .bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=prev]{height:32px;line-height:32px;width:32px}body[data-bespoke-view=""] .bespoke-marp-parent.bespoke-marp-inactive,body[data-bespoke-view=next] .bespoke-marp-parent.bespoke-marp-inactive{cursor:none}body[data-bespoke-view=""] .bespoke-marp-parent.bespoke-marp-inactive>.bespoke-marp-osc,body[data-bespoke-view=next] .bespoke-marp-parent.bespoke-marp-inactive>.bespoke-marp-osc{opacity:0;pointer-events:none}body[data-bespoke-view=""] svg.bespoke-marp-slide,body[data-bespoke-view=next] svg.bespoke-marp-slide{height:100%;left:0;position:absolute;top:0;width:100%}body[data-bespoke-view=""] .bespoke-progress-parent{background:#222;display:flex;height:5px;width:100%}body[data-bespoke-view=""] .bespoke-progress-parent+.bespoke-marp-parent{top:5px}body[data-bespoke-view=""] .bespoke-progress-parent .bespoke-progress-bar{background:#0288d1;flex:0 0 0;transition:flex-basis .2s cubic-bezier(0,1,1,1)}body[data-bespoke-view=next]{background:#0000}body[data-bespoke-view=presenter]{background:#161616}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container{display:grid;font-family:Helvetica,Arial,sans-serif;grid-template:"current dragbar next" minmax(140px,1fr) "current dragbar note" 2fr "info    dragbar note" 3em;grid-template-columns:minmax(3px,var(--bespoke-marp-presenter-split-ratio,66%)) 0 minmax(3px,1fr);height:100%;left:0;position:absolute;top:0;width:100%}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-parent{grid-area:current;overflow:hidden;position:relative}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-parent svg.bespoke-marp-slide{height:calc(100% - 40px);left:20px;pointer-events:none;position:absolute;top:20px;-webkit-user-select:none;user-select:none;width:calc(100% - 40px)}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-parent svg.bespoke-marp-slide.bespoke-marp-active{filter:drop-shadow(0 3px 10px rgba(0,0,0,.5))}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-dragbar-container{background:#0288d1;cursor:col-resize;grid-area:dragbar;margin-left:-3px;opacity:0;position:relative;transition:opacity .4s linear .1s;width:6px;z-index:10}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-dragbar-container:hover{opacity:1}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-dragbar-container.active{opacity:1;transition-delay:0s}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-next-container{background:#222;cursor:pointer;display:none;grid-area:next;overflow:hidden;position:relative}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-next-container.active{display:block}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-next-container iframe.bespoke-marp-presenter-next{background:#0000;border:0;display:block;filter:drop-shadow(0 3px 10px rgba(0,0,0,.5));height:calc(100% - 40px);left:20px;pointer-events:none;position:absolute;top:20px;-webkit-user-select:none;user-select:none;width:calc(100% - 40px)}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container{background:#222;color:#eee;grid-area:note;position:relative;z-index:1}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container button{height:1.5em;line-height:1.5em;width:1.5em}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-presenter-note-wrapper{display:block;inset:0;position:absolute}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-presenter-note-buttons{background:#000000a6;border-radius:4px;bottom:0;display:flex;gap:4px;margin:12px;opacity:0;padding:6px;pointer-events:none;position:absolute;right:0;transition:opacity .2s linear}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-presenter-note-buttons:focus-within,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-presenter-note-wrapper:focus-within+.bespoke-marp-presenter-note-buttons,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container:hover .bespoke-marp-presenter-note-buttons{opacity:1;pointer-events:auto}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note{box-sizing:border-box;font-size:calc(1.1em*var(--bespoke-marp-note-font-scale, 1));height:calc(100% - 40px);margin:20px;overflow:auto;padding-right:3px;white-space:pre-wrap;width:calc(100% - 40px);word-wrap:break-word;scrollbar-color:#eeeeee80 #0000;scrollbar-width:thin}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note::-webkit-scrollbar{width:6px}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note::-webkit-scrollbar-track{background:#0000}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note::-webkit-scrollbar-thumb{background:#eeeeee80;border-radius:6px}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note:empty{pointer-events:none}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note.active{display:block}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note p:first-child{margin-top:0}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-note-container .bespoke-marp-note p:last-child{margin-bottom:0}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container{align-items:center;box-sizing:border-box;color:#eee;display:flex;flex-wrap:nowrap;grid-area:info;justify-content:center;overflow:hidden;padding:0 10px}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-page,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-time,body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-timer{box-sizing:border-box;display:block;padding:0 10px;white-space:nowrap;width:100%}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container button{height:1.5em;line-height:1.5em;width:1.5em}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-page{order:2;text-align:center}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-page .bespoke-marp-presenter-info-page-text{display:inline-block;min-width:120px;text-align:center}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-time{color:#999;order:1;text-align:left}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-timer{color:#999;order:3;text-align:right}body[data-bespoke-view=presenter] .bespoke-marp-presenter-container .bespoke-marp-presenter-info-container .bespoke-marp-presenter-info-timer:hover{cursor:pointer}}@media print{.bespoke-marp-presenter-info-container,.bespoke-marp-presenter-next-container,.bespoke-marp-presenter-note-container{display:none}}</style><style>@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;700&display=swap');@import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/monokai.css');div#\:\$p > svg > foreignObject > section{width:1280px;height:720px;box-sizing:border-box;overflow:hidden;position:relative;scroll-snap-align:center center;-webkit-text-size-adjust:100%;text-size-adjust:100%}div#\:\$p > svg > foreignObject > section::after{bottom:0;content:attr(data-marpit-pagination);padding:inherit;pointer-events:none;position:absolute;right:0}div#\:\$p > svg > foreignObject > section:not([data-marpit-pagination])::after{display:none}div#\:\$p > svg > foreignObject > section :is(h1, marp-h1){font-size:2em;margin-block:0.67em}div#\:\$p > svg > foreignObject > section video::-webkit-media-controls{will-change:transform}@page {size:1280px 720px;margin:0}@media print{html, body{background-color:#fff;margin:0;page-break-inside:avoid;break-inside:avoid-page}div#\:\$p > svg > foreignObject > section{page-break-before:always;break-before:page}div#\:\$p > svg > foreignObject > section, div#\:\$p > svg > foreignObject > section *{-webkit-print-color-adjust:exact!important;animation-delay:0s!important;animation-duration:0s!important;color-adjust:exact!important;print-color-adjust:exact!important;transition:none!important}div#\:\$p > svg[data-marpit-svg]{display:block;height:100vh;width:100vw}}div#\:\$p > svg > foreignObject > :where(section){container-type:size}div#\:\$p > svg > foreignObject > section img[data-marp-twemoji]{background:transparent;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em;width:1em}div#\:\$p > svg > foreignObject > :where(section):not([\20 root]){font-family:"Outfit", sans-serif;font-weight:200;font-size:20px;padding:calc(var(--marpit-root-font-size, 1rem) * 2.5);background:#181818;color:#ccc}div#\:\$p > svg > foreignObject > :where(section):not([\20 root]){--marpit-root-font-size: 20px}div#\:\$p > svg > foreignObject > section spoiler{color:transparent;text-shadow:none}div#\:\$p > svg > foreignObject > section .bespoke-marp-parent{position:absolute;inset:0;overflow:hidden;aspect-ratio:16/9!important;align-self:center}div#\:\$p > svg > foreignObject > section.cover{background:linear-gradient(to bottom, black, transparent 40% 96%, black 100%), linear-gradient(to right, #000 3%, #000e 15%, #000c 20%, transparent 28%), var(--cover, url(cover.jpg));background-color:black;background-size:auto 765px;background-position:top right;background-repeat:no-repeat}div#\:\$p > svg > foreignObject > section.cover ul{padding-left:5px;list-style:none}div#\:\$p > svg > foreignObject > section.cover li{background:#000c;margin:calc(var(--marpit-root-font-size, 1rem) * 1) 0;padding:calc(var(--marpit-root-font-size, 1rem) * 1);box-shadow:3px 3px 0 #fe704d;max-width:max-content}div#\:\$p > svg > foreignObject > section.cover li:hover{background:#fe704d;cursor:pointer}div#\:\$p > svg > foreignObject > section.cover blockquote{position:absolute;bottom:calc(var(--marpit-root-font-size, 1rem) * 5);right:calc(var(--marpit-root-font-size, 1rem) * 5);padding:calc(var(--marpit-root-font-size, 1rem) * 1);background:#000c}div#\:\$p > svg > foreignObject > section :is(h2, marp-h2){color:#fe704d}div#\:\$p > svg > foreignObject > section li{margin:calc(var(--marpit-root-font-size, 1rem) * .5) 0}div#\:\$p > svg > foreignObject > section strong{color:white}div#\:\$p > svg > foreignObject > section :is(pre, marp-pre){background:#000;color:white;padding:calc(var(--marpit-root-font-size, 1rem) * 1);margin:0}div#\:\$p > svg > foreignObject > section code{color:gold;text-wrap:auto}div#\:\$p > svg > foreignObject > section :is(pre, marp-pre) code{color:white}div#\:\$p > svg > foreignObject > section a{color:#3179ed;text-decoration:none}div#\:\$p > svg > foreignObject > section svg[data-marpit-svg]{background:linear-gradient(126deg, indigo, deeppink)}div#\:\$p > svg > foreignObject > section .grid{display:grid;gap:calc(var(--marpit-root-font-size, 1rem) * 1);grid-template-columns:repeat(auto-fit, minmax(300px, 1fr))}div#\:\$p > svg > foreignObject > section:has(steps){position:relative}div#\:\$p > svg > foreignObject > section .step-indicator{position:absolute;top:0;right:0;font-size:0.85em;font-weight:400;padding:calc(var(--marpit-root-font-size, 1rem) * 0.3) calc(var(--marpit-root-font-size, 1rem) * 0.8);background:#fe704d22;color:#fe704d;border-radius:0 0 0 calc(var(--marpit-root-font-size, 1rem) * 0.5);z-index:100;letter-spacing:0.05em;pointer-events:none}div#\:\$p > svg > foreignObject > section section.step-indicator{--marpit-root-font-size: 0.85em}div#\:\$p > svg > foreignObject > section steps{display:block;position:relative}div#\:\$p > svg > foreignObject > section step{display:block}div#\:\$p > svg > foreignObject > section step:not(:first-child){display:none}div#\:\$p > svg > foreignObject > section step[data-marpit-fragment]{display:none}div#\:\$p > svg > foreignObject > section steps:has(> step[data-bespoke-marp-fragment=active])>step:first-child{display:none}div#\:\$p > svg > foreignObject > section step[data-bespoke-marp-fragment=inactive]{visibility:visible!important;display:none!important}div#\:\$p > svg > foreignObject > section step[data-bespoke-marp-fragment=active]{display:block!important;visibility:visible!important}div#\:\$p > svg > foreignObject > section step[data-bespoke-marp-fragment=active]:has(~ step[data-bespoke-marp-fragment=active]){display:none!important}div#\:\$p > svg > foreignObject > section split-slide{--left: 50%;--right: 50%;--font-size: calc(var(--marpit-root-font-size, 1rem) * 1);display:grid;grid-template-columns:var(--left) var(--right);gap:calc(var(--marpit-root-font-size, 1rem) * 1)}div#\:\$p > svg > foreignObject > section split-slide :is(pre, marp-pre){font-size:var(--font-size)}div#\:\$p > svg > foreignObject > section table{--width: 100%;width:var(--width);border-collapse:collapse}div#\:\$p > svg > foreignObject > section th, div#\:\$p > svg > foreignObject > section td{border:1px solid #ddd;padding:8px;text-align:center}div#\:\$p > svg > foreignObject > section a:is([href$=".png"],[href$=".jpg"],[href$=".jpeg"],[href$=".webp"],[href$=".gif"])::before{content:"";display:inline-block;vertical-align:middle;margin-right:calc(var(--marpit-root-font-size, 1rem) * 0.2);width:24px;height:24px;background-size:contain;background-repeat:no-repeat;background-position:center;background-image:url(../assets/icon-img.png)}div#\:\$p > svg > foreignObject > section[data-marpit-scope-t0yYJpP8]{--cover: url(../assets/img_00046_.png);}div#\:\$p > svg > foreignObject > section[data-marpit-scope-CdxLPKDf]{--cover: url(../assets/express.png);}div#\:\$p > svg > foreignObject > section[data-marpit-scope-3ZddtJP5]{--cover: url(../assets/img_00053_node.png);}div#\:\$p > svg > foreignObject > section[data-marpit-scope-YUvoshD3]{--cover: url(../assets/img_00054_node.png);}div#\:\$p > svg > foreignObject > section[data-marpit-scope-HtRrAXoF]{--cover: url(../assets/img_00055_.png);}div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="background"]{columns:initial!important;display:block!important;padding:0!important}div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="background"]::before, div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="background"]::after, div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="content"]::before, div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="content"]::after{display:none!important}div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container]{all:initial;display:flex;flex-direction:row;height:100%;overflow:hidden;width:100%}div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container][data-marpit-advanced-background-direction="vertical"]{flex-direction:column}div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="background"][data-marpit-advanced-background-split] > div[data-marpit-advanced-background-container]{width:var(--marpit-advanced-background-split, 50%)}div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="background"][data-marpit-advanced-background-split="right"] > div[data-marpit-advanced-background-container]{margin-left:calc(100% - var(--marpit-advanced-background-split, 50%))}div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container] > figure{all:initial;background-position:center;background-repeat:no-repeat;background-size:cover;flex:auto;margin:0}div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container] > figure > figcaption{position:absolute;border:0;clip:rect(0, 0, 0, 0);height:1px;margin:-1px;overflow:hidden;padding:0;white-space:nowrap;width:1px}div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="content"], div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="pseudo"]{background:transparent!important}div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background="pseudo"], div#\:\$p > svg[data-marpit-svg] > foreignObject[data-marpit-advanced-background="pseudo"]{pointer-events:none!important}div#\:\$p > svg > foreignObject > section[data-marpit-advanced-background-split]{width:100%;height:100%}
+</style></head><body><div class="bespoke-progress-parent"><div class="bespoke-progress-bar"></div></div><div id=":$p"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="1" data-marpit-scope-t0yYJpP8="" data-paginate="true" data-class="cover" data-theme="alo" lang="en-US" class="cover" data-marpit-pagination="1" style="--paginate:true;--class:cover;--theme:alo;" data-marpit-pagination-total="24">
+<h1 id="apis-con-nodejs">APIs con NodeJS</h1>
+<h2 id="contenidos">Contenidos</h2>
+<ul>
+<li>Nociones básicas de HTTP</li>
+<li>Cabeceras HTTP</li>
+<li>Rutas en Express</li>
+<li>Ejercicio: API de videojuegos</li>
+</ul>
+<blockquote>
+<p>Inspirado en el bootcamp de <br /><strong>Manz.dev</strong> todos los créditos a el.</p>
+</blockquote>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="2" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="2" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="%C2%BFqu%C3%A9-es-express">¿Qué es Express?</h2>
+<ul>
+<li>Un framework de NodeJS para crear y gestionar rutas</li>
+<li><code>pnpm init --init-type=&quot;module&quot;</code></li>
+<li><code>pnpm add express</code></li>
+<li><code>pnpm add -D nodemon</code></li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="3" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="peticiones-http">Peticiones HTTP</h2>
+<ul>
+<li>Instalar <a href="https://httpie.io/">httpie</a> → sudo apt install httpie → Mejor aún: <a href="https://github.com/ducaale/xh">xh</a> (soporte HTTP2)</li>
+</ul>
+<split-slide style="--left: 40%; --right: 60%; --font-size: 1rem;">
+<steps>
+<step>
+<pre><code class="language-bash">$ http HEAD https://manz.dev/
+
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Encoding: gzip
+Content-Type: text/html; charset=utf-8
+Date: Mon, 27 Apr 2026 10:26:56 GMT
+ETag: W/<span class="hljs-string">&quot;69ef2a37-80b7&quot;</span>
+Last-Modified: Mon, 27 Apr 2026 09:19:51 GMT
+Server: nginx/1.22.1
+X-Content-Type-Options: nosniff, nosniff
+X-Frame-Options: DENY, SAMEORIGIN
+X-Powered-By: PHP 9.0.1
+X-XSS-Protection: 1; mode=block, 1; mode=block
+</code></pre>
+</step>
+<step>
+<pre><code class="language-bash">$ xh HEAD https://manz.dev/
+
+HTTP/2.0 200 OK
+content-encoding: gzip
+content-type: text/html; charset=utf-8
+<span class="hljs-built_in">date</span>: Mon, 27 Apr 2026 11:10:28 GMT
+etag: W/<span class="hljs-string">&quot;69ef2a37-80b7&quot;</span>
+last-modified: Mon, 27 Apr 2026 09:19:51 GMT
+server: nginx/1.22.1
+x-content-type-options: nosniff
+x-frame-options: DENY
+x-frame-options: SAMEORIGIN
+x-powered-by: PHP 9.0.1
+x-xss-protection: 1; mode=block
+</code></pre>
+</step>
+</steps>
+<div>
+<ul>
+<li>Con <code>http https://avotz.com/</code> haces una petición a una URL
+<ul>
+<li>...que es equivalente a <code>http GET https://avotz.com/</code></li>
+<li>Esto te devuelve las cabeceras (head) y el cuerpo (body)</li>
+<li>No confundir con el <code>&lt;head&gt;</code> y <code>&lt;body&gt;</code> del HTML</li>
+</ul>
+</li>
+<li>Con <code>http HEAD https://avotz.com/</code> defines el método a usar
+<ul>
+<li>Permite usar otros métodos como HEAD, POST, etc...</li>
+</ul>
+</li>
+<li>Con <code>http --follow --all HEAD https://discord.avotz.com/</code>
+<ul>
+<li>...puedes seguir redirecciones HTTP</li>
+</ul>
+</li>
+</ul>
+</div>
+</split-slide>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="4" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="c%C3%B3digos-http-de-error">Códigos HTTP de error</h2>
+<ul>
+<li><code>200</code> → <strong>OK</strong> (todo ha ido bien)</li>
+<li><code>404</code> → <strong>Not Found</strong> (recurso o página no encontrada)</li>
+<li><code>301</code> → <strong>Redireccion permanente</strong> (muy usada para SEO)</li>
+<li><code>302</code> → <strong>Redirección temporal</strong> (provisional o temporal)</li>
+<li><code>403</code> → <strong>Acceso prohibido</strong> (no puedes entrar aquí)</li>
+<li><code>500</code> → <strong>Error del servidor</strong> (algo está mal en el servidor)</li>
+<li><code>4xx</code> → <strong>Error en el cliente</strong> (problema a nivel de navegador)</li>
+<li><code>5xx</code> → <strong>Error en el servidor</strong> (problema a nivel de máquina)</li>
+<li><a href="https://http.cat/">Otros códigos de error con gatos</a></li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="5" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="5" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="cabeceras-http">Cabeceras HTTP</h2>
+<steps>
+<step>
+<ul>
+<li>Cabeceras que puede enviar el cliente (navegador)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Cabecera</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Accept</code></td>
+<td>Tipos (MIME) que acepta el cliente. Comodines: <code>*/*</code> o <code>image/*</code></td>
+</tr>
+<tr>
+<td><code>Accept-Encoding</code></td>
+<td>Codificaciones/compresión aceptada por cliente</td>
+</tr>
+<tr>
+<td><code>Accept-Language</code></td>
+<td>Idioma preferido que acepta el navegador</td>
+</tr>
+<tr>
+<td><code>Accept-Ranges</code></td>
+<td>El servidor permite descargar partes (streaming, resumir descargas...)</td>
+</tr>
+<tr>
+<td><code>Authorization</code></td>
+<td>Credenciales del cliente. <code>Bearer</code>, <code>Basic</code>, <code>Digest</code>, <code>ApiKey</code>.</td>
+</tr>
+<tr>
+<td><code>Host</code></td>
+<td>Host al que quieres acceder. Obligatorio en HTTP1.</td>
+</tr>
+<tr>
+<td><code>Referer</code></td>
+<td>URL exacta desde donde procedes. Cuidado, no confiar.</td>
+</tr>
+<tr>
+<td><code>User-Agent</code></td>
+<td>Identificación del cliente o navegador. Cuidado, no confiar.</td>
+</tr>
+</tbody>
+</table>
+</step>
+<step>
+<ul>
+<li>Cabeceras que envía el servidor, relacionadas con el <strong>contenido</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Cabecera</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HTTP/1.1 200 OK</code></td>
+<td>Protocolo usado y el código HTTP de error.</td>
+</tr>
+<tr>
+<td><code>Connection</code> <img class="emoji" draggable="false" alt="1️⃣" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/31-20e3.svg" data-marp-twemoji="" /></td>
+<td>Gestión de la conexión <code>keep-alive</code> (la deja abierta) o <code>close</code> (la cierra).</td>
+</tr>
+<tr>
+<td><code>Content-type</code></td>
+<td>Define el tipo (MIME) de contenido (html, json...) y la codificación.</td>
+</tr>
+<tr>
+<td><code>Content-encoding</code></td>
+<td>Define la codificación/compresión. <code>identity</code> &lt; <code>deflate</code> &lt; <code>gzip</code> &lt; <code>br</code> (brotli) ~ <code>zstd</code></td>
+</tr>
+<tr>
+<td><code>Content-length</code></td>
+<td>Define el tamaño del body. Es el "opuesto" a <code>transfer-encoding: chunked</code>.</td>
+</tr>
+<tr>
+<td><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/274c.svg" data-marp-twemoji="" /> <code>Transfer-encoding</code> <img class="emoji" draggable="false" alt="1️⃣" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/31-20e3.svg" data-marp-twemoji="" /></td>
+<td>Valor <code>chunked</code>. Envío por bloques. No necesita saber el tamaño <code>content-length</code>.</td>
+</tr>
+<tr>
+<td><code>Location</code></td>
+<td>Redirección en códigos HTTP 3xx.</td>
+</tr>
+<tr>
+<td><code>Allow</code></td>
+<td>Métodos permitidos para el recurso, separados por coma <code>GET, POST</code>.</td>
+</tr>
+</tbody>
+</table>
+</step>
+<step>
+<ul>
+<li>Cabeceras que envía el servidor, relacionadas con <strong>caché</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Cabecera</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Date</code></td>
+<td>Fecha/hora del servidor.</td>
+</tr>
+<tr>
+<td><code>ETag</code></td>
+<td>Identificador del recurso. Usado para tareas de caché.</td>
+</tr>
+<tr>
+<td><code>Last-Modified</code></td>
+<td>Fecha de última modificación del recurso. Usado para tareas de caché.</td>
+</tr>
+<tr>
+<td><code>Cache-Control</code></td>
+<td>Directivas de caché. <code>no-cache</code>, <code>no-store</code>, <code>public</code>, <code>private</code>, <code>max-age=...</code>, <code>must-revalidate</code></td>
+</tr>
+<tr>
+<td><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/274c.svg" data-marp-twemoji="" /> <code>Expires</code></td>
+<td>Fecha en la que expira la caché. Obsoleta.</td>
+</tr>
+</tbody>
+</table>
+</step>
+<step>
+<ul>
+<li>Cabeceras que envía el servidor, relacionadas con <strong>seguridad</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Cabecera</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Server</code></td>
+<td>Software del servidor. Texto libre, cuidado con dar información.</td>
+</tr>
+<tr>
+<td><code>X-*</code></td>
+<td>Cabecera personalizada. Puedes enviar tus propias cabeceras.</td>
+</tr>
+<tr>
+<td><code>X-Powered-By</code></td>
+<td>Tecnología del backend. Texto libre, cuidado con dar información.</td>
+</tr>
+<tr>
+<td><code>X-Content-Type-Options</code></td>
+<td>Seguridad. <code>nosniff</code> evita MIME sniffing.</td>
+</tr>
+<tr>
+<td><code>X-Frame-Options</code></td>
+<td>Seguridad. <code>DENY</code> controla iframes. Otro valor: <code>SAMEORIGIN</code></td>
+</tr>
+<tr>
+<td><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/274c.svg" data-marp-twemoji="" /> <code>X-XSS-Protection</code></td>
+<td>Filtro XSS legacy. Obsoleto.</td>
+</tr>
+</tbody>
+</table>
+</step>
+</steps>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="6" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="petici%C3%B3n-completa">Petición completa</h2>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-bash">$ xh GET https://manz.dev/
+
+HTTP/2.0 200 OK
+content-length: 32949
+content-type: text/html; charset=utf-8
+...
+
+&lt;!DOCTYPE html&gt;&lt;html lang=<span class="hljs-string">&quot;es&quot;</span> data-astro-cid-lg3izgkh&gt; &lt;<span class="hljs-built_in">head</span>&gt;&lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;&lt;meta name=<span class="hljs-string">&quot;viewport&quot;</span> content=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;&lt;<span class="hljs-built_in">link</span> rel=<span class="hljs-string">&quot;preload&quot;</span> href=<span class="hljs-string">&quot;/assets/fonts/montserrat-vf.woff2&quot;</span> as=<span class="hljs-string">&quot;font&quot;</span> crossorigin=<span class="hljs-string">&quot;anonymous&quot;</span>&gt; ...
+</code></pre>
+<div>
+<ul>
+<li>Una petición <code>HEAD</code> sólo muestra cabeceras</li>
+<li>Una petición GET envía cabeceras + body</li>
+<li>El body es el cuerpo de la página (HTML, JSON, etc...)</li>
+</ul>
+</div>
+</split-slide>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-marpit-scope-CdxLPKDf="" data-paginate="true" data-class="cover" data-theme="alo" lang="en-US" class="cover" data-marpit-pagination="7" style="--paginate:true;--class:cover;--theme:alo;" data-marpit-pagination-total="24">
+<h1 id="nodejs--express">NodeJS + Express</h1>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="8" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="rutas-simples-con-express">Rutas simples con Express</h2>
+<steps>
+<step>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-js"><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;express&quot;</span>;
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+
+app.<span class="hljs-title function_">enable</span>(<span class="hljs-string">&quot;strict routing&quot;</span>);
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">HOST</span> = <span class="hljs-string">&quot;localhost&quot;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = <span class="hljs-number">4321</span>;
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;HOME&quot;</span>));
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/about&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;ABOUT&quot;</span>));
+
+app.<span class="hljs-title function_">listen</span>(<span class="hljs-variable constant_">PORT</span>, <span class="hljs-variable constant_">HOST</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Server at http://<span class="hljs-subst">${HOST}</span>:<span class="hljs-subst">${PORT}</span>/`</span>)
+});
+</code></pre>
+<div>
+<ul>
+<li>
+<p>Con <code>pnpx nodemon index.js</code> ejecutamos el script</p>
+</li>
+<li>
+<p>Cuando guardemos, se recargan los cambios</p>
+</li>
+<li>
+<p><code>node --watch index.js</code> (no compatible con WSL2)</p>
+</li>
+<li>
+<p>Normaliza las rutas <code>/about</code> != <code>/about/</code> → SEO</p>
+</li>
+<li>
+<p>Las variables <code>HOST</code> y <code>PORT</code> se externalizarán en <code>.env</code></p>
+</li>
+<li>
+<p>Con <code>app.listen()</code> escuchamos peticiones en IP y puerto</p>
+</li>
+<li>
+<p>Con <code>app.get()</code>  ejecutamos funciones al recibir rutas</p>
+</li>
+<li>
+<p>Si accedes a <code>http://localhost:4321/</code> vas a HOME</p>
+</li>
+<li>
+<p>Si accedes a <code>http://localhost:4321/about</code> vas a ABOUT</p>
+</li>
+<li>
+<p>Otra ruta de acceso da un error 404</p>
+</li>
+</ul>
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-js">app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/page/&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">header</span>(<span class="hljs-string">&quot;Content-type&quot;</span>, <span class="hljs-string">&quot;text/html&quot;</span>);
+  <span class="hljs-keyword">const</span> html = <span class="hljs-comment">/* html */</span><span class="hljs-string">`
+    &lt;style&gt;
+      body {
+        background: #222;
+        color: #fff;
+      }
+    &lt;/style&gt;
+    &lt;h1&gt;Página principal&lt;/h1&gt;
+    &lt;p&gt;Esta es la página
+      principal de mi sitio web.&lt;/p&gt;
+  `</span>;
+  res.<span class="hljs-title function_">send</span>(html);
+});
+</code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { cwd } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node:process&quot;</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PATH</span> = <span class="hljs-title function_">cwd</span>();
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/robots&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span>
+  res.<span class="hljs-title function_">sendFile</span>(<span class="hljs-string">`<span class="hljs-subst">${PATH}</span>/robots.txt`</span>));
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/youtube&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span>
+  res.<span class="hljs-title function_">redirect</span>(<span class="hljs-string">&quot;https://youtube.com/@manzdev&quot;</span>));
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/forbidden/&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> data = { <span class="hljs-attr">error</span>: <span class="hljs-string">&quot;403&quot;</span> };
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">403</span>).<span class="hljs-title function_">json</span>(data);
+});
+</code></pre>
+</split-slide>
+</step>
+</steps>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="9" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="rutas-din%C3%A1micas">Rutas dinámicas</h2>
+<ul>
+<li>Las rutas dinámicas son formas de crear múltiples rutas con una sola</li>
+</ul>
+<split-slide style="--font-size: 1rem;">
+<pre><code class="language-js">app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/users&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span>
+  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;Lista de usuarios&quot;</span>));
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/user/:name&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> name = req.<span class="hljs-property">params</span>.<span class="hljs-property">name</span>; <span class="hljs-comment">// <img class="emoji" draggable="false" alt="⚠" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/26a0.svg" data-marp-twemoji=""/> Cuidado</span>
+  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">`Usuario: <span class="hljs-subst">${name}</span>`</span>);
+});
+
+app.<span class="hljs-title function_">listen</span>(<span class="hljs-variable constant_">PORT</span>, <span class="hljs-variable constant_">HOST</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Server at http://<span class="hljs-subst">${HOST}</span>:<span class="hljs-subst">${PORT}</span>/`</span>)
+});
+</code></pre>
+<div>
+<ul>
+<li>
+<p>La ruta <code>/users</code> debería mostrar los usuarios existentes</p>
+</li>
+<li>
+<p>La ruta <code>/user/:name</code> es dinámica:</p>
+<ul>
+<li><code>/user/alons</code> da los datos de <code>alons</code></li>
+<li><code>/user/manzdev</code> da los datos de <code>manzdev</code></li>
+</ul>
+</li>
+<li>
+<p>En <code>req.params.name</code> tenemos los datos del <code>:name</code></p>
+<ul>
+<li><code>:name</code> proviene del usuario</li>
+<li>¡<strong>NUNCA</strong> confíes en los datos del usuario!</li>
+</ul>
+</li>
+</ul>
+</div>
+</split-slide>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-marpit-scope-3ZddtJP5="" data-paginate="true" data-class="cover" data-theme="alo" lang="en-US" class="cover" data-marpit-pagination="10" style="--paginate:true;--class:cover;--theme:alo;" data-marpit-pagination-total="24">
+<h1 id="api-de-videojuegos-aventuras-gr%C3%A1ficas-cl%C3%A1sicas">API de videojuegos (aventuras gráficas clásicas)</h1>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="11" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="empecemos-por-una-api-sencilla">Empecemos por una API sencilla</h2>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-js">[
+  {
+    <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;The Secret of Monkey Island&quot;</span>,
+    <span class="hljs-string">&quot;author&quot;</span>: <span class="hljs-string">&quot;Lucasfilm Games&quot;</span>,
+    <span class="hljs-string">&quot;genre&quot;</span>: <span class="hljs-string">&quot;comedia&quot;</span>,
+    <span class="hljs-string">&quot;characters&quot;</span>: [<span class="hljs-string">&quot;Guybrush Threepwood&quot;</span>],
+    <span class="hljs-string">&quot;enemies&quot;</span>: [<span class="hljs-string">&quot;LeChuck&quot;</span>],
+    <span class="hljs-string">&quot;year&quot;</span>: <span class="hljs-number">1990</span>,
+    <span class="hljs-string">&quot;image&quot;</span>: <span class="hljs-string">&quot;monkey-island.avif&quot;</span>,
+    <span class="hljs-string">&quot;slug&quot;</span>: <span class="hljs-string">&quot;monkey-island&quot;</span>,
+    <span class="hljs-string">&quot;summary&quot;</span>: <span class="hljs-string">&quot;Un aspirante a pirata quiere ser leyenda.&quot;</span>,
+    <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;Guybrush Threepwood intenta convertirse en un temido pirata enfrentándose al fantasma LeChuck usando ingenio, insultos y humor.&quot;</span>
+  },
+  ...
+]
+</code></pre>
+<div>
+<ul>
+<li>
+<p>Lo primero, los datos</p>
+<ul>
+<li>De momento, un fichero <code>.json</code></li>
+<li>Y sus imágenes respectivas en <code>covers/</code></li>
+</ul>
+</li>
+<li>
+<p>Pueden existir múltiples protagonistas y enemigos</p>
+</li>
+<li>
+<p>La <code>image</code> y <code>slug</code> podría fusionarse en un dato</p>
+</li>
+<li>
+<p>Tenemos un <code>summary</code> (descripción corta)</p>
+</li>
+<li>
+<p>Tenemos un <code>description</code> (descripción larga)</p>
+</li>
+<li>
+<p>Nuestro <code>.json</code> tendrá varios objetos así</p>
+</li>
+<li>
+<p>Esa será <strong>de momento</strong> nuestra base de información</p>
+</li>
+<li>
+<p>Fichero con los datos: <a href="./api/data.json">data.json</a></p>
+</li>
+</ul>
+</div>
+</split-slide>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="12" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="ruta-principal-y-de-los-juegos">Ruta principal y de los juegos</h2>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-js"><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;express&quot;</span>;
+<span class="hljs-keyword">import</span> data <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./data.json&quot;</span> <span class="hljs-keyword">with</span> { <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;json&quot;</span> };
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">HOST</span> = <span class="hljs-string">&quot;localhost&quot;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = <span class="hljs-number">4321</span>;
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;Manz API 1.0&quot;</span>));
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/games&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">header</span>(<span class="hljs-string">&quot;Content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>);
+  res.<span class="hljs-title function_">send</span>(data.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-property">slug</span>));
+});
+</code></pre>
+<div>
+<ul>
+<li>
+<p>Importamos el <code>.json</code> usando import attributes</p>
+</li>
+<li>
+<p>Recuerda que <code>HOST</code> y <code>PORT</code> deberían externalizarse</p>
+</li>
+<li>
+<p>La ruta <code>/</code> devuelve información sobre la API</p>
+</li>
+<li>
+<p>La ruta <code>/games</code> devuelve una lista de <code>id</code> de los juegos</p>
+<ul>
+<li>Con un <code>map</code> nos quedamos sólo con los <code>slugs</code></li>
+</ul>
+</li>
+<li>
+<p>El <code>header()</code> con el <code>Content-type</code> es didáctico</p>
+<ul>
+<li>Por ejemplo, usar <code>json()</code> ya lo hace por nosotros</li>
+</ul>
+</li>
+<li>
+<p>Evitar enviar demasiada información (sólo slugs)</p>
+<ul>
+<li><code>[&quot;monkey-island&quot;, &quot;loom&quot;, &quot;toonstruck&quot;]</code></li>
+</ul>
+</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="13" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="ruta-de-juego-espec%C3%ADfico">Ruta de juego específico</h2>
+<split-slide style="--font-size: .9rem;">
+<pre><code class="language-js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">notFound</span> = (<span class="hljs-params">res, message</span>) =&gt; {
+  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">error</span>: message });
+}
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/game/:slug&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> game = data
+    .<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-property">slug</span> === req.<span class="hljs-property">params</span>.<span class="hljs-property">slug</span>);
+
+  <span class="hljs-keyword">if</span> (!game)
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">notFound</span>(res, <span class="hljs-string">&quot;Game not found&quot;</span>);
+
+  res.<span class="hljs-title function_">json</span>(game);
+});
+</code></pre>
+<div>
+<ul>
+<li>
+<p>La ruta <code>/game/:slug</code> se espera el <code>slug</code> de un juego</p>
+</li>
+<li>
+<p>Buscamos con <code>find</code> si hay juego que coincida con <code>slug</code></p>
+</li>
+<li>
+<p><img class="emoji" draggable="false" alt="1️⃣" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/31-20e3.svg" data-marp-twemoji=""/> Si no hay, devolvemos un <code>notFound</code></p>
+<ul>
+<li>Función que da un <code>404</code> y devuelve ¡JSON! de error</li>
+<li>Somos una API, errores también devuelven <code>.json</code></li>
+</ul>
+</li>
+<li>
+<p><img class="emoji" draggable="false" alt="2️⃣" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/32-20e3.svg" data-marp-twemoji=""/> Si existe, devolvemos los datos del juego (<code>game</code>)</p>
+<ul>
+<li>En este caso si devolvemos datos extensos (es la idea)</li>
+</ul>
+</li>
+<li>
+<p>Recuerda: Si se entra en una ruta, debería procesarse</p>
+</li>
+</ul>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="14" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="ruta-de-juegos-por-a%C3%B1o-y-aleatorio">Ruta de juegos por año y aleatorio</h2>
+<split-slide style="--left: 55%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-js">app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/year/:year&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> games = data
+    .<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-property">year</span> == req.<span class="hljs-property">params</span>.<span class="hljs-property">year</span>)
+    .<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-property">slug</span>);
+
+  res.<span class="hljs-title function_">json</span>(games);
+});
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/random&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> i = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * data.<span class="hljs-property">length</span>);
+  res.<span class="hljs-title function_">json</span>(data[i]);
+});
+</code></pre>
+<div>
+<ul>
+<li>En las rutas por año...
+<ul>
+<li>Filtramos por el año en cuestión <code>req.params.year</code></li>
+<li>Nos quedamos sólo con el <code>slug</code></li>
+</ul>
+</li>
+<li>Si no existe ningún juego por año indicado:
+<ul>
+<li>Devolvemos un array vacío <code>[]</code></li>
+<li>El año si existe, la ruta es correcta</li>
+<li>...sólo que no tiene juegos</li>
+</ul>
+</li>
+<li>En la ruta <code>random</code>:
+<ul>
+<li>Obtenemos número al azar entre <code>0</code> y el número de juegos</li>
+<li>Devolvemos la información</li>
+</ul>
+</li>
+</ul>
+</div>
+</split-slide>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="15" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="par%C3%A1metros-est%C3%A1ticos-y-catch-all">Parámetros, estáticos y catch-all</h2>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-js">app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/games&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> isFull = req.<span class="hljs-property">query</span>.<span class="hljs-property">include</span> === <span class="hljs-string">&quot;full&quot;</span>;
+  <span class="hljs-keyword">const</span> contents = isFull
+    ? data
+    : data.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-property">slug</span>);
+
+  res.<span class="hljs-title function_">json</span>(contents);
+});
+
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">static</span>(<span class="hljs-string">&quot;public&quot;</span>));
+
+app.<span class="hljs-title function_">use</span>(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">status</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">json</span>({ <span class="hljs-attr">error</span>: <span class="hljs-string">&quot;Path not found&quot;</span> });
+});
+</code></pre>
+<div>
+<ul>
+<li>
+<p>Si el usuario añade <code>?include=full</code> a /games...</p>
+<ul>
+<li>Devolvemos la información detallada</li>
+<li>Puede ser útil para no hacer muchas peticiones</li>
+<li>Valorar si el contenido es demasiado extenso</li>
+</ul>
+</li>
+<li>
+<p>Con <code>app.use</code> usamos un middleware</p>
+<ul>
+<li><code>express.static()</code> permite devolver ficheros estáticos</li>
+<li>Ej: Responde a <code>/covers/monkey-island.avif</code></li>
+<li>Cuidado: No incluyas más que ficheros estáticos</li>
+</ul>
+</li>
+<li>
+<p><strong>Catch-all</strong>: Si no entras en ninguna otra ruta, entra aquí</p>
+<ul>
+<li>Devolvemos un <code>404</code> con ruta no encontrada</li>
+</ul>
+</li>
+</ul>
+</div>
+</split-slide>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="16" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="buscador">Buscador</h2>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-js">app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/search/:text&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> query = req.<span class="hljs-property">params</span>.<span class="hljs-property">text</span>.<span class="hljs-title function_">toLowerCase</span>();
+
+  <span class="hljs-keyword">const</span> results = data
+    .<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">game</span> =&gt;</span> {
+      <span class="hljs-keyword">const</span> json = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(game).<span class="hljs-title function_">toLowerCase</span>();
+      <span class="hljs-keyword">return</span> json.<span class="hljs-title function_">includes</span>(query);
+    })
+    .<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">game</span> =&gt;</span> game.<span class="hljs-property">slug</span>);
+
+  res.<span class="hljs-title function_">json</span>(results);
+});
+</code></pre>
+<div>
+<ul>
+<li>
+<p>En la ruta <code>/search/</code> podemos realizar una búsqueda</p>
+</li>
+<li>
+<p>Pasamos los datos a minúsculas</p>
+</li>
+<li>
+<p>Filtramos por juego, pasamos a texto toda su info</p>
+</li>
+<li>
+<p>Comprobamos si existe el texto buscado</p>
+</li>
+<li>
+<p>De los encontrados, devolvemos su <code>slug</code></p>
+</li>
+<li>
+<p>Convendría poner un tamaño mínimo → <code>/search/a</code></p>
+</li>
+<li>
+<p>Convendría asegurar y validar la entrada de datos</p>
+</li>
+</ul>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="17" data-marpit-scope-YUvoshD3="" data-paginate="true" data-class="cover" data-theme="alo" lang="en-US" class="cover" data-marpit-pagination="17" style="--paginate:true;--class:cover;--theme:alo;" data-marpit-pagination-total="24">
+<h1 id="separar-y-organizar-l%C3%B3gica">Separar y organizar lógica</h1>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="18" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="18" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="controladores-y-m%C3%B3dulos">Controladores y módulos</h2>
+<ul>
+<li>Obtenemos información sensible al entorno en el .env</li>
+</ul>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<steps>
+<step>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;express&quot;</span>;
+
+<span class="hljs-keyword">import</span> { search } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./routes/games/search.js&quot;</span>;
+<span class="hljs-keyword">import</span> { random } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./routes/games/random.js&quot;</span>;
+<span class="hljs-keyword">import</span> { getBySlug } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./routes/games/getBySlug.js&quot;</span>;
+<span class="hljs-keyword">import</span> { getByYear } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./routes/games/getByYear.js&quot;</span>;
+<span class="hljs-keyword">import</span> { getAll } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./routes/games/getAll.js&quot;</span>;
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();
+
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;Manz API 1.0&quot;</span>));
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/games&quot;</span>, getAll);
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/game/:slug&quot;</span>, getBySlug);
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/year/:year&quot;</span>, getByYear);
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/search/:text&quot;</span>, search);
+app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;/random&quot;</span>, random);
+</code></pre>
+</step>
+<step>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> data <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../data.json&quot;</span> <span class="hljs-keyword">with</span> { <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;json&quot;</span> };
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">search</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">const</span> query = req.<span class="hljs-property">params</span>.<span class="hljs-property">text</span>.<span class="hljs-title function_">toLowerCase</span>();
+
+  <span class="hljs-keyword">const</span> results = data
+    .<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">game</span> =&gt;</span> {
+      <span class="hljs-keyword">const</span> json = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(game).<span class="hljs-title function_">toLowerCase</span>();
+      <span class="hljs-keyword">return</span> json.<span class="hljs-title function_">includes</span>(query);
+    })
+    .<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">game</span> =&gt;</span> game.<span class="hljs-property">slug</span>);
+
+  res.<span class="hljs-title function_">json</span>(results);
+}
+</code></pre>
+</step>
+</steps>
+<div>
+<ul>
+<li>
+<p>Vamos a separar las funciones en controladores</p>
+</li>
+<li>
+<p>La carpeta <code>/routes/games/</code> contendrá los controladores</p>
+<ul>
+<li><code>search.js</code> contendrá la lógica de búsqueda</li>
+<li><code>random.js</code> contendrá la lógica de juego al azar</li>
+<li>etc...</li>
+</ul>
+</li>
+<li>
+<p>La función <code>search</code> está exportada en el <code>search.js</code></p>
+</li>
+<li>
+<p>De momento, se trae los datos de ../../data.json</p>
+</li>
+</ul>
+</div>
+</split-slide>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="19" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="validaciones-con-zod">Validaciones con zod</h2>
+<ul>
+<li>Instalamos <a href="https://zod.dev/">zod</a> con <code>pnpm add zod</code> → <a href="https://zod.dev/api">API de zod</a></li>
+</ul>
+<split-slide style="--left: 60%; --right: 40%; --font-size: 1rem;">
+<steps>
+<step>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { z } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zod&quot;</span>;
+
+<span class="hljs-keyword">const</span> schema = z.<span class="hljs-title function_">object</span>({
+  <span class="hljs-attr">text</span>: z.<span class="hljs-title function_">string</span>()
+    .<span class="hljs-title function_">trim</span>()
+    .<span class="hljs-title function_">nonempty</span>(<span class="hljs-string">&quot;Búsqueda no puede estar vacía&quot;</span>)
+    .<span class="hljs-title function_">min</span>(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;Debe tener al menos 3 carácteres&quot;</span>)
+    .<span class="hljs-title function_">max</span>(<span class="hljs-number">50</span>, <span class="hljs-string">&quot;No puede tener más de 50 carácteres&quot;</span>)
+    .<span class="hljs-title function_">transform</span>(<span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span> value.<span class="hljs-title function_">toLowerCase</span>())
+});
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> schema;
+</code></pre>
+</step>
+<step>
+<pre><code class="language-js">z.<span class="hljs-title function_">string</span>();                    z.<span class="hljs-title function_">number</span>()
+    .<span class="hljs-title function_">length</span>(<span class="hljs-number">5</span>)                     .<span class="hljs-title function_">gt</span>(<span class="hljs-number">5</span>)
+    .<span class="hljs-title function_">regex</span>(<span class="hljs-regexp">/A.+/</span>)                  .<span class="hljs-title function_">lt</span>(<span class="hljs-number">5</span>)
+    .<span class="hljs-title function_">uppercase</span>()                   .<span class="hljs-title function_">positive</span>()
+    .<span class="hljs-title function_">lowercase</span>()                   .<span class="hljs-title function_">multipleOf</span>(<span class="hljs-number">5</span>)
+    .<span class="hljs-title function_">includes</span>()
+    .<span class="hljs-title function_">email</span>()                     z.<span class="hljs-title function_">set</span>()
+    .<span class="hljs-title function_">url</span>()                         .<span class="hljs-title function_">min</span>(<span class="hljs-number">5</span>)
+    .<span class="hljs-title function_">emoji</span>()                       .<span class="hljs-title function_">max</span>(<span class="hljs-number">5</span>)
+    .<span class="hljs-title function_">ipv4</span>()                        .<span class="hljs-title function_">size</span>(<span class="hljs-number">5</span>)
+    .<span class="hljs-title function_">hash</span>(<span class="hljs-string">&quot;sha256&quot;</span>)
+    .<span class="hljs-property">iso</span>.<span class="hljs-title function_">datetime</span>()              z.<span class="hljs-title function_">array</span>()
+    .<span class="hljs-property">iso</span>.<span class="hljs-title function_">duration</span>()              z.<span class="hljs-title function_">date</span>()
+  <span class="hljs-comment">/* ... */</span>
+</code></pre>
+</step>
+<step>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> schema <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./search.schema.js&quot;</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">DEFAULT</span> = <span class="hljs-string">&quot;Búsqueda inválida&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">search</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">const</span> parsed = schema.<span class="hljs-title function_">safeParse</span>(req.<span class="hljs-property">params</span>);
+
+  <span class="hljs-keyword">if</span> (!parsed.<span class="hljs-property">success</span>) {
+    <span class="hljs-keyword">const</span> error = parsed.<span class="hljs-property">error</span>.<span class="hljs-property">issues</span>[<span class="hljs-number">0</span>].<span class="hljs-property">message</span> ?? <span class="hljs-variable constant_">DEFAULT</span>;
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">status</span>(<span class="hljs-number">400</span>).<span class="hljs-title function_">json</span>({ error });
+  }
+  <span class="hljs-keyword">const</span> query = parsed.<span class="hljs-property">data</span>.<span class="hljs-property">text</span>;
+  <span class="hljs-comment">/* ... */</span>
+}
+</code></pre>
+</step>
+</steps>
+<div>
+<ul>
+<li>
+<p><img class="emoji" draggable="false" alt="1️⃣" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/31-20e3.svg" data-marp-twemoji=""/> Creamos un <code>routes/games/search.schema.js</code></p>
+</li>
+<li>
+<p>Importamos <code>z</code>, la librería <code>zod</code></p>
+</li>
+<li>
+<p>Creamos un esquema para validar</p>
+<ul>
+<li>Objeto <code>query</code> → <code>{ text: &quot;...&quot; }</code></li>
+<li><img class="emoji" draggable="false" alt="2️⃣" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/32-20e3.svg" data-marp-twemoji=""/> El parámetro <code>text</code> es un <code>string</code></li>
+<li>Limpiamos con <code>trim()</code> y validamos</li>
+<li>Transformamos a minúsculas</li>
+</ul>
+</li>
+<li>
+<p><img class="emoji" draggable="false" alt="3️⃣" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/33-20e3.svg" data-marp-twemoji=""/> Usamos <code>safeParse()</code> con <code>req.params</code></p>
+</li>
+<li>
+<p>Después obtenemos <code>parsed.data.text</code></p>
+</li>
+</ul>
+</div>
+</split-slide>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="20" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="cambiar-express-por-fastify">Cambiar Express por Fastify</h2>
+<ul>
+<li>Como en el chat debe haber ya 25 personas preguntando <strong>¿Y por qué no Fastify?</strong>... (u otra) → <a href="https://fastify.dev/">Fastify</a></li>
+</ul>
+<split-slide style="--font-size: 1rem;">
+<pre><code class="language-js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Fastify</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;fastify&quot;</span>;
+<span class="hljs-keyword">import</span> fastifyStatic <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@fastify/static&quot;</span>;
+<span class="hljs-keyword">const</span> app = <span class="hljs-title class_">Fastify</span>({ <span class="hljs-attr">logger</span>: <span class="hljs-literal">true</span> });
+
+app.<span class="hljs-title function_">register</span>(fastifyStatic, {
+  <span class="hljs-attr">root</span>: <span class="hljs-title function_">join</span>(<span class="hljs-title function_">cwd</span>(), <span class="hljs-string">&quot;public&quot;</span>),
+  <span class="hljs-attr">prefix</span>: <span class="hljs-string">&quot;/&quot;</span>,
+});
+
+app.<span class="hljs-title function_">setNotFoundHandler</span>(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">code</span>(<span class="hljs-number">404</span>).<span class="hljs-title function_">send</span>({ <span class="hljs-attr">error</span>: <span class="hljs-string">&quot;Path not found&quot;</span> });
+});
+
+app.<span class="hljs-title function_">listen</span>({ <span class="hljs-attr">port</span>: <span class="hljs-variable constant_">PORT</span> });
+</code></pre>
+<div>
+<ul>
+<li>
+<p>Instalar con <code>pnpm add fastify @fastify/static</code></p>
+</li>
+<li>
+<p>Importamos y cambiamos instancia inicial con <code>Fastify()</code></p>
+</li>
+<li>
+<p>Usamos <code>app.register()</code> en lugar del <code>app.use()</code></p>
+</li>
+<li>
+<p>Usamos <code>app.setNotFoundHandler()</code> en lugar del <code>app.use()</code></p>
+</li>
+<li>
+<p>Usamos otra sintaxis en <code>app.listen()</code></p>
+</li>
+<li>
+<p>Usamos <code>.send()</code> en lugar de <code>.json()</code></p>
+</li>
+<li>
+<p>Algunos cambios más y tendremos <strong>Fastify</strong> funcionando</p>
+<ul>
+<li>Lo importante es entender lo que estamos haciendo</li>
+<li>La sintaxis es algo menor, es sólo buscar la alternativa</li>
+</ul>
+</li>
+</ul>
+</div>
+</split-slide>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="21" data-marpit-scope-HtRrAXoF="" data-paginate="true" data-class="cover" data-theme="alo" lang="en-US" class="cover" data-marpit-pagination="21" style="--paginate:true;--class:cover;--theme:alo;" data-marpit-pagination-total="24">
+<h1 id="organizar-y-gestionar-datos">Organizar y gestionar datos</h1>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="22" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="22" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="patr%C3%B3n-repositorio">Patrón Repositorio</h2>
+<split-slide style="--left: 60%; --right: 40%; --font-size: 1rem;">
+<steps>
+<step>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> data <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./data.json&quot;</span> <span class="hljs-keyword">with</span> { <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;json&quot;</span> };
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getAll</span> = (<span class="hljs-params"></span>) =&gt; data;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getBySlug</span> = slug =&gt; data.<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-property">slug</span> === slug);
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getByYear</span> = year =&gt; data.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-property">year</span> == year);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getRandom</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">const</span> index = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * data.<span class="hljs-property">length</span>);
+  <span class="hljs-keyword">return</span> data[index];
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">search</span> = (<span class="hljs-params">text</span>) =&gt; {
+  <span class="hljs-keyword">const</span> query = text.<span class="hljs-title function_">toLowerCase</span>();
+  <span class="hljs-keyword">return</span> data.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span>
+    <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(item).<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(query)
+  );
+};
+</code></pre>
+</step>
+<step>
+<pre><code class="language-js"><span class="hljs-comment">// /router/games/getBySlug.js</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> game <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../data/games.js&quot;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getBySlug</span> = (<span class="hljs-params">req, res</span>) =&gt; {
+  <span class="hljs-keyword">const</span> selectedGame = game.<span class="hljs-title function_">getBySlug</span>(req.<span class="hljs-property">params</span>.<span class="hljs-property">slug</span>);
+
+  <span class="hljs-keyword">if</span> (!selectedGame)
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">notFound</span>(res, <span class="hljs-string">&quot;Game not found&quot;</span>);
+
+  res.<span class="hljs-title function_">json</span>(selectedGame);
+}
+</code></pre>
+</step>
+</steps>
+<div>
+<ul>
+<li>
+<p><img class="emoji" draggable="false" alt="1️⃣" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/31-20e3.svg" data-marp-twemoji=""/> Creamos carpeta <code>/data/</code> y movemos <code>data.json</code></p>
+</li>
+<li>
+<p>Creamos un <code>/data/game.js</code></p>
+</li>
+<li>
+<p>Nos traemos la lógica de las funciones</p>
+<ul>
+<li>Cada función debe devolver sus datos</li>
+<li>Exportamos cada función</li>
+</ul>
+</li>
+<li>
+<p><img class="emoji" draggable="false" alt="2️⃣" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/32-20e3.svg" data-marp-twemoji=""/> Actualizamos los endpoints</p>
+<ul>
+<li>Importamos como namespace <code>* as game</code></li>
+<li>Actualizamos usando <code>game.getBySlug()</code></li>
+</ul>
+</li>
+<li>
+<p>Ahora, <strong>no nos importa</strong> que tecnología usamos.</p>
+</li>
+</ul>
+</div>
+</split-slide>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="23" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="23" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="sqlite">SQLite</h2>
+<steps>
+<step>
+<split-slide style="--left: 60%; --right: 40%; --font-size: 1rem;">
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">DatabaseSync</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node:sqlite&quot;</span>;
+<span class="hljs-keyword">import</span> data <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./data.json&quot;</span> <span class="hljs-keyword">with</span> { <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;json&quot;</span> };
+<span class="hljs-keyword">import</span> { cwd } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node:process&quot;</span>;
+<span class="hljs-keyword">import</span> { readFileSync } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node:fs&quot;</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">DATABASE_FILE</span> = <span class="hljs-string">`<span class="hljs-subst">${cwd()}</span>/data/games.db`</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">CREATE_SCRIPT</span> = <span class="hljs-string">`<span class="hljs-subst">${cwd()}</span>/data/CREATE.SQL`</span>;
+
+<span class="hljs-comment">// Establecemos acceso a la base de datos</span>
+<span class="hljs-keyword">const</span> db = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DatabaseSync</span>(<span class="hljs-variable constant_">DATABASE_FILE</span>);
+
+<span class="hljs-comment">// Lee script, lo ejecuta y crea tablas en SQLite</span>
+<span class="hljs-keyword">const</span> sql = <span class="hljs-title function_">readFileSync</span>(<span class="hljs-variable constant_">CREATE_SCRIPT</span>, <span class="hljs-string">&quot;utf-8&quot;</span>);
+db.<span class="hljs-title function_">exec</span>(sql);
+</code></pre>
+<div>
+<ul>
+<li>
+<p>Node 22+ → soporte nativo de <a href="https://nodejs.org/api/sqlite.html">SQLite</a></p>
+</li>
+<li>
+<p>Instala <a href="https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite">Extensión VSCode SQLite</a></p>
+</li>
+<li>
+<p>Vamos a pasar los datos del <code>.json</code> a SQLite</p>
+</li>
+<li>
+<p>Creamos un script <code>data/createdb.js</code></p>
+</li>
+<li>
+<p>Creamos un <code>data/games.db</code> (BD SQLite)</p>
+</li>
+<li>
+<p>Leemos el fichero <code>data/CREATE.SQL</code> (Script SQL)</p>
+</li>
+<li>
+<p>Ejecutamos la consulta del script SQL</p>
+</li>
+</ul>
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE TABLE</span> games (
+  id <span class="hljs-type">INTEGER</span> <span class="hljs-keyword">PRIMARY KEY</span> AUTOINCREMENT,
+  name TEXT <span class="hljs-keyword">NOT NULL</span>,
+  author TEXT <span class="hljs-keyword">NOT NULL</span>,
+  genre TEXT,
+  <span class="hljs-keyword">year</span> <span class="hljs-type">INTEGER</span>,
+  characters TEXT,      <span class="hljs-comment">/* <img class="emoji" draggable="false" alt="⚠" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/26a0.svg" data-marp-twemoji=""/> NO RELACIONAL */</span>
+  enemies TEXT,         <span class="hljs-comment">/* <img class="emoji" draggable="false" alt="⚠" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/26a0.svg" data-marp-twemoji=""/> NO RELACIONAL */</span>
+  image TEXT,
+  slug TEXT <span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">NOT NULL</span>,
+  summary TEXT,
+  description TEXT
+);
+</code></pre>
+<div>
+<ul>
+<li>
+<p>Creamos una tabla SQL llamada <code>games</code></p>
+<ul>
+<li>Un <code>id</code> con un valor numérico autoincremental</li>
+<li>Campos <code>name</code>, <code>author</code>, <code>genre</code> y <code>year</code></li>
+<li><img class="emoji" draggable="false" alt="⚠" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/26a0.svg" data-marp-twemoji=""/> <code>characters</code> y <code>enemies</code> <strong>deberían</strong> ser tablas</li>
+<li>Campo <code>image</code> es el nombre de la <code>imagen.ext</code></li>
+<li>Campo <code>slug</code> es el valor de la URL</li>
+<li>Campo <code>summary</code> y <code>description</code> textos largos</li>
+</ul>
+</li>
+<li>
+<p>SQLite tiene campos básicos: <code>TEXT</code>, <code>INTEGER</code>...</p>
+</li>
+</ul>
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-js"><span class="hljs-comment">// Preparar inserción de datos de juegos</span>
+<span class="hljs-keyword">const</span> games = db.<span class="hljs-title function_">prepare</span>(<span class="hljs-comment">/* SQL */</span><span class="hljs-string">`INSERT INTO games (name,
+  author, genre, year, characters, enemies, image, slug,
+  summary, description) VALUES (:name, :author, :genre, :year,
+  :characters, :enemies, :image, :slug, :summary, :description)`</span>);
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> game <span class="hljs-keyword">of</span> data) {
+  games.<span class="hljs-title function_">run</span>({
+    ...game,
+    <span class="hljs-attr">characters</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(game.<span class="hljs-property">characters</span>),
+    <span class="hljs-attr">enemies</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(game.<span class="hljs-property">enemies</span>)
+  });
+}
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Base de datos creada y poblada con éxito.&quot;</span>);
+</code></pre>
+<div>
+<ul>
+<li>
+<p>Otra forma es incluir la consulta <code>SQL</code> en línea</p>
+</li>
+<li>
+<p>Utilizamos <code>db.prepare()</code> para preparar la consulta</p>
+<ul>
+<li>Permite anticiparse a sus parámetros</li>
+<li>Evita SQL Injection</li>
+<li>Mejor rendimiento</li>
+</ul>
+</li>
+<li>
+<p>Recorremos json <code>data</code> → obtenemos cada juego en <code>game</code></p>
+</li>
+<li>
+<p>Ejecutamos la consulta <code>games.run()</code> y le pasamos <code>game</code></p>
+</li>
+<li>
+<p><img class="emoji" draggable="false" alt="⚠️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/26a0.svg" data-marp-twemoji=""/> <code>JSON.stringify()</code> guarda en texto plano arrays</p>
+<ul>
+<li><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/274c.svg" data-marp-twemoji=""/> NO HACER Es sólo para simplificar ejercicio</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/2705.svg" data-marp-twemoji=""/> Crear más tablas y normalizar</li>
+</ul>
+</li>
+<li>
+<p>Ejecutar con <code>node</code> y comprobar con extensión <code>SQLite</code></p>
+</li>
+</ul>
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">DatabaseSync</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node:sqlite&quot;</span>;
+<span class="hljs-keyword">import</span> { cwd } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node:process&quot;</span>;
+
+<span class="hljs-keyword">const</span> db = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DatabaseSync</span>(<span class="hljs-string">`<span class="hljs-subst">${cwd()}</span>/data/games.db`</span>);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getAll</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">const</span> query = db.<span class="hljs-title function_">prepare</span>(<span class="hljs-string">&quot;SELECT slug FROM games&quot;</span>);
+  <span class="hljs-keyword">return</span> query.<span class="hljs-title function_">all</span>();
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getBySlug</span> = slug =&gt; {
+  <span class="hljs-keyword">const</span> query = db.<span class="hljs-title function_">prepare</span>(<span class="hljs-string">&quot;SELECT * FROM games WHERE slug = ?&quot;</span>);
+  <span class="hljs-keyword">return</span> query.<span class="hljs-title function_">get</span>(slug);
+};
+</code></pre>
+<div>
+<ul>
+<li>
+<p>En <code>/data/games.js</code> Cambiamos repositorio</p>
+<ul>
+<li>Conectamos a la base de datos <code>/data/games.db</code></li>
+</ul>
+</li>
+<li>
+<p>Modificamos nuestros métodos para obtener datos</p>
+</li>
+<li>
+<p>En <code>getAll()</code> obtenemos todos los juegos</p>
+<ul>
+<li><code>db.prepare()</code> prepara consulta</li>
+<li><code>query.all()</code> devuelve todos los datos</li>
+<li><img class="emoji" draggable="false" alt="👀" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/1f440.svg" data-marp-twemoji=""/> Sólo queremos los <code>slug</code></li>
+</ul>
+</li>
+<li>
+<p>En <code>getBySlug()</code> obtenemos info de un juego</p>
+<ul>
+<li><code>db.prepare()</code> prepara consulta</li>
+<li><code>query.get()</code> le pasa el parámetro <code>slug</code> a <code>?</code></li>
+</ul>
+</li>
+</ul>
+</div>
+</split-slide>
+</step>
+<step>
+<split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
+<pre><code class="language-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getByYear</span> = year =&gt; {
+  <span class="hljs-keyword">const</span> query = db.<span class="hljs-title function_">prepare</span>(<span class="hljs-string">&quot;SELECT slug FROM games WHERE year = ?&quot;</span>);
+  <span class="hljs-keyword">return</span> query.<span class="hljs-title function_">all</span>(year);
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getRandom</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">const</span> query = db.<span class="hljs-title function_">prepare</span>(<span class="hljs-string">&quot;SELECT * FROM games ORDER BY RANDOM() LIMIT 1&quot;</span>);
+  <span class="hljs-keyword">return</span> query.<span class="hljs-title function_">all</span>();
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">search</span> = (<span class="hljs-params">text</span>) =&gt; {
+  <span class="hljs-keyword">const</span> query = db.<span class="hljs-title function_">prepare</span>(<span class="hljs-string">&quot;SELECT * FROM games WHERE name LIKE ? OR description LIKE ?&quot;</span>);
+  <span class="hljs-keyword">return</span> query.<span class="hljs-title function_">all</span>(<span class="hljs-string">`%<span class="hljs-subst">${text}</span>%`</span>, <span class="hljs-string">`%<span class="hljs-subst">${text}</span>%`</span>);
+};
+</code></pre>
+<div>
+<ul>
+<li>El método <code>getByYear()</code> similar a los anteriores
+<ul>
+<li>Recuperamos todo <code>query.all()</code></li>
+</ul>
+</li>
+<li>El método <code>getRandom()</code> da un juego al azar
+<ul>
+<li>Utilizamos <code>ORDER BY RANDOM() LIMIT 1</code></li>
+</ul>
+</li>
+<li>El método <code>search()</code> busca textos
+<ul>
+<li>Concretamente en <code>name</code> o <code>description</code></li>
+</ul>
+</li>
+</ul>
+</div>
+</split-slide>
+</step>
+</steps>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="24" data-paginate="true" data-theme="alo" lang="en-US" data-marpit-pagination="24" style="--paginate:true;--theme:alo;" data-marpit-pagination-total="24">
+<h2 id="referencias">Referencias</h2>
+<ul>
+<li><a href="https://lenguajejs.com/javascript/cheatsheets/">CheatSheet Javascript</a></li>
+<li><a href="https://bootcamp.manz.dev/">bootcamp.manz.dev</a></li>
+<li><a href="https://lenguajejs.com/nodejs/">NodeJS</a></li>
+<li><a href="https://nodejs.org/api/">NodeJS API</a></li>
+<li><a href="https://expressjs.com/">Express</a></li>
+<li><a href="https://expressjs.com/en/4x/api.html">Express API</a>s</li>
+<li><a href="https://www.sqlite.org/docs.html">SQLite</a></li>
+</ul>
+<script src="../assets/steps.js"></script>
+<script src="../assets/image-modal.js"></script>
+</section>
+<script>!function(){"use strict";const t={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},e="data-marp-auto-scaling-wrapper",i="data-marp-auto-scaling-svg",n="data-marp-auto-scaling-container";class s extends HTMLElement{container;containerSize;containerObserver;svg;svgComputedStyle;svgPreserveAspectRatio="xMinYMid meet";wrapper;wrapperSize;wrapperObserver;constructor(){super();const t=t=>([e])=>{const{width:i,height:n}=e.contentRect;this[t]={width:i,height:n},this.updateSVGRect()};this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(t("containerSize")),this.wrapperObserver=new ResizeObserver((...e)=>{t("wrapperSize")(...e),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){this.shadowRoot.innerHTML=`\n<style>\n  svg[${i}] { display: block; width: 100%; height: auto; vertical-align: top; }\n  span[${n}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }\n</style>\n<div ${e}>\n  <svg part="svg" ${i}>\n    <foreignObject><span ${n}><slot></slot></span></foreignObject>\n  </svg>\n</div>\n    `.split(/\n\s*/).join(""),this.wrapper=this.shadowRoot.querySelector(`div[${e}]`)??void 0;const t=this.svg;this.svg=this.wrapper?.querySelector(`svg[${i}]`)??void 0,this.svg!==t&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=this.svg?.querySelector(`span[${n}]`)??void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:t}=this;t&&(t.style.display="inline",requestAnimationFrame(()=>{t.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(t){const e=()=>{const i=(()=>{const e=t.getPropertyValue("--preserve-aspect-ratio");if(e)return e.trim();return`x${(({textAlign:t,direction:e})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if("start"===t||"end"===t){let i="rtl"===e;return"end"===t&&(i=!i),i?"Max":"Min"}return"Mid"})(t)}YMid meet`})();i!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=i,this.updateSVGRect()),t===this.svgComputedStyle&&requestAnimationFrame(e)};e()}updateSVGRect(){let t=Math.ceil(this.containerSize?.width??0);const e=Math.ceil(this.containerSize?.height??0);void 0!==this.dataset.downscaleOnly&&(t=Math.max(t,this.wrapperSize?.width??0));const i=this.svg?.querySelector(":scope > foreignObject");if(i?.setAttribute("width",`${t}`),i?.setAttribute("height",`${e}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${t} ${e}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=t<=0||e<=0?"0":""),this.container){const t=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=t.startsWith("xmid")||t.startsWith("xmax")?"auto":"0",this.container.style.marginRight=t.startsWith("xmi")?"auto":"0"}}}const r=(t,{attrs:e={},style:i})=>class extends t{constructor(...t){super(...t);for(const[t,i]of Object.entries(e))this.hasAttribute(t)||this.setAttribute(t,i);this._shadow()}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_shadow(){if(!this.shadowRoot)try{this.attachShadow({mode:"open"})}catch(t){if(!(t instanceof Error&&"NotSupportedError"===t.name))throw t}return this.shadowRoot}_update(){const t=this._shadow();if(t){const e=i?`<style>:host { ${i} }</style>`:"";let n="<slot></slot>";const{autoScaling:s}=this.dataset;if(void 0!==s){n=`<marp-auto-scaling exportparts="svg:auto-scaling" ${"downscale-only"===s?"data-downscale-only":""}>${n}</marp-auto-scaling>`}t.innerHTML=e+n}}};let o;const a=Symbol(),l=()=>o??(o=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is"),o);let c;const d="marpitSVGPolyfill:setZoomFactor,",h=Symbol(),g=Symbol();const p=()=>{const t="Apple Computer, Inc."===navigator.vendor,e=t?[v]:[],i={then:e=>(t?(async()=>{if(void 0===c){const t=document.createElement("canvas");t.width=10,t.height=10;const e=t.getContext("2d"),i=new Image(10,10),n=new Promise(t=>{i.addEventListener("load",()=>t())});i.crossOrigin="anonymous",i.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await n,e.drawImage(i,0,0),c=e.getImageData(5,5,1,1).data[3]<128}return c})().then(t=>{null==e||e(t?[v]:[])}):null==e||e([]),i)};return Object.assign(e,i)};let m,u;function v(t){const e="object"==typeof t&&t.target||document,i="object"==typeof t?t.zoom:t;window[g]||(Object.defineProperty(window,g,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",({data:t,origin:e})=>{if(e===window.origin)try{if(t&&"string"==typeof t&&t.startsWith(d)){const[,e]=t.split(","),i=Number.parseFloat(e);Number.isNaN(i)||(u=i)}}catch(t){console.error(t)}}));let n=!1;Array.from(e.querySelectorAll("svg[data-marpit-svg]"),t=>{var e,s,r,o;t.style.transform||(t.style.transform="translateZ(0)");const a=i||u||t.currentScale||1;m!==a&&(m=a,n=a);const l=t.getBoundingClientRect(),{length:c}=t.children;for(let i=0;i<c;i+=1){const n=t.children[i];if(n.getScreenCTM){const t=n.getScreenCTM();if(t){const i=null!==(s=null===(e=n.x)||void 0===e?void 0:e.baseVal.value)&&void 0!==s?s:0,c=null!==(o=null===(r=n.y)||void 0===r?void 0:r.baseVal.value)&&void 0!==o?o:0,d=n.children.length;for(let e=0;e<d;e+=1){const s=n.children[e];if("SECTION"===s.tagName){const{style:e}=s;e.transformOrigin||(e.transformOrigin=`${-i}px ${-c}px`),e.transform=`scale(${a}) matrix(${t.a}, ${t.b}, ${t.c}, ${t.d}, ${t.e-l.left}, ${t.f-l.top}) translateZ(0.0001px)`;break}}}}}}),!1!==n&&Array.from(e.querySelectorAll("iframe"),({contentWindow:t})=>{null==t||t.postMessage(`${d}${n}`,"null"===window.origin?"*":window.origin)})}function w({once:t=!1,target:e=document}={}){const i=function(t=document){if(t[h])return t[h];let e=!0;const i=()=>{e=!1,delete t[h]};Object.defineProperty(t,h,{configurable:!0,value:i});let n=[],s=!1;(async()=>{try{n=await p()}finally{s=!0}})();const r=()=>{for(const e of n)e({target:t});s&&0===n.length||e&&window.requestAnimationFrame(r)};return r(),i}(e);return t?(i(),()=>{}):i}m=1,u=void 0;const b=Symbol(),y=(e=document)=>{if("undefined"==typeof window)throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const i=window[a];i||customElements.define("marp-auto-scaling",s);for(const n of Object.keys(t)){const s=`marp-${n}`,o=t[n].proto();l()&&o!==HTMLElement?i||customElements.define(s,r(o,{style:t[n].style}),{extends:n}):(i||customElements.define(s,r(HTMLElement,t[n])),e.querySelectorAll(`${n}[is="${s}"]`).forEach(t=>{t.outerHTML=t.outerHTML.replace(new RegExp(`^<${n}`,"i"),`<${s}`).replace(new RegExp(`</${n}>$`,"i"),`</${s}>`)}))}window[a]=!0})(e),e[b])return e[b];const i=w({target:e}),n=()=>{i(),delete e[b]},o=Object.assign(n,{cleanup:n,update:()=>y(e)});return Object.defineProperty(e,b,{configurable:!0,value:o}),o},f=document.currentScript;y(f?f.getRootNode():document)}();
+</script></foreignObject></svg></div><script>/*!! License: https://unpkg.com/@marp-team/marp-cli@4.2.3/lib/bespoke.js.LICENSE.txt */
+!function(){"use strict";function e(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}var t,n,r=(n||(n=1,t={from:function(e,t){var n,r=1===(e.parent||e).nodeType?e.parent||e:document.querySelector(e.parent||e),o=[].filter.call("string"==typeof e.slides?r.querySelectorAll(e.slides):e.slides||r.children,function(e){return"SCRIPT"!==e.nodeName}),a={},i=function(e,t){return(t=t||{}).index=o.indexOf(e),t.slide=e,t},s=function(e,t){a[e]=(a[e]||[]).filter(function(e){return e!==t})},c=function(e,t){return(a[e]||[]).reduce(function(e,n){return e&&!1!==n(t)},!0)},l=function(e,t){o[e]&&(n&&c("deactivate",i(n,t)),n=o[e],c("activate",i(n,t)))},d=function(e,t){var r=o.indexOf(n)+e;c(e>0?"next":"prev",i(n,t))&&l(r,t)},u={off:s,on:function(e,t){return(a[e]||(a[e]=[])).push(t),s.bind(null,e,t)},fire:c,slide:function(e,t){if(!arguments.length)return o.indexOf(n);c("slide",i(o[e],t))&&l(e,t)},next:d.bind(null,1),prev:d.bind(null,-1),parent:r,slides:o,destroy:function(e){c("destroy",i(n,e)),a={}}};return(t||[]).forEach(function(e){e(u)}),n||l(0),u}}),t),o=e(r);const a=document.body,i=(...e)=>history.replaceState(...e),s="",c="presenter",l="next",d=["",c,l],u="bespoke-marp-",f=`data-${u}`,m=(e,{protocol:t,host:n,pathname:r,hash:o}=location)=>{const a=e.toString();return`${t}//${n}${r}${a?"?":""}${a}${o}`},g=()=>a.dataset.bespokeView,p=e=>new URLSearchParams(location.search).get(e),v=(e,t={})=>{const n={location,setter:i,...t},r=new URLSearchParams(n.location.search);for(const t of Object.keys(e)){const n=e[t];"string"==typeof n?r.set(t,n):r.delete(t)}try{n.setter({...window.history.state??{}},"",m(r,n.location))}catch(e){console.error(e)}},h=(()=>{const e="bespoke-marp";try{return localStorage.setItem(e,e),localStorage.removeItem(e),!0}catch{return!1}})(),y=e=>{try{return localStorage.getItem(e)}catch{return null}},b=(e,t)=>{try{return localStorage.setItem(e,t),!0}catch{return!1}},w=e=>{try{return localStorage.removeItem(e),!0}catch{return!1}},x=(e,t)=>{const n="aria-hidden";t?e.setAttribute(n,"true"):e.removeAttribute(n)},k=e=>{e.parent.classList.add(`${u}parent`),e.slides.forEach(e=>e.classList.add(`${u}slide`)),e.on("activate",t=>{const n=`${u}active`,r=t.slide,o=r.classList,a=!o.contains(n);if(e.slides.forEach(e=>{e.classList.remove(n),x(e,!0)}),o.add(n),x(r,!1),a){const e=`${n}-ready`;o.add(e),document.body.clientHeight,o.remove(e)}})},$=e=>{let t=0,n=0;Object.defineProperty(e,"fragments",{enumerable:!0,value:e.slides.map(e=>[null,...e.querySelectorAll("[data-marpit-fragment]")])});const r=r=>void 0!==e.fragments[t][n+r],o=(r,o)=>{t=r,n=o,e.fragments.forEach((e,t)=>{e.forEach((e,n)=>{if(null==e)return;const a=t<r||t===r&&n<=o;e.setAttribute(`${f}fragment`,(a?"":"in")+"active");const i=`${f}current-fragment`;t===r&&n===o?e.setAttribute(i,"current"):e.removeAttribute(i)})}),e.fragmentIndex=o;const a={slide:e.slides[r],index:r,fragments:e.fragments[r],fragmentIndex:o};e.fire("fragment",a)};e.on("next",({fragment:a=!0})=>{if(a){if(r(1))return o(t,n+1),!1;const a=t+1;e.fragments[a]&&o(a,0)}else{const r=e.fragments[t].length;if(n+1<r)return o(t,r-1),!1;const a=e.fragments[t+1];a&&o(t+1,a.length-1)}}),e.on("prev",({fragment:a=!0})=>{if(r(-1)&&a)return o(t,n-1),!1;const i=t-1;e.fragments[i]&&o(i,e.fragments[i].length-1)}),e.on("slide",({index:t,fragment:n})=>{let r=0;if(void 0!==n){const o=e.fragments[t];if(o){const{length:e}=o;r=-1===n?e-1:Math.min(Math.max(n,0),e-1)}}o(t,r)}),o(0,0)},E=document,L=()=>!(!E.fullscreenEnabled&&!E.webkitFullscreenEnabled),S=()=>!(!E.fullscreenElement&&!E.webkitFullscreenElement),P=e=>{e.fullscreen=()=>{L()&&(async()=>{S()?(E.exitFullscreen||E.webkitExitFullscreen)?.call(E):((e=E.body)=>{(e.requestFullscreen||e.webkitRequestFullscreen)?.call(e)})()})()},document.addEventListener("keydown",t=>{"f"!==t.key&&"F11"!==t.key||t.altKey||t.ctrlKey||t.metaKey||!L()||(e.fullscreen(),t.preventDefault())})},_=`${u}inactive`,T=(e=2e3)=>({parent:t,fire:n})=>{const r=t.classList,o=e=>n(`marp-${e?"":"in"}active`);let a;const i=()=>{a&&clearTimeout(a),a=setTimeout(()=>{r.add(_),o()},e),r.contains(_)&&(r.remove(_),o(!0))};for(const e of["mousedown","mousemove","touchend"])document.addEventListener(e,i);setTimeout(i,0)},I=["AUDIO","BUTTON","INPUT","SELECT","TEXTAREA","VIDEO"],M=e=>{e.parent.addEventListener("keydown",e=>{if(!e.target)return;const t=e.target;(I.includes(t.nodeName)||"true"===t.contentEditable)&&e.stopPropagation()})},O=e=>{window.addEventListener("load",()=>{for(const t of e.slides){const e=t.querySelector("marp-auto-scaling, [data-auto-scaling], [data-marp-fitting]");t.setAttribute(`${f}load`,e?"":"hideable")}})},A=({interval:e=250}={})=>t=>{document.addEventListener("keydown",e=>{if(" "===e.key&&e.shiftKey)t.prev();else if("ArrowLeft"===e.key||"ArrowUp"===e.key||"PageUp"===e.key)t.prev({fragment:!e.shiftKey});else if(" "!==e.key||e.shiftKey)if("ArrowRight"===e.key||"ArrowDown"===e.key||"PageDown"===e.key)t.next({fragment:!e.shiftKey});else if("End"===e.key)t.slide(t.slides.length-1,{fragment:-1});else{if("Home"!==e.key)return;t.slide(0)}else t.next();e.preventDefault()});let n,r,o=0;t.parent.addEventListener("wheel",a=>{let i=!1;const s=(e,t)=>{e&&(i=i||((e,t)=>((e,t)=>{const n="X"===t?"Width":"Height";return e[`client${n}`]<e[`scroll${n}`]})(e,t)&&((e,t)=>{const{overflow:n}=e,r=e[`overflow${t}`];return"auto"===n||"scroll"===n||"auto"===r||"scroll"===r})(getComputedStyle(e),t))(e,t)),e?.parentElement&&s(e.parentElement,t)};if(0!==a.deltaX&&s(a.target,"X"),0!==a.deltaY&&s(a.target,"Y"),i)return;a.preventDefault();const c=Math.sqrt(a.deltaX**2+a.deltaY**2);if(void 0!==a.wheelDelta){if(void 0===a.webkitForce&&Math.abs(a.wheelDelta)<40)return;if(a.deltaMode===a.DOM_DELTA_PIXEL&&c<4)return}else if(a.deltaMode===a.DOM_DELTA_PIXEL&&c<12)return;r&&clearTimeout(r),r=setTimeout(()=>{n=0},e);const l=Date.now()-o<e,d=c<=n;if(n=c,l||d)return;let u;(a.deltaX>0||a.deltaY>0)&&(u="next"),(a.deltaX<0||a.deltaY<0)&&(u="prev"),u&&(t[u](),o=Date.now())})},C=(e=`.${u}osc`)=>{const t=document.querySelector(e);if(!t)return()=>{};const n=(e,n)=>{t.querySelectorAll(`[${f}osc=${JSON.stringify(e)}]`).forEach(n)};return L()||n("fullscreen",e=>e.style.display="none"),h||n("presenter",e=>{e.disabled=!0,e.title="Presenter view is disabled due to restricted localStorage."}),e=>{t.addEventListener("click",t=>{if(t.target instanceof HTMLElement){const{bespokeMarpOsc:n}=t.target.dataset;n&&t.target.blur();const r={fragment:!t.shiftKey};"next"===n?e.next(r):"prev"===n?e.prev(r):"fullscreen"===n?e?.fullscreen():"presenter"===n&&e.openPresenterView()}}),e.parent.appendChild(t),e.on("activate",({index:t})=>{n("page",n=>n.textContent=`Page ${t+1} of ${e.slides.length}`)}),e.on("fragment",({index:t,fragments:r,fragmentIndex:o})=>{n("prev",e=>e.disabled=0===t&&0===o),n("next",n=>n.disabled=t===e.slides.length-1&&o===r.length-1)}),e.on("marp-active",()=>x(t,!1)),e.on("marp-inactive",()=>x(t,!0)),L()&&(e=>{for(const t of["","webkit"])E.addEventListener(t+"fullscreenchange",e)})(()=>n("fullscreen",e=>e.classList.toggle("exit",L()&&S())))}},D=e=>{window.addEventListener("message",t=>{if(t.origin!==window.origin)return;const[n,r]=t.data.split(":");if("navigate"===n){const[t,n]=r.split(",");let o=Number.parseInt(t,10),a=Number.parseInt(n,10)+1;a>=e.fragments[o].length&&(o+=1,a=0),e.slide(o,{fragment:a})}})};var N,B,q,K,F,j,V,U={exports:{}},X=(N||(N=1,U.exports=(B=["area","base","br","col","command","embed","hr","img","input","keygen","link","meta","param","source","track","wbr"],q=function(e){return String(e).replace(/[&<>"']/g,function(e){return"&"+K[e]+";"})},K={"&":"amp","<":"lt",">":"gt",'"':"quot","'":"apos"},F="dangerouslySetInnerHTML",j={className:"class",htmlFor:"for"},V={},function(e,t){var n=[],r="";t=t||{};for(var o=arguments.length;o-- >2;)n.push(arguments[o]);if("function"==typeof e)return t.children=n.reverse(),e(t);if(e){if(r+="<"+e,t)for(var a in t)!1!==t[a]&&null!=t[a]&&a!==F&&(r+=" "+(j[a]?j[a]:q(a))+'="'+q(t[a])+'"');r+=">"}if(-1===B.indexOf(e)){if(t[F])r+=t[F].__html;else for(;n.length;){var i=n.pop();if(i)if(i.pop)for(var s=i.length;s--;)n.push(i[s]);else r+=!0===V[i]?i:q(i)}r+=e?"</"+e+">":""}return V[r]=!0,r})),U.exports),H=e(X);const R=({children:e})=>H(null,null,...e),W=`${u}presenter-`,J={container:`${W}container`,dragbar:`${W}dragbar-container`,next:`${W}next`,nextContainer:`${W}next-container`,noteContainer:`${W}note-container`,noteWrapper:`${W}note-wrapper`,noteButtons:`${W}note-buttons`,infoContainer:`${W}info-container`,infoPage:`${W}info-page`,infoPageText:`${W}info-page-text`,infoPagePrev:`${W}info-page-prev`,infoPageNext:`${W}info-page-next`,noteButtonsBigger:`${W}note-bigger`,noteButtonsSmaller:`${W}note-smaller`,infoTime:`${W}info-time`,infoTimer:`${W}info-timer`},Y=e=>{const{title:t}=document;document.title="[Presenter view]"+(t?` - ${t}`:"");const n={},r=e=>(n[e]=n[e]||document.querySelector(`.${e}`),n[e]);document.body.appendChild((e=>{const t=document.createElement("div");return t.className=J.container,t.appendChild(e),t.insertAdjacentHTML("beforeend",H(R,null,H("div",{class:J.nextContainer},H("iframe",{class:J.next,src:"?view=next"})),H("div",{class:J.dragbar}),H("div",{class:J.noteContainer},H("div",{class:J.noteWrapper}),H("div",{class:J.noteButtons},H("button",{class:J.noteButtonsSmaller,tabindex:"-1",title:"Smaller notes font size"},"Smaller notes font size"),H("button",{class:J.noteButtonsBigger,tabindex:"-1",title:"Bigger notes font size"},"Bigger notes font size"))),H("div",{class:J.infoContainer},H("div",{class:J.infoPage},H("button",{class:J.infoPagePrev,tabindex:"-1",title:"Previous"},"Previous"),H("span",{class:J.infoPageText}),H("button",{class:J.infoPageNext,tabindex:"-1",title:"Next"},"Next")),H("time",{class:J.infoTime,title:"Current time"}),H("time",{class:J.infoTimer,title:"Timer"})))),t})(e.parent)),(e=>{let t=!1;r(J.dragbar).addEventListener("mousedown",()=>{t=!0,r(J.dragbar).classList.add("active")}),window.addEventListener("mouseup",()=>{t=!1,r(J.dragbar).classList.remove("active")}),window.addEventListener("mousemove",e=>{if(!t)return;const n=e.clientX/document.documentElement.clientWidth*100;r(J.container).style.setProperty("--bespoke-marp-presenter-split-ratio",`${Math.max(0,Math.min(100,n))}%`)}),r(J.nextContainer).addEventListener("click",()=>e.next());const n=r(J.next),o=(a=n,(e,t)=>a.contentWindow?.postMessage(`navigate:${e},${t}`,"null"===window.origin?"*":window.origin));var a;n.addEventListener("load",()=>{r(J.nextContainer).classList.add("active"),o(e.slide(),e.fragmentIndex),e.on("fragment",({index:e,fragmentIndex:t})=>o(e,t))});const i=document.querySelectorAll(".bespoke-marp-note");i.forEach(e=>{e.addEventListener("keydown",e=>e.stopPropagation()),r(J.noteWrapper).appendChild(e)}),e.on("activate",()=>i.forEach(t=>t.classList.toggle("active",t.dataset.index==e.slide())));let s=0;const c=e=>{s=Math.max(-5,s+e),r(J.noteContainer).style.setProperty("--bespoke-marp-note-font-scale",(1.2**s).toFixed(4))},l=()=>c(1),d=()=>c(-1),u=r(J.noteButtonsBigger),f=r(J.noteButtonsSmaller);u.addEventListener("click",()=>{u.blur(),l()}),f.addEventListener("click",()=>{f.blur(),d()}),document.addEventListener("keydown",e=>{"+"===e.key&&l(),"-"===e.key&&d()},!0),e.on("activate",({index:t})=>{r(J.infoPageText).textContent=`${t+1} / ${e.slides.length}`});const m=r(J.infoPagePrev),g=r(J.infoPageNext);m.addEventListener("click",t=>{m.blur(),e.prev({fragment:!t.shiftKey})}),g.addEventListener("click",t=>{g.blur(),e.next({fragment:!t.shiftKey})}),e.on("fragment",({index:t,fragments:n,fragmentIndex:r})=>{m.disabled=0===t&&0===r,g.disabled=t===e.slides.length-1&&r===n.length-1});let p=new Date;const v=()=>{const e=new Date,t=e=>`${Math.floor(e)}`.padStart(2,"0"),n=e.getTime()-p.getTime(),o=t(n/1e3%60),a=t(n/1e3/60%60),i=t(n/36e5%24);r(J.infoTime).textContent=e.toLocaleTimeString(),r(J.infoTimer).textContent=`${i}:${a}:${o}`};v(),setInterval(v,250),r(J.infoTimer).addEventListener("click",()=>{p=new Date})})(e)},z=e=>{if(!(e=>e.syncKey&&"string"==typeof e.syncKey)(e))throw new Error("The current instance of Bespoke.js is invalid for Marp bespoke presenter plugin.");Object.defineProperties(e,{openPresenterView:{enumerable:!0,value:G},presenterUrl:{enumerable:!0,get:Q}}),h&&document.addEventListener("keydown",t=>{"p"!==t.key||t.altKey||t.ctrlKey||t.metaKey||(t.preventDefault(),e.openPresenterView())})};function G(){const{max:e,floor:t}=Math,n=e(t(.85*window.innerWidth),640),r=e(t(.85*window.innerHeight),360);return window.open(this.presenterUrl,W+this.syncKey,`width=${n},height=${r},menubar=no,toolbar=no`)}function Q(){const e=new URLSearchParams(location.search);return e.set("view","presenter"),e.set("sync",this.syncKey),m(e)}const Z=e=>{const t=g();return t===l&&e.appendChild(document.createElement("span")),{[s]:z,[c]:Y,[l]:D}[t]},ee=e=>{e.on("activate",t=>{document.querySelectorAll(".bespoke-progress-parent > .bespoke-progress-bar").forEach(n=>{n.style.flexBasis=100*t.index/(e.slides.length-1)+"%"})})},te=e=>{const t=Number.parseInt(e,10);return Number.isNaN(t)?null:t},ne=(e={})=>{const t={history:!0,...e};return e=>{let n=!0;const r=e=>{const t=n;try{return n=!0,e()}finally{n=t}},o=(t={fragment:!0})=>{let n=t.fragment?te(p("f")||""):null;((t,n)=>{const{min:r,max:o}=Math,{fragments:a,slides:i}=e,s=o(0,r(t,i.length-1)),c=o(0,r(n||0,a[s].length-1));s===e.slide()&&c===e.fragmentIndex||e.slide(s,{fragment:c})})((()=>{if(location.hash){const[t]=location.hash.slice(1).split(":~:");if(/^\d+$/.test(t))return(te(t)??1)-1;const r=document.getElementById(t)||document.querySelector(`a[name="${CSS.escape(t)}"]`);if(r){const{length:t}=e.slides;for(let o=0;o<t;o+=1)if(e.slides[o].contains(r)){const t=e.fragments?.[o],a=r.closest("[data-marpit-fragment]");if(t&&a){const e=t.indexOf(a);e>=0&&(n=e)}return o}}}return 0})(),n)};e.on("fragment",({index:e,fragmentIndex:r})=>{n||v({f:0===r||r.toString()},{location:{...location,hash:`#${e+1}`},setter:(...e)=>t.history?history.pushState(...e):history.replaceState(...e)})}),setTimeout(()=>{o(),window.addEventListener("hashchange",()=>r(()=>{o({fragment:!1}),v({f:void 0})})),window.addEventListener("popstate",()=>{n||r(()=>o())}),n=!1},0)}},re=(e={})=>{const t=e.key||window.history.state?.marpBespokeSyncKey||Math.random().toString(36).slice(2),n=`bespoke-marp-sync-${t}`;var r;r={marpBespokeSyncKey:t},v({},{setter:(e,...t)=>i({...e,...r},...t)});const o=()=>{const e=y(n);return e?JSON.parse(e):Object.create(null)},a=e=>{const t=o(),r={...t,...e(t)};return b(n,JSON.stringify(r)),r},s=()=>{window.removeEventListener("pageshow",s),a(e=>({reference:(e.reference||0)+1}))};return e=>{s(),Object.defineProperty(e,"syncKey",{value:t,enumerable:!0});let r=!0;setTimeout(()=>{e.on("fragment",e=>{r&&a(()=>({index:e.index,fragmentIndex:e.fragmentIndex}))})},0),window.addEventListener("storage",t=>{if(t.key===n&&t.oldValue&&t.newValue){const n=JSON.parse(t.oldValue),o=JSON.parse(t.newValue);if(n.index!==o.index||n.fragmentIndex!==o.fragmentIndex)try{r=!1,e.slide(o.index,{fragment:o.fragmentIndex,forSync:!0})}finally{r=!0}}});const i=()=>{const{reference:e}=o();void 0===e||e<=1?w(n):a(()=>({reference:e-1}))};window.addEventListener("pagehide",e=>{e.persisted&&window.addEventListener("pageshow",s),i()}),e.on("destroy",i)}},{PI:oe,abs:ae,sqrt:ie,atan2:se}=Math,ce={passive:!0},le=({slope:e=-.7,swipeThreshold:t=30}={})=>n=>{let r;const o=n.parent,a=e=>{const t=o.getBoundingClientRect();return{x:e.pageX-(t.left+t.right)/2,y:e.pageY-(t.top+t.bottom)/2}};o.addEventListener("touchstart",({touches:e})=>{r=1===e.length?a(e[0]):void 0},ce),o.addEventListener("touchmove",e=>{if(r)if(1===e.touches.length){e.preventDefault();const t=a(e.touches[0]),n=t.x-r.x,o=t.y-r.y;r.delta=ie(ae(n)**2+ae(o)**2),r.radian=se(n,o)}else r=void 0}),o.addEventListener("touchend",o=>{if(r){if(r.delta&&r.delta>=t&&r.radian){const t=(r.radian-e+oe)%(2*oe)-oe;n[t<0?"next":"prev"](),o.stopPropagation()}r=void 0}},ce)},de=new Map;de.clear(),de.set("none",{backward:{both:void 0,incoming:void 0,outgoing:void 0},forward:{both:void 0,incoming:void 0,outgoing:void 0}});const ue={both:"",outgoing:"outgoing-",incoming:"incoming-"},fe={forward:"",backward:"-backward"},me=e=>`--marp-bespoke-transition-animation-${e}`,ge=e=>`--marp-transition-${e}`,pe=me("name"),ve=me("duration"),he=e=>new Promise(t=>{const n={},r=document.createElement("div"),o=e=>{r.remove(),t(e)};r.addEventListener("animationstart",()=>o(n)),Object.assign(r.style,{animationName:e,animationDuration:"1s",animationFillMode:"both",animationPlayState:"paused",position:"absolute",pointerEvents:"none"}),document.body.appendChild(r);const a=getComputedStyle(r).getPropertyValue(ge("duration"));a&&Number.parseFloat(a)>=0&&(n.defaultDuration=a),((e,t)=>{requestAnimationFrame(()=>{e.style.animationPlayState="running",requestAnimationFrame(()=>t(void 0))})})(r,o)}),ye=async e=>de.has(e)?de.get(e):(e=>{const t={},n=[];for(const[r,o]of Object.entries(ue))for(const[a,i]of Object.entries(fe)){const s=`marp-${o}transition${i}-${e}`;n.push(he(s).then(e=>{t[a]=t[a]||{},t[a][r]=e?{...e,name:s}:void 0}))}return Promise.all(n).then(()=>t)})(e).then(t=>(de.set(e,t),t)),be=e=>Object.values(e).flatMap(Object.values).every(e=>!e),we=(e,{type:t,backward:n})=>{const r=e[n?"backward":"forward"],o=(()=>{const e=r[t],n=e=>({[pe]:e.name});if(e)return n(e);if(r.both){const e=n(r.both);return"incoming"===t&&(e[me("direction")]="reverse"),e}})();return!o&&n?we(e,{type:t,backward:!1}):o||{[pe]:"__bespoke_marp_transition_no_animation__"}},xe=e=>{if(e)try{const t=JSON.parse(e);if((e=>{if("object"!=typeof e)return!1;const t=e;return"string"==typeof t.name&&(void 0===t.duration||"string"==typeof t.duration)})(t))return t}catch{}},ke="_tSId",$e="_tA",Ee="bespoke-marp-transition-warming-up",Le=window.matchMedia("(prefers-reduced-motion: reduce)"),Se="__bespoke_marp_transition_reduced_outgoing__",Pe="__bespoke_marp_transition_reduced_incoming__",_e={forward:{both:void 0,incoming:{name:Pe},outgoing:{name:Se}},backward:{both:void 0,incoming:{name:Pe},outgoing:{name:Se}}},Te=e=>{if(!document.startViewTransition)return;const t=t=>(void 0!==t&&(e._tD=t),e._tD);let n;t(!1),((...e)=>{CSS.registerProperty({name:ge("duration"),syntax:"<time>",inherits:!0,initialValue:"-1s"});const t=[...new Set(e).values()];return Promise.all(t.map(e=>ye(e))).then()})(...Array.from(document.querySelectorAll("section[data-transition], section[data-transition-back]")).flatMap(e=>[e.dataset.transition,e.dataset.transitionBack].flatMap(e=>{const t=xe(e);return[t?.name,t?.builtinFallback?`__builtin__${t.name}`:void 0]}).filter(e=>!!e))).then(()=>{document.querySelectorAll("style").forEach(e=>{e.innerHTML=e.innerHTML.replace(/--marp-transition-duration:[^;}]*[;}]/g,e=>e.slice(0,-1)+"!important"+e.slice(-1))})});const r=(n,{back:r,cond:o})=>a=>{const i=t();if(i)return!!a[$e]||!("object"!=typeof i||(i.skipTransition(),!a.forSync));if(!o(a))return!0;const s=e.slides[e.slide()],c=()=>a.back??r,l="data-transition"+(c()?"-back":""),d=s.querySelector(`section[${l}]`);if(!d)return!0;const u=xe(d.getAttribute(l)??void 0);return!u||((async(e,{builtinFallback:t=!0}={})=>{let n=await ye(e);if(be(n)){if(!t)return;return n=await ye(`__builtin__${e}`),be(n)?void 0:n}return n})(u.name,{builtinFallback:u.builtinFallback}).then(e=>{if(!e){t(!0);try{n(a)}finally{t(!1)}return}let r=e;Le.matches&&(console.warn("Use a constant animation to transition because preferring reduced motion by viewer has detected."),r=_e);const o=document.getElementById(ke);o&&o.remove();const i=document.createElement("style");i.id=ke,document.head.appendChild(i),((e,t)=>{const n=[`:root{${ge("direction")}:${t.backward?-1:1};}`,":root:has(.bespoke-marp-inactive){cursor:none;}"],r=t=>{const n=e[t].both?.defaultDuration||e[t].outgoing?.defaultDuration||e[t].incoming?.defaultDuration;return"forward"===t?n:n||r("forward")},o=t.duration||r(t.backward?"backward":"forward");void 0!==o&&n.push(`::view-transition-group(*){${ve}:${o};}`);const a=e=>Object.entries(e).map(([e,t])=>`${e}:${t};`).join("");return n.push(`::view-transition-old(root){${a(we(e,{...t,type:"outgoing"}))}}`,`::view-transition-new(root){${a(we(e,{...t,type:"incoming"}))}}`),n})(r,{backward:c(),duration:u.duration}).forEach(e=>i.sheet?.insertRule(e));const s=document.documentElement.classList;s.add(Ee);let l=!1;const d=()=>{l||(n(a),l=!0,s.remove(Ee))},f=()=>{t(!1),i.remove(),s.remove(Ee)};try{t(!0);const e=document.startViewTransition(d);t(e),e.finished.finally(f)}catch(e){console.error(e),d(),f()}}),!1)};e.on("prev",r(t=>e.prev({...t,[$e]:!0}),{back:!0,cond:e=>e.index>0&&!((e.fragment??1)&&n.fragmentIndex>0)})),e.on("next",r(t=>e.next({...t,[$e]:!0}),{cond:t=>t.index+1<e.slides.length&&!(n.fragmentIndex+1<n.fragments.length)})),setTimeout(()=>{e.on("slide",r(t=>e.slide(t.index,{...t,[$e]:!0}),{cond:t=>{const n=e.slide();return t.index!==n&&(t.back=t.index<n,!0)}}))},0),e.on("fragment",e=>{n=e})};let Ie;const Me=()=>(void 0===Ie&&(Ie="wakeLock"in navigator&&navigator.wakeLock),Ie),Oe=async()=>{const e=Me();if(e)try{return await e.request("screen")}catch(e){console.warn(e)}return null},Ae=async()=>{if(!Me())return;let e;const t=()=>{e&&"visible"===document.visibilityState&&Oe()};for(const e of["visibilitychange","fullscreenchange"])document.addEventListener(e,t);return e=await Oe(),e};((e=document.getElementById(":$p"))=>{(()=>{const e=p("view");a.dataset.bespokeView=e===l||e===c?e:""})();const t=(e=>{const t=p(e);return v({[e]:void 0}),t})("sync")||void 0;o.from(e,((...e)=>{const t=d.findIndex(e=>g()===e);return e.map(([e,n])=>e[t]&&n).filter(e=>e)})([[1,1,0],re({key:t})],[[1,1,1],Z(e)],[[1,1,0],M],[[1,1,1],k],[[1,0,0],T()],[[1,1,1],O],[[1,1,1],ne({history:!1})],[[1,1,0],A()],[[1,1,0],P],[[1,0,0],ee],[[1,1,0],le()],[[1,0,0],C()],[[1,0,0],Te],[[1,1,1],$],[[1,1,0],Ae]))})()}();</script></body></html>
