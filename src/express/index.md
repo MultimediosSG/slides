@@ -465,7 +465,7 @@ section {
 
 - Nuestro ``.json`` tendrá varios objetos así
 - Esa será **de momento** nuestra base de información
-- Fichero con los datos: [data.json](./api/data.json)
+- Fichero con los datos: [data.json](../assets/api/data.json)
 </div>
 </split-slide>
 
