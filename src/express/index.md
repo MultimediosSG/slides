@@ -40,7 +40,7 @@ section {
 <step>
 
 ```bash
-$ http HEAD https://manz.dev/
+$ http HEAD https://avotz.com/
 
 HTTP/1.1 200 OK
 Connection: keep-alive
@@ -59,7 +59,7 @@ X-XSS-Protection: 1; mode=block, 1; mode=block
 <step>
 
 ```bash
-$ xh HEAD https://manz.dev/
+$ xh HEAD https://avotz.com/
 
 HTTP/2.0 200 OK
 content-encoding: gzip
@@ -280,7 +280,7 @@ x-xss-protection: 1; mode=block
 <split-slide style="--left: 50%; --right: 50%; --font-size: 1rem;">
 
 ```bash
-$ xh GET https://manz.dev/
+$ xh GET https://avotz.com/
 
 HTTP/2.0 200 OK
 content-length: 32949
@@ -485,7 +485,7 @@ const app = express();
 const HOST = "localhost";
 const PORT = 4321;
 
-app.get("/", (req, res) => res.send("Manz API 1.0"));
+app.get("/", (req, res) => res.send("Alo API 1.0"));
 
 app.get("/games", (req, res) => {
   res.header("Content-type", "application/json");
@@ -682,7 +682,7 @@ import { getAll } from "./routes/games/getAll.js";
 
 const app = express();
 
-app.get("/", (req, res) => res.send("Manz API 1.0"));
+app.get("/", (req, res) => res.send("Alo API 1.0"));
 app.get("/games", getAll);
 app.get("/game/:slug", getBySlug);
 app.get("/year/:year", getByYear);
@@ -802,7 +802,7 @@ export const search = (req, res) => {
 
 ---
 ## Cambiar Express por Fastify
-- Como en el chat debe haber ya 25 personas preguntando **¿Y por qué no Fastify?**... (u otra) → [Fastify](https://fastify.dev/)
+- Se estarán preguntando **¿Y por qué no Fastify?**... (u otra) → [Fastify](https://fastify.dev/)
 
 
 <split-slide style="--font-size: 1rem;">
@@ -896,7 +896,7 @@ export const getBySlug = (req, res) => {
 <div>
 
 - 1️⃣ Creamos carpeta ``/data/`` y movemos ``data.json``
-- Creamos un ``/data/game.js``
+- Creamos un ``/data/games.js``
 - Nos traemos la lógica de las funciones
   - Cada función debe devolver sus datos
   - Exportamos cada función
@@ -1090,7 +1090,7 @@ export const search = (text) => {
 - [NodeJS](https://lenguajejs.com/nodejs/)
 - [NodeJS API](https://nodejs.org/api/)
 - [Express](https://expressjs.com/)
-- [Express API](https://expressjs.com/en/4x/api.html)s
+- [Express API](https://expressjs.com/en/4x/api.html)
 - [SQLite](https://www.sqlite.org/docs.html)
 
 
