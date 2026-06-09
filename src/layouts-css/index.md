@@ -245,6 +245,10 @@ section {
     background: indigo;
     border: 5px solid gold;
   }
+  .cat {
+    background: white;
+    object-fit: contain;
+  }
 }
 .cat {
   order: var(--cat-order, 0);
