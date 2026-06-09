@@ -25,11 +25,12 @@ section {
 
 ## La propiedad display
 
-- Los flujos inline se ajustan al contenido
-- Los flujos block ocupan el espacio disponible
+- Los flujos ``inline`` se ajustan al contenido
+- Los flujos ``block`` ocupan el espacio disponible
 - 🆕 Nueva sintaxis (comportamiento exterior, comportamiento de hijos)
 
-<div class="grid">
+<steps>
+<step>
 
 ```css
 .element {
@@ -42,6 +43,9 @@ section {
   display: grid;
 }
 ```
+</step>
+<step>
+
 ```css
 .element {
   display: inline flow;         /* Antiguo inline ❌ Ignora width / height */
@@ -54,7 +58,8 @@ section {
 }
 ```
 
-</div>
+</step>
+</steps>
 
 ---
 <!-- _class: cover -->
@@ -70,13 +75,10 @@ section {
 ## Flex CSS
 
 - Sistema de una sola dimensión [Flex](https://lenguajecss.com/css/flex/que-es-flex/)
-- Propiedad flex-direction:
 
-  - row (por defecto)
-  - column
-  - *-reverse
-
-<div class="grid">
+<split-slide>
+<steps>
+<step>
 
 ```html
 <div class="parent">
@@ -89,6 +91,9 @@ section {
 </div>
 
 ```
+</step>
+<step>
+
 ```css
 .parent {
   display: flex;
@@ -106,15 +111,29 @@ section {
   }
 }
 ```
+</step>
+</steps>
+<div>
+
+- Propiedad ``flex-direction``:
+
+  - ``row`` (por defecto)
+  - ``column``
+  - ``row-reverse``
+  - ``column-reverse``
 
 </div>
+</split-slide>
 
 ---
 ## Gaps (Huecos)
 
 - Propiedad ``gap`` → para añadir huecos entre items (no globales)
 - No es lo mismo ``gap`` (sólo entre items) que ``padding`` o ``margin``
-<div class="grid">
+
+<split-slide>
+<steps>
+<step>
 
 ```css
 .parent {
@@ -128,7 +147,24 @@ section {
   }
 }
 ```
-<div class="grid">
+</step>
+<step>
+
+```css
+.parent {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 1rem;
+  border: 3px solid black;
+  column-rule: 3px solid black;
+  column-rule-inset: -1rem;
+  background: #999;
+}
+```
+</step>
+</steps>
+<div>
 
 - Añadimos un ``padding`` para border exteriores
 - Ponemos líneas con ``column-rule: 3px solid black``
@@ -142,25 +178,7 @@ section {
 - Mutamos ``gap: calc(var(--offset) * 2)``
 </div>
 
-</div>
-
----
-## Variables CSS
-
-- Variable definida en el elemento
-- Variable definida en el padre
-- Variable definida en el HTML
-- Uso de fallbacks
-- Ámbitos de variables de CSS
-
-```css
-.element {
-  --size: 50px;
-
-  width: var(--size);        /* No usa fallback */
-  height: var(--size, 50px); /* Usa fallback */
-}
-```
+</split-slide>
 
 ---
 ## Flex multilínea (Wrap)
@@ -168,7 +186,7 @@ section {
 - Se dice que Flex funciona con una dimensión, pero...
 - Propiedad ``flex-wrap*`` → con ``wrap`` permite multilínea (desborda items sin deformarlos)
 
-<div class="grid">
+<split-slide>
 
 ```html
 <div class="parent">
@@ -180,6 +198,24 @@ section {
   <!-- ... hasta 10 -->
 </div>
 ```
+<steps>
+<step>
+
+```css
+.parent {
+  display: flex;
+  flex-direction: row;
+  background: grey;
+  padding: 1rem;
+  width: 600px;
+  gap: 1rem;
+
+  .item { /* ... */ }
+}
+```
+</step>
+<step>
+
 ```css
 .parent {
   display: flex;
@@ -193,7 +229,9 @@ section {
   gap: 1rem;
 }
 ```
-</div>
+</step>
+</steps>
+</split-slide>
 
 - El modo ``wrap`` desbloquea ``align-content`` para alinear esas líneas extra.
 
@@ -250,11 +288,11 @@ section {
 ---
 ## Grid
 - Sistema de dos dimensiones (cuadrículas) → Conceptos: [ Grid](https://lenguajecss.com/css/grid/que-es-grid/)
-- Definir el tamaño de ancho → grid-template-columns
-- Definir el tamaño de alto → grid-template-rows
-- Definir huecos con gap → (row + columns)
 
-<div class="grid">
+
+<split-slide>
+<steps>
+<step>
 
 ```html
 <div class="grid">
@@ -266,6 +304,9 @@ section {
   <div class="item">6</div>
 </div>
 ```
+</step>
+<step>
+
 ```css
 .grid {
   display: grid;
@@ -278,15 +319,41 @@ section {
   .item { background: indigo }
 }
 ```
+</step>
+</steps>
+<div>
+
+- Definir el tamaño de ancho → ``grid-template-columns``
+- Definir el tamaño de alto → ``grid-template-rows``
+- Definir huecos con ``gap`` → (row + columns)
+- Más info: [Grid](https://lenguajecss.com/css/grid/que-es-grid/)
 </div>
+</split-slide>
 
 
 ---
 ## Más características en Grid
+- Se pueden usar características adicionales en Grid
 
-- La función ``repeat(num, size)`` ayuda a simplificar
-- La unidad ``fr`` (fracción restante)
-- Responsive one-line: ``repeat(auto-fill, minmax(var(--size), 1fr))``
+
+<split-slide>
+<steps>
+<step>
+
+```css
+.grid {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 50px 50px;
+  gap: 15px 15px;
+  width: max-content;
+  background: grey;
+
+  .item { background: indigo }
+}
+```
+</step>
+<step>
 
 ```css
 .grid {
@@ -300,13 +367,36 @@ section {
   .item { background: indigo }
 }
 ```
+</step>
+<step>
+
+```css
+.grid {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px;
+  grid-template-rows: repeat(2, 50px);
+  gap: 15px 15px;
+  width: max-content;
+  background: grey;
+
+  .item { background: indigo }
+}
+```
+</step>
+</steps>
+<div>
+
+- La función ``repeat(num, size)`` ayuda a simplificar
+- La unidad ``fr`` (fracción restante)
+- Responsive one-line: ``repeat(auto-fill, minmax(var(--size), 1fr))``
+<div>
 
 ---
 ## Extras de Grid
 
-- Con las propiedades *-items y *-content se puede alinear elementos
-- Con justify-items y align-items (hijos, dentro de celdas)
-- Con justify-content y align-content (el propio grid)
+- Con las propiedades ``*-items`` y ``*-content`` se puede alinear elementos
+- Con ``justify-items`` y ``align-items`` (hijos, dentro de celdas)
+- Con ``justify-content`` y ``align-content`` (el propio grid)
 - Más info → [Alinear en Grid](https://lenguajecss.com/css/grid/alinear-centrar-css/)
 
 ![bg contain right](../assets/alinear-grid-css.png)
@@ -317,7 +407,7 @@ section {
 - [Grid por áreas](https://lenguajecss.com/css/grid/grid-template-areas/): ``grid-template-areas`` y ``grid-area``
 - Zonas vacías con ``.`` (asegúrate de tener mismo número de columnas)
 
-<div class="grid">
+<split-slide>
 
 ```html
 <div class="parent">
@@ -342,7 +432,7 @@ section { grid-area: body; background: green }
 aside { grid-area: menu; background: grey }
 footer { grid-area: foot; background: #333 }
 ```
-</div>
+</split-slide>
 
 ---
 ## Grids irregulares
@@ -350,7 +440,7 @@ footer { grid-area: foot; background: #333 }
 - [Grids irregulares](https://lenguajecss.com/css/grid/irregular-grid/): ``grid-*-start`` y ``grid-*-end``
 - Zonas vacías con ``.`` (asegúrate de tener mismo número de columnas)
 
-<div class="grid">
+<split-slide>
 
 ```html
 <div class="parent">
@@ -376,7 +466,7 @@ footer { grid-area: foot; background: #333 }
   grid-column: 1 / span 2; /* De 1 hasta 2 */
 }
 ```
-</div>
+</split-slide>
 
 Juegos para prácticar:
 
@@ -399,7 +489,10 @@ section {
 - La propiedad ``position``
 - 5 modalidades: ``static``, ``relative`` y ``absolute`` (variaciones: ``fixed`` y ``sticky``)
 - Desplazamientos: ``top``, ``bottom``, ``left``, ``right``
-<div class="grid">
+
+<split-slide style="--left:60%; --right:40%;">
+<steps>
+<step>
 
 ```css
 .item-1 {
@@ -410,6 +503,19 @@ section {
   top: -5px;            /* ↑ 5px (hacia arriba) */
 }
 ```
+</step>
+<step>
+
+```css
+.item-2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+```
+</step>
+<step>
+
 ```css
 .parent {
   position: relative;       /* Marco (referencia) */
@@ -421,60 +527,71 @@ section {
   }
 }
 ```
-</div>
-
-
----
-## Posicionamiento CSS
-- La propiedad ``position``
-- 5 modalidades: ``static``, ``relative`` y ``absolute`` (variaciones: ``fixed`` y ``sticky``)
-- Desplazamientos: ``top``, ``bottom``, ``left``, ``right``
-
-<div class="grid">
+</step>
+<step>
 
 ```css
 .parent {
-  .box {
-    background: indigo;
-    position: fixed;
-    width: 50px;
-    height: 50px;
-    right: 0;
+  position: relative;       /* Marco (referencia) */
+  .item {
+    position: absolute;     /* Busca padre != static */
+    left: 0;
     top: 0;
+    bottom: 0;
+    right: 0;               /* Extender a 20px */
   }
 }
 ```
+</step>
+<step>
+
 ```css
 .parent {
-  .box {
-    background: indigo;
-    position: sticky;
-    top: 0;
-    height: 50px;
+  position: relative;
+  .item {
+    position: absolute;
+    inset: 0;               /* inset: 0 20px 0 0 */
   }
 }
 ```
+</step>
+</steps>
+<div>
+
+- Posicionamiento relativo
+- Posicionamiento absoluto
+- Posicionamiento de referencia (colocar)
+- Posicionamiento de referencia → inset
+- Posicionamiento fijo (sobre el viewport)
+- Posicionamiento pegajoso
 </div>
+</split-slide>
+
+
+
 
 ---
 <style scoped>
 .item {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   position: relative;
 
   &.item-1 { background: deeppink }
   &.item-2 { background: indigo; top: -40px; left: 40px }
   &.item-3 { background: black; top: -80px; left: 80px }
   &.item-1 { z-index: 1 }
-  &.item-2 { z-index: var(--item-index, 0) }
+  &.item-2 { z-index: var(--item-index, 5) }
   &.item-3 { z-index: 10 }
 }
 </style>
 
 ## Profundidad CSS
 - La propiedad ``z-index`` (valores numéricos)
-<div class="grid">
+
+<split-slide style="--left:60%; --right:40%;">
+<steps>
+<step>
 
 ```html
 <div class="container">
@@ -483,6 +600,9 @@ section {
   <div class="item item-3"></div>
 </div>
 ```
+</step>
+<step>
+
 ```css
 .item {
   width: 100px;
@@ -493,13 +613,12 @@ section {
   &.item-2 { background: indigo; top: -40px; left: 40px }
   &.item-3 { background: black; top: -80px; left: 80px }
   &.item-1 { z-index: 1 }
-  &.item-2 { z-index: var(--item-index, 0) }
+  &.item-2 { z-index: var(--item-index, 5) }
   &.item-3 { z-index: 10 }
 }
 ```
-
-</div>
-
+</step>
+</steps>
 <div>
 <div class="zindex-example">
   <div class="item item-1">1</div>
@@ -512,6 +631,10 @@ section {
   <code>&nbsp;}</code>
 </div>
 </div>
+
+</split-slide>
+
+
 
 ---
 <style scoped>
@@ -532,7 +655,7 @@ section {
 </style>
 
 ## CSS Anchor position
-<div class="grid">
+<split-slide>
 
 ```html
 <div class="reference">Reference</div>
@@ -558,7 +681,7 @@ section {
   <div class="element">Element</div>
   </div>
 </div>
-</div>
+</split-slide>
 
 ---
 <!-- _class: cover -->
@@ -595,10 +718,10 @@ section {
 </style>
 
 ## Transiciones
-- La palabra clave all aplica a todas las propiedades
+- La palabra clave ``all`` aplica a todas las propiedades
 - Transiciones de entrada y de salida
 
-<div class="grid">
+<split-slide>
 
 ```css
 .element {
@@ -620,13 +743,16 @@ section {
 <div class="element transition t-fast"></div>
 </div>
 
-</div>
+</split-slide>
 
 ---
 ## La regla ``@starting-style``
 
 - Estilo inicial (útil para evitar saltos en entradas)
-- Se puede aplicar ``nesting`` en los estilos
+- Se puede aplicar **nesting** en los estilos
+
+<steps>
+<step>
 
 ```css
 .element {
@@ -641,6 +767,24 @@ section {
   .element { opacity: 0 }
 }
 ```
+</step>
+<step>
+
+```css
+.element {
+  background: deeppink;
+  width: 200px;
+  height: 75px;
+  transition: all 0.75s;
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+```
+</step>
+</steps>
 
 ---
 <style scoped>
@@ -658,9 +802,9 @@ section {
 
 ## Animaciones
 - Con ``@keyframes`` creamos la animación
-- Con ``animation`` la aplicamos → Más opciones de animación
+- Con ``animation`` la aplicamos → [Más opciones de animación](https://lenguajecss.com/animaciones/animaciones/animaciones/#propiedades-de-animaci%C3%B3n-css)
 
-<div class="grid">
+<split-slide>
 
 ```css
 .element {
@@ -682,7 +826,7 @@ section {
 </div>
 
 
-</div>
+</split-slide>
 
 ---
 ## Ritmo (funciones de tiempo)
@@ -692,9 +836,11 @@ section {
 - [Ritmo lineal personalizado](https://lenguajecss.com/animaciones/timing-functions/linear/): función ``linear()``
 - [Ritmos escalonados](https://lenguajecss.com/animaciones/timing-functions/steps/): función ``steps()`` → [Ejemplo con SpriteSheets](https://lenguajecss.com/animaciones/animaciones/spritesheets-css/)
 
+Se puede usar con transiciones y animaciones
+
 ---
 ## Animaciones de scroll
-- La función view() → [Ejemplo](https://codepen.io/alons182/pen/MYjEYEQ)
+- La [función view()](https://lenguajecss.com/animaciones/scroll-driven-animation/view/) → [Ejemplo](https://codepen.io/alons182/pen/MYjEYEQ)
 
 ```css
 .element {
@@ -739,3 +885,6 @@ section {
 - [CheatSheet CSS](https://lenguajecss.com/css/cheatsheets/)
 - [bootcamp.manz.dev](https://bootcamp.manz.dev/)
 
+
+<script src="../assets/steps.js"></script>
+<script src="../assets/image-modal.js"></script>
