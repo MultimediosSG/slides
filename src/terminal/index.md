@@ -390,7 +390,5 @@ section {
 
 
 
-
-
 <script src="../assets/steps.js"></script>
 <script src="../assets/image-modal.js"></script>
