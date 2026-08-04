@@ -564,10 +564,10 @@ section {
 @container name (width <= 800px) { /* ... */ }
 .element { background: var(--color, grey) }
 .element {
-  --name: "ManzDev";
+  --name: "Alons";
   background: if(
-    style(--name: "ManzDev"): indigo;
-    style(--name: "CyberManzDev"): red;
+    style(--name: "Alons"): indigo;
+    style(--name: "CyberAlons"): red;
     else: grey
   );
 }
@@ -652,7 +652,7 @@ section {
 ```html
 <!-- El color se toma del atributo -->
 <div class="element"
-     data-color="indigo">Manz</div>
+     data-color="indigo">Alons</div>
 ```
 
 </div>
