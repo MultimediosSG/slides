@@ -122,14 +122,22 @@ img {
       image-rendering: pixelated;
     }
   }
+  #filter-image {
+      width: 600px;
+      height: 400px;
+      border: 3px solid white;
+      background: url(../assets/img_00070_.png);
+  }
 </style>
 ## Filtros y modos de fusión
 
-- ``filter:`` contrast(200%)
-- ``background-color:`` blue
-- ``background-blend-mode:`` darken
+<split-slide>
+<div>
 
-<div class="grid">
+- ``filter:`` <select id="filter"><option>none</option><option>grayscale(100%)</option><option>blur(5px)</option><option>sepia(100%)</option><option>saturate(200%)</option><option>opacity(25%)</option><option>brightness(200%)</option><option>contrast(200%)</option><option>hue-rotate(0.5turn)</option><option>invert(100%)</option></select>
+- ``background-color:`` <select id="colors" data-alpine-devtools-right-click=""><option>transparent</option><option>red</option><option>green</option><option>blue</option></select>
+- ``background-blend-mode:`` <select id="fusion"><option>normal</option><option>multiply</option><option>screen</option><option>overlay</option><option>darken</option><option>lighten</option><option>color-dodge</option><option>color-burn</option><option>hard-light</option><option>soft-light</option><option>difference</option><option>exclusion</option><option>hue</option><option>saturation</option><option>color</option><option>luminosity</option></select>
+
 
 ```css
 img {
@@ -138,7 +146,11 @@ img {
   filter: grayscale(100%);
 }
 ```
-
+</div>
+<div>
+<div id="filter-image"></div>
+</div>
+</split-slides>
 
 ---
 <!-- _class: cover -->
@@ -160,7 +172,8 @@ section {
 - Intenta reducir contenido en media queries (si puedes usar variables CSS, mejor)
 - Establece tus breakpoints y crea las [media queries modernas](https://lenguajecss.com/css/responsive-web-design/media-queries/) que necesites
 
-
+<steps>
+<step>
 
 ```css
 /* Estilos comunes que no cambian de desktop a mobile */
@@ -175,13 +188,8 @@ section {
 }
 
 ```
-
----
-## Filosofía del responsive
-
-- Elige estrategia: ``Mobile-first`` / ``Desktop-first``, Olvídate del «pixel perfect»
-- Intenta reducir contenido en media queries (si puedes usar variables CSS, mejor)
-- Establece tus breakpoints y crea las [media queries modernas](https://lenguajecss.com/css/responsive-web-design/media-queries/) que necesites
+</step>
+<step>
 
 ```css
 /* Estilos aplicados a pantallas entre 640px y 1024px */
@@ -192,8 +200,8 @@ section {
 
 @media (640px <= width <= 1024px) { }                              /* ✅✅ AÚN MEJOR */
 ```
-
-
+</step>
+<step>
 
 ```css
 .element {
@@ -208,14 +216,18 @@ section {
   }
 }
 ```
+</step>
+</steps>
 
 ---
 ## No sólo de width vive el dev
 
-- Puedes usar height, aspect-ratio, orientation u otros
+- Puedes usar ``height``, ``aspect-ratio``, ``orientation`` u otros
 - Hay muchos [media features](https://lenguajecss.com/css/responsive-web-design/media-features/)
-- También hay @media basados en las preferencias de usuario
+- También hay @media basados en las [preferencias de usuario](https://lenguajecss.com/css/responsive-web-design/preferencias-usuario/)
 
+<steps>
+<step>
 
 ```css
 @media (aspect-ratio <= 6/2) { }        /* 6/2 === 3/1 === 3 */
@@ -225,6 +237,9 @@ section {
 @media (any-pointer: none) { }          /* Usuario sin táctil (coarse) ni ratón preciso (fine) */
 @media print { }                        /* Se aplica sólo cuando se imprime (físico o PDF) */
 ```
+</step>
+<step>
+
 ```css
 @media (prefers-reduced-motion: reduce) { }        /* Usuario prefiere sin animaciones */
 @media (prefers-reduced-transparency: reduce) { }  /* Usuario prefiere sin transparencias */
@@ -237,7 +252,8 @@ body {
   color: light-dark(black, white);
 }
 ```
-
+</step>
+</steps>
 
 
 ---
@@ -278,16 +294,16 @@ section {
 ---
 ## Especificidad CSS
 
-- CSS tiene varias reglas → Cascada
-- NO FUNCIONAN como la programación
+- CSS tiene varias reglas → [Cascada](https://lenguajecss.com/cascada-css/introduccion/que-es/)
+- **NO FUNCIONAN** como la programación
 - Hay que entenderlas (no memorizarlas)
 
 Reglas
 
-- Herencia: Quien tiene preferencia
-- Estructura: Como se lee el CSS
-- Especificidad: Resolver conflictos
-- Alcance: Hasta donde se aplica el CSS
+- **Herencia:** Quien tiene preferencia
+- **Estructura:** Como se lee el CSS
+- **Especificidad:** Resolver conflictos
+- **Alcance:** Hasta donde se aplica el CSS
 
 ![bg contain right](../assets/cascada.png)
 
@@ -297,7 +313,7 @@ Reglas
 ## Herencia
 - [Propiedades heredables](https://lenguajecss.com/cascada-css/herencia/que-es/#propiedades-heredables): ``color``, ``font-family``, ``font-size``, etc...
 - Valores de herencia: ``inherit``, ``initial`` o ``unset`` (``inherit``/``initial`` según caso)
-- Resets si quieres algo ya hecho
+- [Resets](https://lenguajecss.com/cascada-css/herencia/reset-css/) si quieres algo ya hecho
 
 <div class="grid">
   
@@ -335,7 +351,7 @@ spoiler {
 ## Estructura (tradicional)
 - Fuente: [-] ``<link>`` → ``<style>`` → ``style=""`` [+]
 - Orden (mismo selector): herencia + ``!important``
-- Selector: Especificidad (A,B,C) → Calculadoras: [keegan](https://specificity.keegan.st/) / [wallace](https://www.projectwallace.com/specificity-calculator?selectors=.kid+%3Ahas%28.friend%29+%7E+%3Awhere%28.treehouse%29+%3Ais%28%23gross%29)
+- Selector: **Especificidad** (A,B,C) → Calculadoras: [keegan](https://specificity.keegan.st/) / [wallace](https://www.projectwallace.com/specificity-calculator?selectors=.kid+%3Ahas%28.friend%29+%7E+%3Awhere%28.treehouse%29+%3Ais%28%23gross%29)
 
 <div class="grid">
   
@@ -352,9 +368,9 @@ spoiler {
 ```
 
 
-- El selector div tiene especificidad... <spoiler>0,0,1 (es un elemento)</spoiler>
-- El selector #element tiene especificidad... <spoiler>1,0,0 (es un id)</spoiler>
-- El selector .text tiene especificidad... <spoiler>0,1,0 (es una class)</spoiler>
+- El selector ``div`` tiene especificidad... <spoiler>0,0,1 (es un elemento)</spoiler>
+- El selector ``#element`` tiene especificidad... <spoiler>1,0,0 (es un id)</spoiler>
+- El selector ``.text`` tiene especificidad... <spoiler>0,1,0 (es una class)</spoiler>
 
 
 </div>
@@ -363,8 +379,8 @@ spoiler {
 
 ## Estructura (moderna)
 - Estilos globales ↔ Estilos locales (Shadow DOM)
-- Evita !important a favor de :where() (especificidad 0)
-- Usa @layer (capas, estilo «Photoshop», de especificidad)
+- Evita ``!important`` a favor de ``:where()`` (especificidad 0)
+- Usa ``@layer`` (capas, estilo «Photoshop», de especificidad)
 
 <div class="grid">
   
@@ -550,12 +566,16 @@ section {
 ---
 ## Condicionales en CSS
 
+<split-slide>
+<div>
+
 - ``@media (...)`` según features del dispositivo
 - ``@media (prefers-*)`` según preferencias de usuario
 - ``@support (...)`` según soporte/compatibilidad
 - ``@container (...)`` según contenedor padre
 - ``var(..., fallback)`` según si existe variable
 - ``if(...; else: ...)`` según valor de variable
+</div>
 
 ```css
 @media (width <= 800px) { /* ... */ }
@@ -564,14 +584,15 @@ section {
 @container name (width <= 800px) { /* ... */ }
 .element { background: var(--color, grey) }
 .element {
-  --name: "Alons";
+  --name: "ManzDev";
   background: if(
-    style(--name: "Alons"): indigo;
-    style(--name: "CyberAlons"): red;
+    style(--name: "ManzDev"): indigo;
+    style(--name: "CyberManzDev"): red;
     else: grey
   );
 }
 ```
+</split-slide>
 
 ---
 ## Funciones en CSS
@@ -596,7 +617,7 @@ section {
 ```
 - En CSS tenemos la regla ``@function``
 - Se usan como las variables CSS pero con paréntesis
-- Las funciones devuelven resultados
+- Las funciones devuelven **resultados**
 - Permiten parámetros
 - Hacen más semántico y reutilizable el CSS
 
@@ -652,7 +673,7 @@ section {
 ```html
 <!-- El color se toma del atributo -->
 <div class="element"
-     data-color="indigo">Alons</div>
+     data-color="indigo">Manz</div>
 ```
 
 </div>
@@ -695,4 +716,10 @@ section {
 
 - [CheatSheet CSS](https://lenguajecss.com/css/cheatsheets/)
 - [bootcamp.manz.dev](https://bootcamp.manz.dev/)
+
+
+<script src="../assets/steps.js"></script>
+<script src="../assets/image-modal.js"></script>
+<script src="../assets/filters.js"></script>
+
 
