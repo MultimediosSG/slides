@@ -55,12 +55,9 @@ section {
 
 ## Overflow (Desbordamiento)
 
-- Norma 1 de CSS: Entiende CSS → no lo intentes cambiar
-
-- Overflow: Gestionar el desbordamiento
-- Entender el modelo de cajas (en siguientes slides)
-
-<div class="grid">
+<split-slide>
+<steps>
+<step>
 
 ```html
 <div class="avatar">
@@ -77,6 +74,9 @@ section {
 }
 </style>
 ```
+</step>
+<step>
+
 ```html
 <div class="avatar">
   <img src="https://avotz.com/img/logo.png"
@@ -95,8 +95,16 @@ section {
 }
 </style>
 ```
+</step>
+</steps>
 
+<div>
+
+- **Norma 1 de CSS:** Entiende CSS → no lo intentes cambiar
+- **Overflow:** Gestionar el desbordamiento
+- **Entender el modelo de cajas** (en siguientes slides)
 </div>
+</split-slide>
 
 ---
 ## Realmente, no se hace en el mismo documento
@@ -120,11 +128,9 @@ section {
 ---
 ## Variables CSS
 
-- Variable definida en el elemento
-- Variable definida en el padre
-- Variable definida en el HTML
-- Uso de fallbacks
-- Ámbitos de variables de CSS
+- Propiedades personalizadas 
+
+<split-slide>
 
 ```css
 .element {
@@ -134,14 +140,25 @@ section {
   height: var(--size, 50px); /* Usa fallback */
 }
 ```
+<div>
+
+- Variable definida en el elemento
+- Variable definida en el padre
+- Variable definida en el HTML
+- Uso de fallbacks
+- **Ámbitos** de variables de CSS
+
+</div>
+</split-slide>
+
 
 ---
 ## Unidades
 
-- [Unidades CSS](https://lenguajecss.com/css/unidades-css/que-son/): Absolutas (px, cm, in...) y relativas (em, rem, vw, vh...)
-- Unidades relativas al elemento padre: em, ex, ch
-- Unidades relativas a la raíz: rem, rlh
-- Unidades relativas a la ventana: vw, vh, vmin, vmax
+- [Unidades CSS](https://lenguajecss.com/css/unidades-css/que-son/): Absolutas (**px, cm, in...**) y relativas (**em, rem, vw, vh...**)
+- Unidades relativas al elemento padre: **em, ex, ch**
+- Unidades relativas a la raíz: **rem, rlh**
+- Unidades relativas a la ventana: **vw, vh, vmin, vmax**
 
 <div class="grid">
 
@@ -190,17 +207,15 @@ section {
 - El modelo por defecto es ``content-box``
 - El modelo ``border-box`` es un modelo alternativo.
 - Se pueden usar ambos en una página.
-- Mucha gente usa resets (y se saltan entender esto)
+- Mucha gente usa [resets](https://lenguajecss.com/cascada-css/herencia/reset-css/) (y se saltan entender esto)
 
 ![bg contain right](../assets/box-sizing.png)
 
 ---
 ## Bordes CSS
-- La propiedad border
-- La propiedad border-image (incompatible con border-radius)
-- Bordes con gradientes con border-image
-- La propiedad border-radius
-- La propiedad corner-shape (round, bevel, notch, squircle)
+- Existen varias propiedad para modificar bordes CSS
+
+<split-slide>
 
 ```css
 .element {
@@ -215,6 +230,18 @@ section {
   corner-shape: scoop;
 }
 ```
+<div>
+
+- La propiedad ``border``
+- La propiedad ``border-image`` (incompatible con ``border-radius``)
+- Bordes con gradientes con ``border-image``
+- La propiedad ``border-radius``
+- La propiedad ``corner-shape`` (round, bevel, notch, squircle)
+
+*``border-image`` es incompatible con ``border-radius``
+
+</div>
+</split-slide>
 
 
 ---
@@ -236,19 +263,22 @@ section {
 - Propiedades: ``color`` y ``background-color``
 - Palabras clave: ``indigo``, ``deeppink``, ``white``, ... → keywords
 - Esquema de colores RGB
-- Función RGB: ``rgb(25% 40% 80% / 50%)`` ❌ rgba()
+- Función [RGB](https://www.fffuel.co/cccolor/): ``rgb(25% 40% 80% / 50%)`` ❌ rgba()
 - ⭐ Hexadecimal: ``#558899`` → ``#589``
-- Función HSL: ``hsl(0.75turn 45% 35% / 100%)`` ❌ hsla()
-- Funciones avanzadas: ``oklab()`` y ``oklch()``
+- Función [HSL](https://colorpicker.dev/#7d30a3): ``hsl(0.75turn 45% 35% / 100%)`` ❌ hsla()
+- Funciones avanzadas: [``oklab()``](https://oklch.com/#0.7,0.1,106,100) y [``oklch()``](https://oklch.com/#0.7,0.1,106,100)
 
 
 ---
 ## Fondos
 
-- Fondos: background-image con función ``url("imagen.jpg")``
+- Fondos: ``background-image`` con función ``url("imagen.jpg")``
 - Gradientes: ``linear-gradient()``, ``radial-gradient()`` y ``conic-gradient()``
 - Se pueden combinar y añadir múltiples fondos
 - Otras y la propiedad de atajo: ``background``
+
+<steps>
+<step>
 
 ```css
 .element {
@@ -258,9 +288,8 @@ section {
   background-image: url("imagen.jpg");
 }
 ```
-
----
-## Fondos
+</step>
+<step>
 
 ```css
 .element {
@@ -272,7 +301,8 @@ section {
   background-image: conic-gradient(from 0.5turn at 50% 50%, indigo, deeppink, black);
 }
 ``` 
-<div class="grid">
+</step>
+<step>
 
 ```css
 .element {
@@ -284,6 +314,9 @@ section {
     url("imagen.jpg");
 }
 ```
+</step>
+<step>
+
 ```css
 .element {
   width: 800px;
@@ -295,15 +328,15 @@ section {
   background-size: cover;
 }
 ```
-</div>
-
+</step>
+</steps>
 
 ---
 ## Tipografías
 
 - La propiedad ``font-family`` establece la fuente
 - Se suele establecer una lista de fuentes (de 2 a 3, aprox.)
-- Se termina con una fuente segura.
+- Se termina con una **fuente segura**.
 - Propiedades relacionadas: tamaño, peso, estilo...
 
 ```css
@@ -315,7 +348,7 @@ section {
   font-style: italic;   /* italic, normal, oblique */
 }
 ```
-Las tipografías sólo se ven si el usuario las tiene instaladas
+👎❌ Las tipografías sólo se ven si el usuario las tiene instaladas
 
 ---
 ## Formatos de tipografías
@@ -324,6 +357,8 @@ Las tipografías sólo se ven si el usuario las tiene instaladas
 - Alternativa eficiente: [FontSource](https://fontsource.org/) → Self-host
 - Formatos: ✅ WOFF2, ✅ WOFF, ❌ TTF, ❌ EOT, ❌ SVG → [DaFont](https://www.dafont.com/es/)
 - [Transfonter](https://transfonter.org/): Generador de código para cargar tipografías
+
+<split-slide style="--left:60%; --right:40%;">
 
 ```css
 @font-face {
@@ -335,6 +370,17 @@ Las tipografías sólo se ven si el usuario las tiene instaladas
     url("/fonts/entercommand.ttf") format("truetype");
 }
 ```
+```bash
+# Conversor de .ttf a .woff2
+sudo apt install woff2
+woff2_compress file.ttf # A woff2
+woff2_decompress file.woff # A ttf
+
+# Conversor de .ttf a .woff (v1)
+pnpx ttf2woff file.ttf file.woff
+```
+
+</split-slide>
 
 ---
 <!-- _class: cover -->
@@ -457,7 +503,8 @@ p::first-letter { /* ... */ }
 - Combinador ``:has()`` → [Ejemplo de botón de selección sin Javascript](https://codepen.io/alons182/pen/NPRpBEa)
 - Combinador ``:not()``
 
-<div class="grid">
+<steps>
+<step>
 
 ```css
 .parent .item-1,
@@ -469,6 +516,9 @@ p::first-letter { /* ... */ }
 /* Simplifica grupos */
 .parent :is(.item-1, .item-2, .item-3) { /* ... */ }
 ```
+</step>
+<step>
+
 ```css
 /* Enlaces sin atributo href */
 a:not([href]) { /* ... */ }
@@ -477,13 +527,17 @@ a:not([href]) { /* ... */ }
 .parent:has(code) {
   /* ... */
 }
-````
+```
 
-</div>
+</steps>
 
 ---
 ## Referencias
 - [Guía CSS](https://lenguajecss.com/css/introduccion/guia-css/)
 - [CheatSheet CSS](https://lenguajecss.com/css/cheatsheets/)
 - [bootcamp.manz.dev](https://bootcamp.manz.dev/)
+
+
+<script src="../assets/steps.js"></script>
+<script src="../assets/image-modal.js"></script>
 
