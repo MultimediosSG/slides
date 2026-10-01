@@ -74,7 +74,7 @@ section {
 
 ## Flex CSS
 
-- Sistema de una sola dimensión [Flex](https://lenguajecss.com/css/flex/que-es-flex/)
+- Sistema de una sola dimensión [Esquema Flex](../assets/flex-como-funciona.png) -> [Flex](https://lenguajecss.com/css/flex/que-es-flex/)
 
 <split-slide>
 <steps>
@@ -131,7 +131,7 @@ section {
 - Propiedad ``gap`` → para añadir huecos entre items (no globales)
 - No es lo mismo ``gap`` (sólo entre items) que ``padding`` o ``margin``
 
-<split-slide>
+<split-slide style="--left:40%; --right:60%;">
 <steps>
 <step>
 
@@ -171,6 +171,7 @@ section {
 - Aumentamos el ``gap`` a ``2rem`` para dar más espacio
 - Ajustamos: ``border: 3px solid black`` y ``width: max-content``
 - ⚠ Ajustamos las lineas con ``column-rule-inset: -1rem``
+
 **Pro-tip:**
 - Añadimos un ``--offset: 2rem``
 - Mutamos ``column-rule-inset: calc(var(--offset) * -1)``
@@ -274,7 +275,8 @@ section {
 
   
 </div>
-Juegos para practicar:
+
+### Juegos para practicar:
 
 [FlexboxFroggy](https://flexboxfroggy.com/#es)
 [FlexboxDefense](https://flexboxdefense.com/)
@@ -291,8 +293,7 @@ section {
 
 ---
 ## Grid
-- Sistema de dos dimensiones (cuadrículas) → Conceptos: [ Grid](https://lenguajecss.com/css/grid/que-es-grid/)
-
+- Sistema de dos dimensiones (cuadrículas) → Conceptos: [Grid](../assets/grid-css-conceptos.png)
 
 <split-slide>
 <steps>
@@ -565,7 +566,7 @@ section {
 - Posicionamiento relativo
 - Posicionamiento absoluto
 - Posicionamiento de referencia (colocar)
-- Posicionamiento de referencia → inset
+- Posicionamiento de referencia → ``inset``
 - Posicionamiento fijo (sobre el viewport)
 - Posicionamiento pegajoso
 </div>
