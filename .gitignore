@@ -1,2 +1,5 @@
 node_modules
 dist
+
+# Material de origen (no forma parte del sitio; se sirve en pnpm dev si vive en src/)
+src/*/*.pdf
